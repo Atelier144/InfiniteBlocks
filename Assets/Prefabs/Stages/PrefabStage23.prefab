@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1490878669502734}
+  m_IsPrefabAsset: 1
+--- !u!1 &1490878669502734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4918808819928562}
+  - component: {fileID: 114160983447270640}
+  m_Layer: 0
+  m_Name: PrefabStage23
+  m_TagString: Stage
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4918808819928562
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1490878669502734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114160983447270640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1490878669502734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7045d2c1b0c47c487a698521c7a555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelUpBonus: 8000
+  musicChannel: 1
+  isLevelUpFailZone: 0
+  prefabHardRoundBlock: {fileID: 1112927883058200, guid: 246e240050f9e48e3b95e19b0863d7af,
+    type: 2}
+  prefabCountRoundBlock: {fileID: 1406007770834860, guid: 0f0efc1268d214d4b87148fafac9f801,
+    type: 2}
+  prefabCountRoundLevelUpBlock: {fileID: 1915719494736080, guid: 92ca8837e3a584e08a141c2ac9110f68,
+    type: 2}
+  prefabSteelBlocksWheelSystem: {fileID: 1292969989049872, guid: 7d5128ff6888d4adaa61840986aae99d,
+    type: 2}
+  prefabCeilingSystem: {fileID: 1970426844181390, guid: 0f1408b0b193f4101987bed317c841be,
+    type: 2}

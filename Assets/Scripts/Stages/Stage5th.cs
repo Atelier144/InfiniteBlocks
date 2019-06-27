@@ -1,0 +1,118 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Stage5th : Stage {
+
+    [SerializeField] GameObject prefabNormalBlock;
+    [SerializeField] GameObject prefabHardBlock;
+    [SerializeField] GameObject prefabSmallBlock;
+    [SerializeField] GameObject prefabRoundBlock;
+    [SerializeField] GameObject prefabCeilingSystem;
+
+    int[] numbersOfAppearItem = { };
+    int[] numbersOfAppearItemCode = { };
+
+    int brokenBlocks;
+
+    protected override void Start()
+    {
+        base.Start();
+        int[] numbersMin = { };
+        int[] numbersMax = { };
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
+
+        brokenBlocks = 0;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
+    public override void GenerateStage()
+    {
+        int randomColorCode = Random.Range(7, 14);
+        for(int x = 0; x < 7; x++)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                float positionX = x * 50.0f - 150.0f;
+                float positionY = y * 20.0f + 260.0f;
+                int colorCode = 6 - x;
+                prefabCreator.CreateNormalBlock(positionX, positionY, colorCode);
+            }
+        }
+        for (int x = 0; x < 2; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                float positionX1 = x * 50.0f - 375.0f;
+                float positionX2 = x * 50.0f + 325.0f;
+                float positionY = y * 20.0f + 100.0f;
+                prefabCreator.CreateHardBlock(positionX1, positionY);
+                prefabCreator.CreateHardBlock(positionX2, positionY);
+            }
+        }
+        for(int x = 0; x < 7; x++)
+        {
+            for(int y = 0; y < 7; y++)
+            {
+                float positionX1 = x * 20.0f - 430.0f;
+                float positionX2 = x * 20.0f + 310.0f;
+                float positionY = y * 20.0f + 200.0f;
+                int colorCode = (x - y + randomColorCode) % 7;
+                prefabCreator.CreateSmallBlock(positionX1, positionY, colorCode);
+                prefabCreator.CreateSmallBlock(positionX2, positionY, colorCode);
+            }
+        }
+        for (int x = 0; x < 7; x++)
+        {
+            float[] positionsY = { 80.0f, 100.0f, 120.0f, 140.0f, 120.0f, 100.0f, 80.0f };
+            float positionX = x * 80.0f - 240.0f;
+            float positionY = positionsY[x];
+            int colorCode = 6 - x;
+            prefabCreator.CreateRoundBlock(positionX, positionY, colorCode);
+        }
+        for (int x = 0; x < 12; x++)
+        {
+            float[] positionsX = { -462.5f, -387.5f, -312.5f, -237.5f, -112.5f, -37.5f, 37.5f, 112.5f, 237.5f, 312.5f, 387.5f, 462.5f };
+            int[] directionCodes = { 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1 };
+            float positionX = positionsX[x];
+            float positionY = 0.0f;
+            int directionCode = directionCodes[x];
+            prefabCreator.CreateUpDownGate(positionX, positionY, directionCode);
+        }
+        for(int x = 0; x < 10; x++)
+        {
+            float positionX = x * 50.0f - 225.0f;
+            float positionY = 240.0f;
+            prefabCreator.CreateSteelBlock(positionX, positionY);
+        }
+        prefabCreator.CreateItemBlock(-225.0f, 260.0f, 20);
+        prefabCreator.CreateItemBlock(225.0f, 260.0f, 20);
+        prefabCreator.CreateItemBlock(-225.0f, 220.0f, 19);
+        prefabCreator.CreateItemBlock(225.0f, 220.0f, 19);
+        prefabCreator.CreateSteelBlock(-175.0f, 0.0f);
+        prefabCreator.CreateSteelBlock(175.0f, 0.0f);
+        prefabCreator.CreateCeilingSystem();
+    }
+
+    public override int GenerateItemCode(int itemCode)
+    {
+        brokenBlocks++;
+        if (itemCode != 0) return itemCode;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
+        return 0;
+    }
+
+    public override bool IsLevelUp()
+    {
+        return GameObject.FindGameObjectsWithTag("Block").Length == 0;
+    }
+}
