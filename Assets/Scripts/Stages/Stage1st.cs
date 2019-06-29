@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Stage1st : Stage {
 
-    [SerializeField] GameObject prefabNormalBlock;
-    [SerializeField] GameObject prefabCeilingSystem;
-
     int[] numbersOfAppearItem = { 10, 25, 40, 65, 80, 105, 115, 120 };
     int[] numbersOfAppearItemCodes = { 1, 8, 1, 13, 5, 19, 10, 10 };
 
@@ -54,10 +51,10 @@ public class Stage1st : Stage {
                 float positionX = x * 50.0f - 425.0f;
                 float positionY = y * 20.0f + 200.0f;
                 int colorCode = y;
-                CreateNormalBlock(positionX, positionY, colorCode);
+                prefabCreator.CreateNormalBlock(positionX, positionY, colorCode);
             }
         }
-        CreateCeilingSystem();
+        prefabCreator.CreateCeilingSystem();
     }
 
     public override int GenerateItemCode(int itemCode)
@@ -65,21 +62,11 @@ public class Stage1st : Stage {
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
         for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCodes[i];
-        return 1;
+        return 0;
     }
 
     public override bool IsLevelUp()
     {
         return GameObject.FindGameObjectsWithTag("Block").Length == 0;
-    }
-
-    void CreateNormalBlock(float positionX, float positionY, int colorCode)
-    {
-        Instantiate(prefabNormalBlock, new Vector3(positionX, positionY, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<NormalBlock>().Initialize(colorCode);
-    }
-
-    void CreateCeilingSystem()
-    {
-        Instantiate(prefabCeilingSystem, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }
