@@ -19,12 +19,12 @@ public class SKL144SystemWeakPoint : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ball") body.Damage(1);
-        if (collision.gameObject.tag == "PoweredBall") body.Damage(3);
+        if (collision.gameObject.tag == "Ball") Debug.Log("");
+        if (collision.gameObject.tag == "PoweredBall") Debug.Log("");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet") body.Damage(1);
+        if (collision.gameObject.tag == "Bullet") Debug.Log("");
     }
 }

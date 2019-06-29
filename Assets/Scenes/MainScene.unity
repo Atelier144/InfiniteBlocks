@@ -8325,33 +8325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60ea9deee3344251b26cd704da00403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectSKL144System: {fileID: 1367217128}
-  gameObjectFace: {fileID: 737914823}
-  gameObjectBlockGenerator: {fileID: 914649670}
-  gameObjectBigBar: {fileID: 446563067}
-  gameObjectPrecipitate: {fileID: 1872233415}
-  gameObjectWeakPoint1: {fileID: 390386197}
-  gameObjectWeakPoint2: {fileID: 579530528}
-  gameObjectWeakPoint3: {fileID: 1821817459}
-  explosionEffect: {fileID: 1486323793133598, guid: 1a868211a208d4216b609dccbf2e2740,
-    type: 2}
-  duration1: 1
-  duration2: 1
-  duration3: 1
-  motionTrigger1:
-  - Motion1
-  - Guard
-  - Motion2
-  - DestroyAllBlocks
-  - GenerateBlocks2
-  - BigBar1
-  - Guard
-  motionTrigger2:
-  - BigBar2
-  - DestroyAllBlocks
-  - GenerateBlocks3
-  motionTrigger3:
-  - Flash
 --- !u!1 &1051163405
 GameObject:
   m_ObjectHideFlags: 0
@@ -11110,7 +11083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1367217129
 Transform:
   m_ObjectHideFlags: 0
