@@ -162,7 +162,7 @@ public class Item : MonoBehaviour {
                     break;
                 case HOSTAGE_300:
                     ball.StopBall();
-                    mainManager.Missing();
+                    StartCoroutine(mainManager.Missing());
                     break;
             }
             Destroy(this.gameObject);

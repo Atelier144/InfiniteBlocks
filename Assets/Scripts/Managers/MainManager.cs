@@ -155,6 +155,7 @@ public class MainManager : MonoBehaviour {
             textRetireDialogButtonOK.font = fontForJapanese;
             textRetireDialogButtonOK.text = "はい";
         }
+
         displayGameScore = gameScore;
         displayHighScore = highScore;
 
@@ -163,7 +164,7 @@ public class MainManager : MonoBehaviour {
         standardBeginnerSaveCount = playerId == 0 ? 1000 : 1250;
         signalManager.StartReplayMode(standardBeginnerSaveCount);
 
-        CreateStage();
+        StartCoroutine(GenerateStage());
 
         DrawUIDisplay();
     }
@@ -171,18 +172,11 @@ public class MainManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(gameScore > displayGameScore)
-        {
-            displayGameScore++;
-        }else if(gameScore < displayGameScore)
-        {
-            displayGameScore--;
-        }
+        if (gameScore > displayGameScore) displayGameScore++;
+        else if (gameScore < displayGameScore) displayGameScore--;
 
-        if (displayGameScore >= displayHighScore)
-        {
-            displayHighScore = displayGameScore;
-        }
+        if (displayGameScore >= displayHighScore) displayHighScore = displayGameScore;
+
 
         displayGameScore = gameScore;
         displayHighScore = highScore;
@@ -239,14 +233,12 @@ public class MainManager : MonoBehaviour {
     //Returnボタン(左矢印)を押した時の呼び出されるメソッド
     public void PushReturnButton()
     {
-        Debug.Log("Pushed Return Button");
         SetDialogStatus(3);
     }
 
     //Retireボタン(掌)を押した時に呼び出されるメソッド
     public void PushRetireButton()
     {
-        Debug.Log("Pushed Retire Button");
         SetDialogStatus(4);
     }
 
@@ -303,14 +295,9 @@ public class MainManager : MonoBehaviour {
     //ItemUseボタン(見えない)を押した瞬間に呼び出されるメソッド
     public void PushItemUseButton()
     {
-        if(signalManager.IsActivePrecipitate())
-        {
-            theBall.Precipitate();
-        }
-        if(signalManager.IsActiveShooting())
-        {
-            theRacket.ShootBullet();
-        }
+        if (signalManager.IsActivePrecipitate()) theBall.Precipitate();
+
+        if (signalManager.IsActiveShooting()) theRacket.ShootBullet();
 
         theBall.Detach();
     }
@@ -359,10 +346,7 @@ public class MainManager : MonoBehaviour {
 
     public void AddRestOfBall()
     {
-        if(restOfBall < MAX_REST_OF_BALL)
-        {
-            restOfBall++;
-        }
+        if (restOfBall < MAX_REST_OF_BALL) restOfBall++;
     }
 
     void DrawUIDisplay()
@@ -398,15 +382,12 @@ public class MainManager : MonoBehaviour {
         }
     }
 
-    public void Missing()
+    public IEnumerator Missing()
     {
         DestroyAllItems();
         DestroyAllBullets();
-        Invoke("MissingSecond", 0.05f);
-    }
+        yield return new WaitForSeconds(0.05f);
 
-    public void MissingSecond()
-    {
         signalManager.StopAllSignalsWithoutReplayMode();
         SetDialogStatus(0);
         if (signalManager.IsActiveReplayMode())
@@ -414,7 +395,7 @@ public class MainManager : MonoBehaviour {
             replayTelop.SetActive(true);
             theBall.DiminishForReplay();
         }
-        else if(currentStage.IsLevelUpFailZone())
+        else if (currentStage.IsLevelUpFailZone())
         {
             LevelUp();
         }
@@ -423,29 +404,21 @@ public class MainManager : MonoBehaviour {
             missTelop.SetActive(true);
             theBall.DiminishForMissing();
         }
+
     }
 
-    public void CreateStage()
+    public IEnumerator GenerateStage()
     {
-        GameObject gameObjectStage = GameObject.FindWithTag("Stage");
-        Destroy(gameObjectStage);
+        GameObject[] gameObjectsStage = GameObject.FindGameObjectsWithTag("Stage");
+        foreach (GameObject gameObjectStage in gameObjectsStage) Destroy(gameObjectStage);
+        yield return null;
 
-        Invoke("CreateStageSecond", 0.02f);
-    }
-
-    public void CreateStageSecond()
-    {
         Instantiate(prefabsStage[gameLevel], new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
         currentStage = GameObject.FindWithTag("Stage").GetComponent<Stage>();
-
         DestroyAllBlocks();
         DestroyAllSystems();
+        yield return null;
 
-        Invoke("CreateStageThird", 0.02f);
-    }
-
-    public void CreateStageThird()
-    {
         currentStage.GenerateStage();
 
         SetDialogStatus(1);
@@ -522,7 +495,7 @@ public class MainManager : MonoBehaviour {
 
         theRacket.SetStepOfLength(3);
         gameLevel++;
-        CreateStage();
+        StartCoroutine(GenerateStage());
     }
 
     public void OnAnimationEndFromMissTelop()

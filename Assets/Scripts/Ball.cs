@@ -184,7 +184,7 @@ public class Ball : MonoBehaviour {
         if(theTag == "FailZone")
         {
             StopBall();
-            mainManager.Missing();
+            StartCoroutine(mainManager.Missing());
         }
         if(theTag == "PrecipitateBlock")
         {
