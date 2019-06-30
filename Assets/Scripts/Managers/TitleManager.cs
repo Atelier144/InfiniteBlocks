@@ -15,26 +15,19 @@ public class TitleManager : MonoBehaviour {
 
     //[DllImport("__Internal")]
     //private static extern void SetNumberFromUnity(int s);
-    [SerializeField] GameObject thePanels;
-    [SerializeField] Image imageLevelNumber0;
-    [SerializeField] Image imageLevelNumber1;
+    [SerializeField] GameObject gameObjectThePanels;
 
-    [SerializeField] Button buttonStart;
     [SerializeField] Button buttonLevelSelect;
     [SerializeField] Button buttonHighScoreReset;
     [SerializeField] Button buttonReturnToTopForLevelSelect;
     [SerializeField] Button buttonReturnToTopForHighScoreReset;
-    [SerializeField] Button[] buttonsIntermediateStart = new Button[31];
+    [SerializeField] Button[] buttonsStart = new Button[31];
 
-    [SerializeField] Button buttonLevelUp;
-    [SerializeField] Button buttonLevelDown;
-
-    [SerializeField] Text textButtonStart;
     [SerializeField] Text textButtonLevelSelect;
     [SerializeField] Text textButtonHighScoreReset;
     [SerializeField] Text textButtonReturnToTopForLevelSelect;
     [SerializeField] Text textButtonReturnToTopForHighScoreReset;
-    [SerializeField] Text[] textsButtonsIntermediateStart = new Text[31];
+    [SerializeField] Text[] textsButtonsStart = new Text[31];
 
     [SerializeField] Text textHighScore;
     [SerializeField] Text textGuestMode;
@@ -43,13 +36,10 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] Font fontForEnglish;
     [SerializeField] Font fontForJapanese;
 
-    [SerializeField] Sprite[] spritesBigNumber = new Sprite[10];
     [SerializeField] Sprite spriteButtonEnabled;
     [SerializeField] Sprite spriteButtonDisabled;
-    [SerializeField] Sprite spriteButtonLevelUpEnabled;
-    [SerializeField] Sprite spriteButtonLevelUpDisabled;
-    [SerializeField] Sprite spriteButtonLevelDownEnabled;
-    [SerializeField] Sprite spriteButtonLevelDownDisabled;
+    [SerializeField] Sprite spriteSmallButtonEnabled;
+    [SerializeField] Sprite spriteSmallButtonDisabled;
 
     public static int highScoreForMainScene = 0;
     public static int gameLevelForMainScene = 1;
@@ -64,50 +54,26 @@ public class TitleManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         highScore = 0;
-        maxLevel = 30;
+        maxLevel = 20;
         playerId = 1;
 
         textHighScore.text = "HIGH SCORE : " + highScore.ToString("D6");
         textMaxLevel.text = "MAX LEVEL : " + maxLevel.ToString("D2");
-        if (playerId == 0)
+
+        if (playerId == 0) textGuestMode.text = "GUEST MODE";
+        else textGuestMode.text = "";
+
+        for (int i = 2; i <= maxLevel && i <= 30; i++)
         {
-            textGuestMode.text = "GUEST MODE";
-        }
-        else
-        {
-            textGuestMode.text = "";
+            buttonsStart[i].image.sprite = spriteSmallButtonEnabled;
+            buttonsStart[i].interactable = true;
+            textsButtonsStart[i].color = colorEnabledGreen;
         }
 
-        if (highScore > 0)
+        if (languageName == "Japanese")
         {
-            buttonHighScoreReset.interactable = true;
-            buttonHighScoreReset.image.sprite = spriteButtonEnabled;
-            textButtonHighScoreReset.color = colorEnabledGreen;
-        }
-        else
-        {
-            buttonHighScoreReset.interactable = false;
-            buttonHighScoreReset.image.sprite = spriteButtonDisabled;
-            textButtonHighScoreReset.color = colorDisabledBlack;
-        }
-
-        if (maxLevel >= 2)
-        {
-            buttonLevelSelect.interactable = true;
-            buttonLevelSelect.image.sprite = spriteButtonEnabled;
-            textButtonLevelSelect.color = colorEnabledGreen;
-        }
-        else
-        {
-            buttonLevelSelect.interactable = false;
-            buttonLevelSelect.image.sprite = spriteButtonDisabled;
-            textButtonLevelSelect.color = colorDisabledBlack;
-        }
-
-        if(languageName == "Japanese")
-        {
-            textButtonStart.font = fontForJapanese;
-            textButtonStart.text = "スタート";
+            textsButtonsStart[0].font = fontForJapanese;
+            textsButtonsStart[0].text = "スタート";
             textButtonLevelSelect.font = fontForJapanese;
             textButtonLevelSelect.text = "中間レベルから";
             textButtonHighScoreReset.font = fontForJapanese;
@@ -124,10 +90,10 @@ public class TitleManager : MonoBehaviour {
 		
 	}
 
-    public void PushStartButton() 
+    public void PushStartButton(int startLevel) 
     {
         highScoreForMainScene = highScore;
-        gameLevelForMainScene = 1;
+        gameLevelForMainScene = startLevel;
         playerIdForMainScene = playerId;
         SceneManager.LoadScene("MainScene");
     }
@@ -135,33 +101,12 @@ public class TitleManager : MonoBehaviour {
     public void PushLevelSelectButton()
     {
         selectLevel = maxLevel;
-        DrawLevelNumbers();
-        thePanels.transform.localPosition = new Vector3(0.0f, -1000.0f, 0.0f);
+        gameObjectThePanels.transform.localPosition = new Vector3(0.0f, -1000.0f, 0.0f);
     }
 
     public void PushResetHighScoreButton()
     {
-        thePanels.transform.localPosition = new Vector3(0.0f, -2000.0f, 0.0f);
-    }
-
-    public void PushLevelDownButton()
-    {
-        selectLevel--;
-        DrawLevelNumbers();
-    }
-
-    public void PushLevelUpButton()
-    {
-        selectLevel++;
-        DrawLevelNumbers();
-    }
-
-    public void PushIntermediateStartButton(int startLevel)
-    {
-        highScoreForMainScene = highScore;
-        gameLevelForMainScene = startLevel;
-        playerIdForMainScene = playerId;
-        SceneManager.LoadScene("MainScene");
+        gameObjectThePanels.transform.localPosition = new Vector3(0.0f, -2000.0f, 0.0f);
     }
 
     public void PushAcceptResetHighScoreButton()
@@ -171,35 +116,6 @@ public class TitleManager : MonoBehaviour {
 
     public void PushReturnToTopButton()
     {
-        thePanels.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
-    }
-
-    void DrawLevelNumbers()
-    {
-        int displayNumber0 = selectLevel % 10;
-        int displayNumber1 = selectLevel / 10 % 10;
-        imageLevelNumber0.sprite = spritesBigNumber[displayNumber0];
-        imageLevelNumber1.sprite = spritesBigNumber[displayNumber1];
-        if(selectLevel <= 2)
-        {
-            buttonLevelDown.interactable = false;
-            buttonLevelDown.image.sprite = spriteButtonLevelDownDisabled;
-        }
-        else
-        {
-            buttonLevelDown.interactable = true;
-            buttonLevelDown.image.sprite = spriteButtonLevelDownEnabled;
-        }
-
-        if(selectLevel >= maxLevel)
-        {
-            buttonLevelUp.interactable = false;
-            buttonLevelUp.image.sprite = spriteButtonLevelUpDisabled;
-        }
-        else
-        {
-            buttonLevelUp.interactable = true;
-            buttonLevelUp.image.sprite = spriteButtonLevelUpEnabled;
-        }
+        gameObjectThePanels.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     }
 }
