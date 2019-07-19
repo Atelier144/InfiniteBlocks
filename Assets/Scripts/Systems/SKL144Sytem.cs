@@ -11,9 +11,6 @@ public class SKL144Sytem : MonoBehaviour {
     [SerializeField] GameObject gameObjectBody;
     [SerializeField] GameObject gameObjectFace;
 
-    Animator animator;
-    AnimatorOverrideController animatorOverrideController;
-
     [SerializeField] int duration1;
     [SerializeField] int duration2;
     [SerializeField] int duration3;
@@ -24,18 +21,18 @@ public class SKL144Sytem : MonoBehaviour {
 
     string[][] motionTriggers = { new string[] { }, new string[] { }, new string[] { }, new string[] { } };
 
+    SKL144SystemBody body;
+    SKL144SystemFace face;
+
     bool isLevelUp;
     bool isReturned;
     bool flipReturn;
-
-
-    AnimationCurve animationCurveX;
-    AnimationCurve animationCurveY;
-    AnimationClip animationClipReturn1;
-    AnimationClip animationClipReturn2;
+    bool isIdle;
 
     int motionCode;
-    int formCode = 1;
+    int phaseCode = 1;
+
+    Coroutine currentCoroutine;
 
     void Start()
     {
@@ -43,43 +40,18 @@ public class SKL144Sytem : MonoBehaviour {
         signalManager = GameObject.Find("SignalManager").GetComponent<SignalManager>();
         prefabCreator = GameObject.Find("PrefabCreator").GetComponent<PrefabCreator>();
 
-        animator = GetComponent<Animator>();
-        animatorOverrideController = new AnimatorOverrideController();
-        animatorOverrideController.runtimeAnimatorController = animator.runtimeAnimatorController;
-        animator.runtimeAnimatorController = animatorOverrideController;
-
-        AnimationEvent animationEvent = new AnimationEvent();
-        AnimationEvent animationEventFace = new AnimationEvent();
-
-        animationEvent.time = 2.0f;
-        animationEvent.functionName = "OnReturnAnimationEnd";
-        animationEventFace.time = 0.0f;
-        animationEventFace.intParameter = 1;
-        animationEventFace.functionName = "ChangeFace";
-
-        animationClipReturn1 = new AnimationClip();
-        animationClipReturn2 = new AnimationClip();
-        animationClipReturn1.AddEvent(animationEvent);
-        animationClipReturn2.AddEvent(animationEvent);
-        animationClipReturn1.AddEvent(animationEventFace);
-        animationClipReturn2.AddEvent(animationEventFace);
+        body = gameObjectBody.GetComponent<SKL144SystemBody>();
+        face = gameObjectFace.GetComponent<SKL144SystemFace>();
 
         motionTriggers[1] = motionTrigger1;
         motionTriggers[2] = motionTrigger2;
         motionTriggers[3] = motionTrigger3;
 
-        AnimatorStateInfo[] animatorStateInfos = new AnimatorStateInfo[animator.layerCount];
-        for (int i = 0; i < animator.layerCount; i++) animatorStateInfos[i] = animator.GetCurrentAnimatorStateInfo(i);
-        animatorOverrideController["Return"] = animationClipReturn2;
-        animator.Update(0.0f);
-
-        for (int i = 0; i < animator.layerCount; i++) animator.Play(animatorStateInfos[i].fullPathHash, i, animatorStateInfos[i].normalizedTime);
+        isIdle = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        animationCurveX = AnimationCurve.Linear(0.0f, gameObjectBody.transform.position.x, 2.0f, 0.0f);
-        animationCurveY = AnimationCurve.Linear(0.0f, gameObjectBody.transform.position.y, 2.0f, 240.0f);
     }
 
     private void FixedUpdate()
@@ -89,7 +61,19 @@ public class SKL144Sytem : MonoBehaviour {
             if (!isReturned)
             {
                 isReturned = true;
-                SetTriggerReturn();
+                StopCoroutine(currentCoroutine);
+                StartCoroutine("Return");
+            }
+        }
+        if (mainManager.GetDialogStatus() == 2)
+        {
+            if (isIdle)
+            {
+                isIdle = false;
+                isReturned = false;
+                currentCoroutine = StartCoroutine(motionTriggers[phaseCode][motionCode]);
+                motionCode++;
+                if (motionCode >= motionTriggers[phaseCode].Length) motionCode = 0;
             }
         }
     }
@@ -99,68 +83,65 @@ public class SKL144Sytem : MonoBehaviour {
         return isLevelUp;
     }
 
-    public void OnIdleAnimationEnd()
+    public IEnumerator Motion1()
     {
-        if (mainManager.GetDialogStatus() == 2) SetTriggerMotion();
+        body.SetVelocity(-350.0f, 0.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(0.0f, -250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(700.0f, 0.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(0.0f, 250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(-700.0f, -250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(0.0f, 250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(700.0f, -250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(0.0f, 250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(-350.0f, -250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(0.0f, 250.0f);
+        yield return new WaitForSeconds(1.0f);
+        body.SetVelocity(0.0f, 0.0f);
+        body.SetBasePosition();
+        yield return new WaitForSeconds(1.0f);
+        isIdle = true;
     }
 
-    public void OnMotionAnimationEnd()
+    public IEnumerator Flash()
     {
-        SetTriggerIdle();
-    }
-
-    public void OnReturnAnimationEnd()
-    {
-        isReturned = false;
-        SetTriggerIdle();
-    }
-
-    public void SetTriggerIdle()
-    {
-        animator.SetTrigger("Idle");
-    }
-
-    public void SetTriggerMotion()
-    {
-        animator.SetTrigger(motionTriggers[formCode][motionCode]);
-        motionCode++;
-        if (motionCode >= motionTriggers[formCode].Length) motionCode = 0;
-    }
-
-    public void SetTriggerReturn()
-    {
-
-        flipReturn = !flipReturn;
-        if (flipReturn)
-        {
-            animationClipReturn1.ClearCurves();
-            animationClipReturn1.SetCurve("Body", typeof(Transform), "localPosition.x", animationCurveX);
-            animationClipReturn1.SetCurve("Body", typeof(Transform), "localPosition.y", animationCurveY);
-        }
-        else
-        {
-            animationClipReturn2.ClearCurves();
-            animationClipReturn2.SetCurve("Body", typeof(Transform), "localPosition.x", animationCurveX);
-            animationClipReturn2.SetCurve("Body", typeof(Transform), "localPosition.y", animationCurveY);
-        }
-
-        AnimatorStateInfo[] animatorStateInfos = new AnimatorStateInfo[animator.layerCount];
-        for (int i = 0; i < animator.layerCount; i++) animatorStateInfos[i] = animator.GetCurrentAnimatorStateInfo(i);
-        animatorOverrideController["Return"] = flipReturn ? animationClipReturn1 : animationClipReturn2;
-        animator.Update(0.0f);
-
-        for (int i = 0; i < animator.layerCount; i++) animator.Play(animatorStateInfos[i].fullPathHash, i, animatorStateInfos[i].normalizedTime);
-
-        animator.SetTrigger("Return");
-    }
-
-    public void Flash()
-    {
+        face.ChangeFace(13);
+        yield return new WaitForSeconds(1.0f);
+        face.ChangeFace(12);
+        yield return new WaitForSeconds(1.0f);
+        face.ChangeFace(11);
+        yield return new WaitForSeconds(1.0f);
+        face.ChangeFace(0);
         mainManager.StartFlash();
+        yield return new WaitForSeconds(1.0f);
+        face.ChangeFace(1);
+        yield return new WaitForSeconds(3.0f);
+        isIdle = true;
     }
 
-    public void ChangeFace(int faceCode)
+
+    public IEnumerator Return()
     {
-        gameObjectFace.GetComponent<SKL144SystemFace>().ChangeFace(faceCode);
+        float startPositionX = gameObjectBody.transform.position.x;
+        float startPositionY = gameObjectBody.transform.position.y;
+
+        body.SetVelocity(0.0f, 0.0f);
+        for (int i = 100; i > 0; i--)
+        {
+            float positionX = startPositionX * 0.01f * i;
+            float positionY = (startPositionY - 240.0f) * 0.01f * i + 240.0f;
+            gameObjectBody.transform.position = new Vector3(positionX, positionY, 0.0f);
+            yield return null;
+        }
+        gameObjectBody.transform.position = new Vector3(0.0f, 240.0f, 0.0f);
+        isIdle = true;
     }
 }

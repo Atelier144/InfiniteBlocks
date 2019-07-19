@@ -29,4 +29,14 @@ public class SKL144SystemBody : MonoBehaviour {
     {
 
     }
+
+    public void SetVelocity(float x, float y)
+    {
+        rbody2D.velocity = new Vector2(x, y);
+    }
+
+    public void SetBasePosition()
+    {
+        rbody2D.MovePosition(new Vector2(0.0f, 240.0f));
+    }
 }

@@ -9914,14 +9914,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1367217129}
   - component: {fileID: 1367217130}
-  - component: {fileID: 1367217131}
   m_Layer: 0
   m_Name: SKL144System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1367217129
 Transform:
   m_ObjectHideFlags: 0
@@ -9963,25 +9962,6 @@ MonoBehaviour:
   motionTrigger3:
   - Flash
   - Motion1
---- !u!95 &1367217131
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367217128}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7822229df4993430db6f7035bd8d7936, type: 2}
-  m_CullingMode: 2
-  m_UpdateMode: 1
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1393765560
 GameObject:
   m_ObjectHideFlags: 0
@@ -14743,7 +14723,7 @@ MonoBehaviour:
   fontForJapanese: {fileID: 12800000, guid: 33acd6bcdb55248e8a50420bb85e6d83, type: 3}
   textRestOfBlocksForDebug: {fileID: 771898177}
   isTestMode: 1
-  testLevel: 29
+  testLevel: 28
 --- !u!1 &1997590441
 GameObject:
   m_ObjectHideFlags: 0
