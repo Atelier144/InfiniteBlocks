@@ -24,6 +24,8 @@ public class TimeBomberSystem : MonoBehaviour {
     Color colorRed = new Color(1.0f, 0.2f, 0.2f);
     Color colorGreen = new Color(0.2f, 1.0f, 0.2f);
 
+    AudioSource audioSource;
+
     int countingCount = 50;
 	// Use this for initialization
 	void Start () {
@@ -33,6 +35,8 @@ public class TimeBomberSystem : MonoBehaviour {
         for (int i = 0; i < 4; i++) spriteRenderersNumbers[i] = gameObjectsNumbers[i].GetComponent<SpriteRenderer>();
         spriteRendererColon = gameObjectColon.GetComponent<SpriteRenderer>();
         spriteRendererSignal = gameObjectSignal.GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -54,7 +58,12 @@ public class TimeBomberSystem : MonoBehaviour {
             else
             {
                 countingCount = 50;
-                if (bombingCount > 0) bombingCount--;
+                if (bombingCount > 0)
+                {
+                    bombingCount--;
+                    audioSource.time = 0.1f;
+                    audioSource.Play();
+                }
                 else mainManager.StartExplosion();
 
             }

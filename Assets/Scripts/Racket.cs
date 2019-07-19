@@ -23,6 +23,8 @@ public class Racket : MonoBehaviour {
     [SerializeField] GameObject magnetEffect;
     [SerializeField] GameObject stickyEffect;
 
+    AudioSource[] audioSources;
+
     int stepOfLengthOfRacket = 3;
 
     bool isAttachedBulletShooter = false;
@@ -31,7 +33,10 @@ public class Racket : MonoBehaviour {
 	void Start () {
         mainManager = GameObject.Find("MainManager");
         ball = GameObject.Find("TheBall").GetComponent<Ball>();
-        edgeCollider2D = this.GetComponent<EdgeCollider2D>();
+
+        edgeCollider2D = GetComponent<EdgeCollider2D>();
+        audioSources = GetComponents<AudioSource>();
+
         Transform();
     }
 	
@@ -40,7 +45,7 @@ public class Racket : MonoBehaviour {
         float mouseX = Mathf.Round(Input.mousePosition.x - 512.0f);
         if (mouseX > 500.0f) mouseX = 500.0f;
         if (mouseX < -500.0f) mouseX = -500.0f;
-        this.transform.position = new Vector3(mouseX, -195.0f, 0.0f);
+        this.transform.position = new Vector3(mouseX, -195.5f, 0.0f);
     }
 
     private void FixedUpdate()
@@ -56,6 +61,9 @@ public class Racket : MonoBehaviour {
             float racketPointX = collision.gameObject.transform.position.x;
             Vector2 collisionPoint = collision.contacts[0].point;
             float effectPointX = ballPointX - racketPointX;
+
+            audioSources[0].time = 0.2f;
+            audioSources[0].Play();
         }
     }
 
@@ -64,6 +72,8 @@ public class Racket : MonoBehaviour {
         if (stepOfLengthOfRacket < 6)
         {
             stepOfLengthOfRacket++;
+            audioSources[1].time = 0.1f;
+            audioSources[1].Play();
             Transform();
         }
     }
@@ -73,6 +83,8 @@ public class Racket : MonoBehaviour {
         if (stepOfLengthOfRacket > 0)
         {
             stepOfLengthOfRacket--;
+            audioSources[2].time = 0.1f;
+            audioSources[2].Play();
             Transform();
         }
     }

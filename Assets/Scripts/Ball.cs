@@ -12,7 +12,6 @@ public class Ball : MonoBehaviour {
     [SerializeField] GameObject prefabEffectDiminishForLevelUp;
     [SerializeField] GameObject prefabEffectDiminishForReplay;
     [SerializeField] GameObject prefabEffectDiminishForMissing;
-    [SerializeField] GameObject prefabBounceEffect;
 
     [SerializeField] Sprite spriteNormalBall;
     [SerializeField] Sprite spritePoweredBall;
@@ -178,7 +177,6 @@ public class Ball : MonoBehaviour {
             else
             {
                 rigidbody2D.velocity = reflectionVelocity;
-                Instantiate(prefabBounceEffect, collision.contacts[0].point, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<RacketBounceEffect>().SetEffectPosition(pointX);
             }
         }
         if(theTag == "FailZone")
