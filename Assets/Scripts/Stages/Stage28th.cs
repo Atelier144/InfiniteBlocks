@@ -12,6 +12,8 @@ public class Stage28th : Stage {
 
     int brokenBlocks;
 
+    SKL144Sytem skl144system;
+
     protected override void Start()
     {
         base.Start();
@@ -44,6 +46,7 @@ public class Stage28th : Stage {
                 CreateNormalBlock(positionX, positionY, colorCode);
             }
         }
+        skl144system = prefabCreator.CreateSKL144System();
         CreateCeilingSystem();
     }
 
@@ -57,7 +60,7 @@ public class Stage28th : Stage {
 
     public override bool IsLevelUp()
     {
-        return false;
+        return skl144system.IsLevelUp();
     }
 
     void CreateNormalBlock(float positionX, float positionY, int colorCode)

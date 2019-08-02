@@ -29,8 +29,9 @@ public class Ball : MonoBehaviour {
 
     int comboBonusScore = 0;
 
-    bool isMoving = false;
-    bool isPowered = false;
+    bool isMoving;
+    bool isPowered;
+    bool isConstant;
 
     bool isSticked;
     bool isPrecipitating;
@@ -114,6 +115,15 @@ public class Ball : MonoBehaviour {
 
         movingAngle = Mathf.Atan2(rigidbody2D.velocity.y, rigidbody2D.velocity.x);
 
+        if (isConstant)
+        {
+            float velocityX = currentVelocity * Mathf.Cos(movingAngle);
+            float velocityY = currentVelocity * Mathf.Sin(movingAngle);
+
+            rigidbody2D.velocity = new Vector2(velocityX, velocityY);
+        }
+
+
         //角度補正システム
         float halfSqrt2 = Mathf.Sqrt(2) / 2;
         int correctionCode = GetAngleCorrectionCode(movingAngle);
@@ -172,10 +182,12 @@ public class Ball : MonoBehaviour {
                 stickedPointX = pointX;
                 stickedVelocity = reflectionVelocity;
                 isSticked = true;
+                isConstant = false;
                 rigidbody2D.velocity = Vector2.zero;
             }
             else
             {
+                isConstant = true;
                 rigidbody2D.velocity = reflectionVelocity;
             }
         }
@@ -187,14 +199,36 @@ public class Ball : MonoBehaviour {
         if(theTag == "PrecipitateBlock")
         {
             float collisionPointY = collision.contacts[0].point.y - collision.transform.position.y;
-            if (collisionPointY <= 20.0f)
+            if (collisionPointY <= -20.0f)
             {
                 collision.gameObject.GetComponent<PrecipitateBlock>().StartEffect();
                 PrecipitateExtremely();
             }
         }
+        if(theTag == "RigidbodyPrecipitate")
+        {
+            float collisionPointX = collision.contacts[0].point.x - collision.transform.position.x;
+            float collisionPointY = collision.contacts[0].point.y - collision.transform.position.y;
+            Debug.Log("(" + collisionPointX + "," + collisionPointY + ")");
+            if (collisionPointY <= -25.0f)
+            {
+                if (collisionPointX <= -10.0f) collision.gameObject.GetComponent<SKL144SystemPrecipitate>().StartEffectLeft();
+                if (collisionPointX >= 10.0f) collision.gameObject.GetComponent<SKL144SystemPrecipitate>().StartEffectRight();
 
-        if(theTag == "Rigidbody" || theTag == "BlockSupport")
+                PrecipitateExtremely();
+            }
+            else if (isPrecipitating)
+            {
+                isPrecipitating = false;
+                Draw();
+                float rotationAngle = Random.Range(5.0f, 15.0f);
+                if (Random.Range(0, 2) == 0) rotationAngle *= 1.0f;
+                rigidbody2D.velocity = Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
+                isConstant = true;
+            }
+        }
+
+        if (theTag == "Rigidbody" || theTag == "BlockSupport")
         {
             if (isPrecipitating)
             {
@@ -204,6 +238,7 @@ public class Ball : MonoBehaviour {
                 if (Random.Range(0, 2) == 0) rotationAngle *= 1.0f;
                 rigidbody2D.velocity =  Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
             }
+            isConstant = true;
         }
         if(theTag == "Protector")
         {
@@ -221,20 +256,24 @@ public class Ball : MonoBehaviour {
                 Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
                 rigidbody2D.velocity = reflectionVelocity;
             }
+            isConstant = true;
         }
     }
     public void StopBall()
     {
+        isConstant = false;
         rigidbody2D.velocity = Vector2.zero;
     }
 
     public void SetBall()
     {
+        isConstant = false;
         this.transform.position = new Vector3(0.0f, -130.0f, 0.0f);
     }
 
     public void MoveBall()
     {
+        isConstant = false;
         rigidbody2D.velocity = new Vector2(0.0f, -50.0f);
     }
 
@@ -254,6 +293,7 @@ public class Ball : MonoBehaviour {
     {
         if (!isSticked)
         {
+            isConstant = false;
             isPrecipitating = true;
             rigidbody2D.velocity = new Vector2(0.0f, -currentVelocity);
             Draw();
@@ -263,15 +303,17 @@ public class Ball : MonoBehaviour {
 
     public void PrecipitateExtremely()
     {
+        isConstant = false;
         isPrecipitating = true;
         rigidbody2D.velocity = new Vector2(0.0f, currentVelocity * -3.0f);
     }
 
     public void Detach()
     {
-        if (isSticked && this.transform.position.x < 485.0f && this.transform.position.x > -485.0f)
+        if (isSticked && this.transform.position.x < 492.0f && this.transform.position.x > -492.0f)
         {
             isSticked = false;
+            isConstant = true;
             rigidbody2D.velocity = stickedVelocity;
         }
     }
@@ -286,6 +328,7 @@ public class Ball : MonoBehaviour {
     {
         isSticked = false;
         isPrecipitating = false;
+        isConstant = false;
 
         rigidbody2D.velocity = Vector2.zero;
         this.transform.position = new Vector3(10000.0f, 0.0f, 0.0f);

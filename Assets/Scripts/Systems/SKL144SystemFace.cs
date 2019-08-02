@@ -19,21 +19,21 @@ public class SKL144SystemFace : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-    private void FixedUpdate()
-    {
-        countDamageFace--;
-        if(countDamageFace == 1)
+        if (countDamageFace > 0) countDamageFace--;
+        if (countDamageFace == 1)
         {
             countDamageFace = 0;
             DrawFace();
         }
     }
+
+    private void FixedUpdate()
+    {
+
+    }
     public void DamageFace()
     {
-        countDamageFace = 10;
+        countDamageFace = 30;
         DrawFace();
     }
 

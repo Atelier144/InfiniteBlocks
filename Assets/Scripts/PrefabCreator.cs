@@ -224,9 +224,9 @@ public class PrefabCreator : MonoBehaviour {
         Instantiate(prefabLv27System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
     }
 
-    public void CreateSKL144System()
+    public SKL144Sytem CreateSKL144System()
     {
-        Instantiate(prefabSKL144System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
+        return Instantiate(prefabSKL144System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<SKL144Sytem>();
     }
 
     public void CreateTimeBomberSystem()

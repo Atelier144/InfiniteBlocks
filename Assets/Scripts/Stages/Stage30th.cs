@@ -33,6 +33,7 @@ public class Stage30th : Stage {
                 prefabCreator.CreateNormalBlock(positionX, positionY, colorCode);
             }
         }
+        prefabCreator.CreateInfiniteBlocksSystem();
         prefabCreator.CreateCeilingSystem();
     }
 
