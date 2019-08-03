@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Stage27th : Stage {
 
-    [SerializeField] GameObject prefabCeilingSystem;
-    [SerializeField] GameObject prefabLevel27System;
-
     Level27System level27System;
-
-    int brokenBlocks;
 
     protected override void Start()
     {
@@ -28,8 +23,8 @@ public class Stage27th : Stage {
 
     public override void GenerateStage()
     {
-        CreateLevel27System();
-        CreateCeilingSystem();
+        level27System = prefabCreator.CreateLv27System();
+        prefabCreator.CreateCeilingSystem();
     }
 
     public override int GenerateItemCode(int itemCode)
@@ -40,15 +35,5 @@ public class Stage27th : Stage {
     public override bool IsLevelUp()
     {
         return level27System.IsLevelUp();
-    }
-
-    void CreateCeilingSystem()
-    {
-        Instantiate(prefabCeilingSystem, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
-    }
-
-    void CreateLevel27System()
-    {
-        level27System = Instantiate(prefabLevel27System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Level27System>();
     }
 }

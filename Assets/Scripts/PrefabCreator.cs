@@ -214,14 +214,14 @@ public class PrefabCreator : MonoBehaviour {
         return Instantiate(prefabJackpotChallengeSystem, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<JackpotChallengeSystem>();
     }
 
-    public void CreateLv26System()
+    public Level26System CreateLv26System()
     {
-        Instantiate(prefabLv26System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
+        return Instantiate(prefabLv26System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Level26System>();
     }
 
-    public void CreateLv27System()
+    public Level27System CreateLv27System()
     {
-        Instantiate(prefabLv27System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
+        return Instantiate(prefabLv27System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Level27System>();
     }
 
     public SKL144Sytem CreateSKL144System()

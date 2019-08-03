@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Stage26th : Stage {
 
-    [SerializeField] GameObject prefabCeilingSystem;
-    [SerializeField] GameObject prefabLevel26System;
-
     Level26System level26System;
 
     protected override void Start()
@@ -26,8 +23,8 @@ public class Stage26th : Stage {
 
     public override void GenerateStage()
     {
-        CreateCeilingSystem();
-        CreateLevel26System();
+        level26System = prefabCreator.CreateLv26System();
+        prefabCreator.CreateCeilingSystem();
     }
 
     public override int GenerateItemCode(int itemCode)
@@ -38,16 +35,5 @@ public class Stage26th : Stage {
     public override bool IsLevelUp()
     {
         return level26System.IsLevelUp();
-    }
-
-
-    void CreateCeilingSystem()
-    {
-        Instantiate(prefabCeilingSystem, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
-    }
-
-    void CreateLevel26System()
-    {
-        level26System = Instantiate(prefabLevel26System, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Level26System>();
     }
 }
