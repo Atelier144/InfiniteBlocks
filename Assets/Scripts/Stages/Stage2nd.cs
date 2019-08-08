@@ -8,16 +8,16 @@ public class Stage2nd : Stage {
     [SerializeField] GameObject prefabItemBlock;
     [SerializeField] GameObject prefabCeilingSystem;
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = { 3, 13, 25, 40, 60, 68, 73 };
+    int[] numbersOfAppearItemCode = { 1, 8, 2, 5, 14, 10, 10 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        int[] numbersMin = { 3, 13, 25, 40, 60, 68, 73 };
+        int[] numbersMax = { 5, 16, 28, 45, 64, 70, 75 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;

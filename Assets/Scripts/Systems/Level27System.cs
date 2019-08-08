@@ -61,7 +61,29 @@ public class Level27System : MonoBehaviour {
         switch (levelStage)
         {
             case 0:
-                prefabCreator.CreateGoldBlock(0.0f, 0.0f);
+                for (int x = 0; x < 5; x++)
+                {
+                    for (int y = 0; y < 7; y++)
+                    {
+                        float positionX1 = x * 50.0f - 400.0f;
+                        float positionX2 = x * 50.0f - 100.0f;
+                        float positionX3 = x * 50.0f + 200.0f;
+                        float positionY = y * 20.0f + 20.0f;
+                        int colorCode = 6 - y;
+                        if (x == 2 && y == 3)
+                        {
+                            prefabCreator.CreateItemBlock(positionX1, positionY, 8);
+                            prefabCreator.CreateItemBlock(positionX2, positionY, 9);
+                            prefabCreator.CreateItemBlock(positionX3, positionY, 8);
+                        }
+                        else
+                        {
+                            prefabCreator.CreateNormalBlock(positionX1, positionY, colorCode);
+                            prefabCreator.CreateNormalBlock(positionX2, positionY, colorCode);
+                            prefabCreator.CreateNormalBlock(positionX3, positionY, colorCode);
+                        }
+                    }
+                }
                 break;
             case 1:
                 break;

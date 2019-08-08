@@ -32,6 +32,7 @@ public class Item : MonoBehaviour {
     MainManager mainManager;
     ItemManager itemManager;
     SignalManager signalManager;
+    PrefabSounds prefabSounds;
 
     Ball ball;
     Racket racket;
@@ -45,6 +46,7 @@ public class Item : MonoBehaviour {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         signalManager = GameObject.Find("SignalManager").GetComponent<SignalManager>();
+        prefabSounds = GameObject.Find("PrefabSounds").GetComponent<PrefabSounds>();
 
         ball = GameObject.Find("TheBall").GetComponent<Ball>();
         racket = GameObject.Find("TheRacket").GetComponent<Racket>();
@@ -81,15 +83,19 @@ public class Item : MonoBehaviour {
             {
                 case POINT_100:
                     mainManager.AddGameScore(100);
+                    prefabSounds.GetPoint();
                     break;
                 case POINT_200:
                     mainManager.AddGameScore(200);
+                    prefabSounds.GetPoint();
                     break;
                 case POINT_500:
                     mainManager.AddGameScore(500);
+                    prefabSounds.GetPoint();
                     break;
                 case POINT_1000:
                     mainManager.AddGameScore(1000);
+                    prefabSounds.GetPoint();
                     break;
                 case EXPAND_RACKET:
                     racket.Expand();

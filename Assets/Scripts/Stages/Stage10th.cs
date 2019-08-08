@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class Stage10th : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
-
-    int brokenBlocks;
-
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
-
-        brokenBlocks = 0;
     }
 
     protected override void Update()
@@ -70,10 +60,7 @@ public class Stage10th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
-        brokenBlocks++;
-        if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        return itemCode;
     }
 
     public override bool IsLevelUp()

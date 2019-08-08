@@ -291,6 +291,7 @@ public class SignalManager : MonoBehaviour {
     public void StartProtector(int activeCount)
     {
         activeCountProtector = activeCount;
+        protector.SetActive(false);
         protector.SetActive(true);
         aurora.SetActiveProtector(true);
     }

@@ -124,6 +124,7 @@ public class Racket : MonoBehaviour {
     public void AttachBulletShooter()
     {
         isAttachedBulletShooter = true;
+        bulletShooter.SetActive(false);
         bulletShooter.SetActive(true);
     }
 

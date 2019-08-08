@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Stage7th : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[6];
+    int[] numbersOfAppearItemCode = { 13, 5, 8, 21, 13, 10 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        int[] numbersMin = { 25, 50, 75, 100, 125, 150 };
+        int[] numbersMax = { 35, 60, 85, 110, 135, 152 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;

@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class Stage5th : Stage {
 
-    [SerializeField] GameObject prefabNormalBlock;
-    [SerializeField] GameObject prefabHardBlock;
-    [SerializeField] GameObject prefabSmallBlock;
-    [SerializeField] GameObject prefabRoundBlock;
-    [SerializeField] GameObject prefabCeilingSystem;
-
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[9];
+    int[] numbersOfAppearItemCode;
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        int[][] numbersOfAppearItemCodes =
+        {
+            new int[]{1,9,1,20,1,19,2,10,10},
+            new int[]{1,19,1,9,1,21,2,10,10},
+            new int[]{1,1,5,1,9,20,2,10,10},
+            new int[]{9,1,1,1,5,21,2,10,10}
+        };
+        int[] numbersMin = { 10, 20, 40, 60, 80, 100, 120, 140, 145 };
+        int[] numbersMax = { 12, 25, 45, 65, 85, 105, 125, 142, 146 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
-
+        numbersOfAppearItemCode = numbersOfAppearItemCodes[Random.Range(0, numbersOfAppearItemCodes.Length)];
         brokenBlocks = 0;
     }
 

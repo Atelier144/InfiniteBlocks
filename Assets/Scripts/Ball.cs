@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour {
 
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigidbody2D;
+    AudioSource[] audioSources;
 
     SpriteRenderer[] spriteRenderersAfterimage = new SpriteRenderer[10];
 
@@ -69,6 +70,7 @@ public class Ball : MonoBehaviour {
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        audioSources = GetComponents<AudioSource>();
 
         for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i] = gameObjectsAfterimage[i].GetComponent<SpriteRenderer>();
     }
@@ -279,6 +281,8 @@ public class Ball : MonoBehaviour {
 
     public void PowerUp()
     {
+        audioSources[0].time = 0.0f;
+        audioSources[0].Play();
         this.gameObject.tag = "PoweredBall";
         Draw();
     }

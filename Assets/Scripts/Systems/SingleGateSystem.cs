@@ -12,6 +12,8 @@ public class SingleGateSystem : MonoBehaviour {
     GateSignal gateSignal;
     GateBar[] gateBars = new GateBar[2];
 
+    AudioSource audioSource;
+
     int gateOpenCount;
 
     bool isGateOpen;
@@ -21,6 +23,8 @@ public class SingleGateSystem : MonoBehaviour {
         gateSignal = gameObjectGateSignal.GetComponent<GateSignal>();
         gateBars[0] = gameObjectsGateBar[0].GetComponent<GateBar>();
         gateBars[1] = gameObjectsGateBar[1].GetComponent<GateBar>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -30,6 +34,9 @@ public class SingleGateSystem : MonoBehaviour {
 
     public void OnSwitchOn()
     {
+        audioSource.time = 0.0f;
+        audioSource.Play();
+
         isGateOpen = !isGateOpen;
         if (isGateOpen)
         {

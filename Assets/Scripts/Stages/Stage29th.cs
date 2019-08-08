@@ -67,6 +67,32 @@ public class Stage29th : Stage {
                 else prefabCreator.CreateSilverBlock(positionX, positionY);
             }
         }
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                int[,] pattern = { { 1, 0, 1 }, { 0, 2, 0 }, { 1, 0, 1 } };
+                float positionX1 = x * 50.0f - 450.0f;
+                float positionX2 = x * 50.0f + 350.0f;
+                float positionY = y * 20.0f + 280.0f;
+                int colorCode = y;
+                switch (pattern[x, y])
+                {
+                    case 0:
+                        prefabCreator.CreateSilverBlock(positionX1, positionY);
+                        prefabCreator.CreateSilverBlock(positionX2, positionY);
+                        break;
+                    case 1:
+                        prefabCreator.CreateGoldBlock(positionX1, positionY);
+                        prefabCreator.CreateGoldBlock(positionX2, positionY);
+                        break;
+                    case 2:
+                        prefabCreator.CreateItemBlock(positionX1, positionY, 19);
+                        prefabCreator.CreateItemBlock(positionX2, positionY, 19);
+                        break;
+                }
+            }
+        }
         prefabCreator.CreateCountLevelUpBlock(0.0f, 335.0f, 10);
         prefabCreator.CreateTimeBomberSystem();
         prefabCreator.CreateCeilingSystem();

@@ -159,6 +159,8 @@ public class MainManager : MonoBehaviour {
         displayGameScore = gameScore;
         displayHighScore = highScore;
 
+        audioMixer.SetFloat("BGM", 0.0f);
+        audioMixer.SetFloat("SE", 0.0f);
 
 
         standardBeginnerSaveCount = playerId == 0 ? 1000 : 1250;
