@@ -125,7 +125,7 @@ public class Item : MonoBehaviour {
                     signalManager.StartPrecipitate(1500);
                     break;
                 case SHOOTING:
-                    signalManager.StartShooting(1000);
+                    signalManager.StartShooting(750);
                     break;
                 case HOSTAGE_300:
                     mainManager.AddGameScore(300);
@@ -141,7 +141,7 @@ public class Item : MonoBehaviour {
                     signalManager.StopAllSignals();
                     break;
                 case MAGNET:
-                    signalManager.StartMagnet(1500);
+                    signalManager.StartMagnet(1000);
                     break;
                 case STICKY:
                     signalManager.StartSticky(1500);
@@ -167,8 +167,7 @@ public class Item : MonoBehaviour {
                     //複雑なシステムに使う
                     break;
                 case HOSTAGE_300:
-                    ball.StopBall();
-                    StartCoroutine(mainManager.Missing());
+                    mainManager.MissingHostage300();
                     break;
             }
             Destroy(this.gameObject);

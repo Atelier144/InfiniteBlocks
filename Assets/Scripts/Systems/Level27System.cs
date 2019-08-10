@@ -14,7 +14,7 @@ public class Level27System : MonoBehaviour {
 
     PrefabCreator prefabCreator;
 
-    int levelStage;
+    int levelStage = 1;
     int timerCount;
 
 	// Use this for initialization
@@ -86,6 +86,18 @@ public class Level27System : MonoBehaviour {
                 }
                 break;
             case 1:
+                for (int x = 0; x < 12; x++)
+                {
+                    float positionX = x * 80.0f - 440.0f;
+                    float positionY = 157.0f;
+                    prefabCreator.CreateHardRoundBlock(positionX, positionY);
+                }
+                for (int x = 0; x < 20; x++)
+                {
+                    float positionX = x * 50.0f - 475.0f;
+                    float positionY = 112.0f;
+                    prefabCreator.CreateHardBlock(positionX, positionY);
+                }
                 break;
             case 2:
                 break;

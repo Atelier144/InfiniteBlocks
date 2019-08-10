@@ -269,6 +269,8 @@ public class SKL144Sytem : MonoBehaviour {
 
     public IEnumerator Guard1()
     {
+        face.ChangeFace(1);
+        yield return new WaitForSeconds(1.0f);
         face.ChangeFace(7);
         gameObjectWeakPoint1.SetActive(false);
         gameObjectWeakPoint2.SetActive(false);
@@ -279,6 +281,8 @@ public class SKL144Sytem : MonoBehaviour {
 
     public IEnumerator Guard2()
     {
+        face.ChangeFace(1);
+        yield return new WaitForSeconds(1.0f);
         face.ChangeFace(7);
         gameObjectWeakPoint1.SetActive(false);
         gameObjectWeakPoint2.SetActive(false);
@@ -289,6 +293,8 @@ public class SKL144Sytem : MonoBehaviour {
 
     public IEnumerator Guard3()
     {
+        face.ChangeFace(1);
+        yield return new WaitForSeconds(1.0f);
         face.ChangeFace(7);
         gameObjectWeakPoint1.SetActive(false);
         gameObjectWeakPoint2.SetActive(false);
@@ -716,7 +722,14 @@ public class SKL144Sytem : MonoBehaviour {
         face.ChangeFace(1);
         yield return new WaitForSeconds(2.0f);
         face.ChangeFace(10);
+        gameObjectBigBar.SetActive(true);
+        gameObjectBlockGenerator.SetActive(true);
+        gameObjectPrecipitate.SetActive(true);
         yield return new WaitForSeconds(2.0f);
+        gameObjectBigBar.SetActive(false);
+        gameObjectBlockGenerator.SetActive(false);
+        gameObjectPrecipitate.SetActive(false);
+
         face.ChangeFace(1);
         yield return new WaitForSeconds(2.0f);
         motionCode = -1;
@@ -745,8 +758,19 @@ public class SKL144Sytem : MonoBehaviour {
         body.SetVelocity(0.0f, 0.0f);
         gameObjectBody.transform.position = new Vector3(0.0f, 240.0f, 0.0f);
         yield return new WaitForSeconds(2.0f);
-        face.ChangeFace(0);
-        yield return new WaitForSeconds(2.0f);
+        face.ChangeFace(4);
+        for (int i = 0; i < 5; i++) 
+        {
+            gameObjectBigBar.SetActive(false);
+            gameObjectBlockGenerator.SetActive(false);
+            gameObjectPrecipitate.SetActive(false);
+            yield return new WaitForSeconds(0.3f);
+            gameObjectBigBar.SetActive(true);
+            gameObjectBlockGenerator.SetActive(true);
+            gameObjectPrecipitate.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }
+        yield return new WaitForSeconds(3.0f);
         isLevelUp = true;
         gameObjectBody.SetActive(false);
         Instantiate(prefabExplosionEffect, new Vector3(0.0f, 240.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));

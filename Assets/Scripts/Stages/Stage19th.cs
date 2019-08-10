@@ -33,7 +33,7 @@ public class Stage19th : Stage {
 
     public override void GenerateStage()
     {
-        int baseColorCode = Random.Range(0, 7);
+        int baseColorCode = 0;
         for(int i = 0; i < 3; i++)
         {
             float[] positionsPx = { -450.0f, -100.0f, 250.0f };

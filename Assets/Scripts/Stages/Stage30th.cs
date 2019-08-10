@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Stage30th : Stage {
 
-    int brokenBlocks;
-
     protected override void Start()
     {
         base.Start();
@@ -39,7 +37,7 @@ public class Stage30th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
-        return 0;
+        return itemCode;
     }
 
     public override bool IsLevelUp()

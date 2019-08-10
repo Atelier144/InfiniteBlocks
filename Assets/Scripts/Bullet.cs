@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour {
     Rigidbody2D rigidbody2D;
     AudioSource soundShooting;
 
-    [SerializeField] GameObject diminishEffect;
     [SerializeField] GameObject[] afterimages = new GameObject[5];
 
     Vector3[] previousPositions = new Vector3[5];
@@ -50,11 +49,7 @@ public class Bullet : MonoBehaviour {
         string theTag = collision.gameObject.tag;
         if(theTag == "Block" || theTag == "BlockSupport" || theTag == "Rigidbody" || theTag == "PrecipitateBlock")
         {
-            Vector3 effectPosition = this.gameObject.transform.position;
-            effectPosition.y += 12.5f;
-            Instantiate(diminishEffect, effectPosition, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
             Destroy(this.gameObject);
-            
         }
     }
 }

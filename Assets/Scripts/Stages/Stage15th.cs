@@ -6,8 +6,8 @@ public class Stage15th : Stage {
 
     BonusStageSystem bonusStageSystem;
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[12];
+    int[] numbersOfAppearItemCode = { 2, 3, 3, 4, 5, 8, 9, 14, 19, 20, 21, 101 };
 
     int brokenBlocks;
     int currentRestOfBalls;
@@ -16,8 +16,22 @@ public class Stage15th : Stage {
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        if (true)
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+
+        int[] numbersMin = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120 };
+        int[] numbersMax = { 13, 23, 33, 43, 53, 63, 73, 83, 93, 103, 113, 123 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -108,10 +122,13 @@ public class Stage15th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int[] itemCodes = { 5, 8, 9, 14, 19, 20, 21 };
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        if (resultItemCode == 101) resultItemCode = itemCodes[Random.Range(0, itemCodes.Length)];
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()

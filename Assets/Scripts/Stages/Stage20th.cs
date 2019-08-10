@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class Stage20th : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
-
-    int brokenBlocks;
-
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
-
-        brokenBlocks = 0;
     }
 
     protected override void Update()
@@ -103,10 +93,7 @@ public class Stage20th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
-        brokenBlocks++;
-        if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        return itemCode;
     }
 
     public override bool IsLevelUp()
@@ -114,13 +101,3 @@ public class Stage20th : Stage {
         return GameObject.FindGameObjectsWithTag("Block").Length == 0;
     }
 }
-
-/*
- *                 if (blockCode == 1) prefabCreator.CreateSilverBlock(positionX, positionY);
-                if (blockCode == 2) prefabCreator.CreateGoldBlock(positionX, positionY);
-                if (blockCode == 3) prefabCreator.CreateItemBlock(positionX, positionY, 8); // 8:itemCode of PowerUp
-                if (blockCode == 4) prefabCreator.CreateItemBlock(positionX, positionY, 9); // 9:itemCode of Protector;
-                if (blockCode == 5) prefabCreator.CreateItemBlock(positionX, positionY, 11); // 11:itemCode of TrapGuard;
-                if (blockCode == 6) prefabCreator.CreateItemBlock(positionX, positionY, 10); // 10:itemCode of LevelUp;
-                if (blockCode == 7) prefabCreator.CreateItemBlock(positionX, positionY, 7); // 7:itemCode of ExtraBall;
-*/

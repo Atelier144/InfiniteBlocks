@@ -384,6 +384,11 @@ public class MainManager : MonoBehaviour {
         }
     }
 
+    public void MissingHostage300()
+    {
+        StartCoroutine(Missing());
+    }
+
     public IEnumerator Missing()
     {
         DestroyAllItems();
@@ -507,6 +512,7 @@ public class MainManager : MonoBehaviour {
         {
             restOfBall--;
             SetDialogStatus(1);
+            theBall.StopBall();
             theBall.SetBall();
             signalManager.StartReplayMode(standardBeginnerSaveCount);
             theRacket.Rebound();
@@ -521,6 +527,7 @@ public class MainManager : MonoBehaviour {
     {
         replayTelop.SetActive(false);
         SetDialogStatus(1);
+        theBall.StopBall();
         theBall.SetBall();
         theRacket.Rebound();
     }
