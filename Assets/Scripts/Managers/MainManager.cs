@@ -31,7 +31,6 @@ public class MainManager : MonoBehaviour {
     [SerializeField] GameObject theGameOver;
     [SerializeField] GameObject theExplosion;
 
-
     [SerializeField] GameObject panelMainView;
 
     [SerializeField] Sprite[] spritesYellowNumber = new Sprite[11];
@@ -40,10 +39,6 @@ public class MainManager : MonoBehaviour {
     [SerializeField] Sprite spriteReturnButtonDisabled;
     [SerializeField] Sprite spriteRetireButtonEnabled;
     [SerializeField] Sprite spriteRetireButtonDisabled;
-    [SerializeField] Sprite spriteMusicButtonOn;
-    [SerializeField] Sprite spriteMusicButtonOff;
-    [SerializeField] Sprite spriteSoundButtonOn;
-    [SerializeField] Sprite spriteSoundButtonOff;
 
     [SerializeField] Image[] imagesHighScoreNumber = new Image[6];
     [SerializeField] Image[] imagesGameScoreNumber = new Image[6];
@@ -57,8 +52,9 @@ public class MainManager : MonoBehaviour {
 
     [SerializeField] Button buttonReturn;
     [SerializeField] Button buttonRetire;
-    [SerializeField] Button buttonMusic;
-    [SerializeField] Button buttonSound;
+
+    [SerializeField] Slider sliderBGM;
+    [SerializeField] Slider sliderSE;
 
     [SerializeField] Text textBallStartTelop;
     [SerializeField] Text textReturnDialog;
@@ -77,11 +73,16 @@ public class MainManager : MonoBehaviour {
     [SerializeField] bool isTestMode;
     [SerializeField] int testLevel;
 
+    AudioSource[] audioSources;
+
     public static int gameScoreForEndScene;
     public static int highScoreForEndScene;
     public static int playerIdForEndScene;
     public static int gameLevelForEndScene;
     public static bool isPerformancePlayForEndScene;
+
+    static float currentSliderBGMValue;
+    static float currentSliderSEValue;
 
     int gameScore = 0;
     int gameLevel = 1;
@@ -117,50 +118,43 @@ public class MainManager : MonoBehaviour {
         systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         signalManager = GameObject.Find("SignalManager").GetComponent<SignalManager>();
 
+        audioSources = GetComponents<AudioSource>();
+
         highScore = TitleManager.highScoreForMainScene;
         gameLevel = TitleManager.gameLevelForMainScene;
         playerId = TitleManager.playerIdForMainScene;
 
-        if (isTestMode)
-        {
-            gameLevel = testLevel;
-        }
+        sliderBGM.value = currentSliderBGMValue;
+        sliderSE.value = currentSliderSEValue;
 
+        if (isTestMode) gameLevel = testLevel;
 
-        if(gameLevel == 1)
-        {
-            isPerformancePlay = true;
-        }
-        else
-        {
-            isPerformancePlay = false;
-        }
+        isPerformancePlay = gameLevel == 1;
 
-        if(languageName == "Japanese")
+        switch (languageName)
         {
-            textBallStartTelop.font = fontForJapanese;
-            textBallStartTelop.text = "下の枠内をクリックしてスタート";
-            textReturnDialog.font = fontForJapanese;
-            textReturnDialog.lineSpacing = 1.35f;
-            textReturnDialog.text = "ゲームを中止して、タイトル画面に戻りますか？\n（スコアは記録されません）";
-            textRetireDialog.font = fontForJapanese;
-            textRetireDialog.lineSpacing = 1.35f;
-            textRetireDialog.text = "まだボールが残っていますが\nゲームを終了させて結果画面に切り替えますか？";
-            textReturnDialogButtonCancel.font = fontForJapanese;
-            textReturnDialogButtonCancel.text = "キャンセル";
-            textReturnDialogButtonOK.font = fontForJapanese;
-            textReturnDialogButtonOK.text = "はい";
-            textRetireDialogButtonCancel.font = fontForJapanese;
-            textRetireDialogButtonCancel.text = "キャンセル";
-            textRetireDialogButtonOK.font = fontForJapanese;
-            textRetireDialogButtonOK.text = "はい";
+            case "Japanese":
+                textBallStartTelop.font = fontForJapanese;
+                textBallStartTelop.text = "下の枠内をクリックしてスタート";
+                textReturnDialog.font = fontForJapanese;
+                textReturnDialog.lineSpacing = 1.35f;
+                textReturnDialog.text = "ゲームを中止して、タイトル画面に戻りますか？\n（スコアは記録されません）";
+                textRetireDialog.font = fontForJapanese;
+                textRetireDialog.lineSpacing = 1.35f;
+                textRetireDialog.text = "まだボールが残っていますが\nゲームを終了させて結果画面に切り替えますか？";
+                textReturnDialogButtonCancel.font = fontForJapanese;
+                textReturnDialogButtonCancel.text = "キャンセル";
+                textReturnDialogButtonOK.font = fontForJapanese;
+                textReturnDialogButtonOK.text = "はい";
+                textRetireDialogButtonCancel.font = fontForJapanese;
+                textRetireDialogButtonCancel.text = "キャンセル";
+                textRetireDialogButtonOK.font = fontForJapanese;
+                textRetireDialogButtonOK.text = "はい";
+                break;
         }
 
         displayGameScore = gameScore;
         displayHighScore = highScore;
-
-        audioMixer.SetFloat("BGM", 0.0f);
-        audioMixer.SetFloat("SE", 0.0f);
 
 
         standardBeginnerSaveCount = playerId == 0 ? 1000 : 1250;
@@ -236,46 +230,28 @@ public class MainManager : MonoBehaviour {
     public void PushReturnButton()
     {
         SetDialogStatus(3);
+        audioSources[0].time = 0.12f;
+        audioSources[0].Play();
     }
 
     //Retireボタン(掌)を押した時に呼び出されるメソッド
     public void PushRetireButton()
     {
         SetDialogStatus(4);
+        audioSources[0].time = 0.12f;
+        audioSources[0].Play();
     }
 
-    //Musicボタン(四分音符)を押した時に呼び出されるメソッド
-    public void PushMusicButton()
+    public void OnValueChangedSliderBGM()
     {
-        if (isMusicOn)
-        {
-            isMusicOn = false;
-            buttonMusic.image.sprite = spriteMusicButtonOff;
-            audioMixer.SetFloat("BGM", -80.0f);
-        }
-        else
-        {
-            isMusicOn = true;
-            buttonMusic.image.sprite = spriteMusicButtonOn;
-            audioMixer.SetFloat("BGM", 0.0f);
-        }
+        currentSliderBGMValue = sliderBGM.value;
+        audioMixer.SetFloat("BGM", currentSliderBGMValue);
     }
 
-    //Soundボタン(スピーカー)を押した時に呼び出されるメソッド
-    public void PushSoundButton()
+    public void OnValueChangedSliderSE()
     {
-        if (isSoundOn)
-        {
-            isSoundOn = false;
-            buttonSound.image.sprite = spriteSoundButtonOff;
-            audioMixer.SetFloat("SE", -80.0f);
-        }
-        else
-        {
-            isSoundOn = true;
-            buttonSound.image.sprite = spriteSoundButtonOn;
-            audioMixer.SetFloat("SE", 0.0f);
-        }
+        currentSliderSEValue = sliderSE.value;
+        audioMixer.SetFloat("SE", currentSliderSEValue);
     }
 
     //DisplayScoreボタン(見えない)を押した時に呼び出されるメソッド
@@ -320,6 +296,8 @@ public class MainManager : MonoBehaviour {
     public void PushDialogButtonCancel()
     {
         SetDialogStatus(1);
+        audioSources[1].time = 0.05f;
+        audioSources[1].Play();
     }
 
 
