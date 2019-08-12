@@ -14,8 +14,9 @@ public class Level27System : MonoBehaviour {
 
     PrefabCreator prefabCreator;
 
-    int levelStage = 1;
+    int levelStage = 2;
     int timerCount;
+    bool isLevelUp;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +30,7 @@ public class Level27System : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (levelStage >= 15)
+        if (isLevelUp)
         {
             for (int i = 0; i < 15; i++)
             {
@@ -49,11 +50,7 @@ public class Level27System : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (GameObject.FindGameObjectsWithTag("Block").Length == 0)
-        {
-            levelStage++;
-            CreateLevelStage();
-        }
+        if (levelStage >= 14) if (GameObject.FindGameObjectsWithTag("Block").Length == 0) isLevelUp = true;
     }
 
     void CreateLevelStage()
@@ -131,7 +128,16 @@ public class Level27System : MonoBehaviour {
 
     public bool IsLevelUp()
     {
-        return levelStage >= 15;
+        return isLevelUp;
+    }
+
+    public void OnTriggerEnter2DFromChecker()
+    {
+        if (GameObject.FindGameObjectsWithTag("Block").Length == 0)
+        {
+            levelStage++;
+            CreateLevelStage();
+        }
     }
 
     IEnumerator Timer()

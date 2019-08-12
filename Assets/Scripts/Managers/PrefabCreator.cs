@@ -28,6 +28,7 @@ public class PrefabCreator : MonoBehaviour {
     [SerializeField] GameObject prefabPointBumper;
     [SerializeField] GameObject prefabUpDownGate;
 
+    [SerializeField] GameObject prefabMagnetGeneratorSystem;
     [SerializeField] GameObject prefabSingleGateSystem;
     [SerializeField] GameObject prefabSixGatesSystem;
     [SerializeField] GameObject prefabSlidingSteelBlocksSystem;
@@ -168,6 +169,10 @@ public class PrefabCreator : MonoBehaviour {
     }
 
 
+    public void CreateMagnetGeneratorSystem()
+    {
+        Instantiate(prefabMagnetGeneratorSystem, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
+    }
 
     public void CreateSingleGateSystem()
     {

@@ -14,8 +14,9 @@ public class Level26System : MonoBehaviour {
 
     PrefabCreator prefabCreator;
 
-    int levelStage = 4;
+    int levelStage = 0;
     int timerCount;
+    bool isLevelUp;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +30,7 @@ public class Level26System : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(levelStage >= 8)
+		if(isLevelUp)
         {
             for(int i=0; i < 8; i++)
             {
@@ -49,11 +50,7 @@ public class Level26System : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if(GameObject.FindGameObjectsWithTag("Block").Length == 0)
-        {
-            levelStage++;
-            CreateLevelStage();
-        }
+        if (levelStage >= 7) if (GameObject.FindGameObjectsWithTag("Block").Length == 0) isLevelUp = true;
     }
 
     void CreateLevelStage()
@@ -78,7 +75,7 @@ public class Level26System : MonoBehaviour {
                     int[] numberOfBlocks = { 1, 2, 3, 4, 3, 2, 1 };
                     for (int y = 0; y < numberOfBlocks[x]; y++)
                     {
-                        float[] positionsPy = { 60.0f, 40.0f, 20.0f, 0.0f, 20.0f, 40.0f, 60.0f };
+                        float[] positionsPy = { 160.0f, 140.0f, 120.0f, 100.0f, 120.0f, 140.0f, 160.0f };
                         float positionX = x * 100.0f - 300.0f;
                         float positionY = y * 40.0f + positionsPy[x];
                         prefabCreator.CreateHardBlock(positionX, positionY);
@@ -191,7 +188,16 @@ public class Level26System : MonoBehaviour {
 
     public bool IsLevelUp()
     {
-        return levelStage >= 8;
+        return isLevelUp;
+    }
+
+    public void OnTriggerEnter2DFromChecker()
+    {
+        if (GameObject.FindGameObjectsWithTag("Block").Length == 0)
+        {
+            levelStage++;
+            CreateLevelStage();
+        }
     }
 
     IEnumerator Timer()

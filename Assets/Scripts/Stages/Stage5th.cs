@@ -74,9 +74,8 @@ public class Stage5th : Stage {
         }
         for (int x = 0; x < 7; x++)
         {
-            float[] positionsY = { 80.0f, 100.0f, 120.0f, 140.0f, 120.0f, 100.0f, 80.0f };
             float positionX = x * 80.0f - 240.0f;
-            float positionY = positionsY[x];
+            float positionY = 120.0f;
             int colorCode = 6 - x;
             prefabCreator.CreateRoundBlock(positionX, positionY, colorCode);
         }
@@ -95,12 +94,9 @@ public class Stage5th : Stage {
             float positionY = 240.0f;
             prefabCreator.CreateSteelBlock(positionX, positionY);
         }
-        prefabCreator.CreateItemBlock(-225.0f, 260.0f, 20);
-        prefabCreator.CreateItemBlock(225.0f, 260.0f, 20);
-        prefabCreator.CreateItemBlock(-225.0f, 220.0f, 19);
-        prefabCreator.CreateItemBlock(225.0f, 220.0f, 19);
         prefabCreator.CreateSteelBlock(-175.0f, 0.0f);
         prefabCreator.CreateSteelBlock(175.0f, 0.0f);
+        prefabCreator.CreateMagnetGeneratorSystem();
         prefabCreator.CreateCeilingSystem();
     }
 
