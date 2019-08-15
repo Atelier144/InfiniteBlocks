@@ -84,21 +84,6 @@ public class Stage14th : Stage {
         {
             int[] colorCodes = { 0, 1, 2, 3, 4, 5, 6, 0, 1, 2 };
             int[] colorDice = { 0, 1, 2, 3, 4, 5, 6 };
-            if (true)
-            {
-                int a = colorDice.Length;
-                while (a > 0) 
-                {
-                    int s = a - 1;
-                    int t = Random.Range(0, a);
-                    int tmp = colorDice[s];
-                    colorDice[s] = colorDice[t];
-                    colorDice[t] = tmp;
-                    a--;
-                }
-            }
-            for (int k = 0; k < colorDice.Length; k++) colorCodes[k] = colorDice[k];
-            if (true)
             {
                 int a = colorDice.Length;
                 while (a > 0)
@@ -114,6 +99,18 @@ public class Stage14th : Stage {
             colorCodes[7] = colorDice[0];
             colorCodes[8] = colorDice[1];
             colorCodes[9] = colorDice[2];
+            {
+                int a = colorCodes.Length;
+                while (a > 0)
+                {
+                    int s = a - 1;
+                    int t = Random.Range(0, a);
+                    int tmp = colorCodes[s];
+                    colorCodes[s] = colorCodes[t];
+                    colorCodes[t] = tmp;
+                    a--;
+                }
+            }
             for (int j = 0; j < 10; j++)
             {
                 float radius = j * 36.0f * Mathf.Deg2Rad;
