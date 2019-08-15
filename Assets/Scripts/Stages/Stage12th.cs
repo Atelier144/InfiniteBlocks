@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class Stage12th : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[7];
+    int[] numbersOfAppearItemCode = { 3, 5, 8, 9, 11, 13, 20 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        if (true)
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+        numbersOfAppearItemCode[5] = 17;
+        numbersOfAppearItemCode[6] = 10;
+        int[] numbersMin = { 10, 25, 40, 55, 70, 85, 96 };
+        int[] numbersMax = { 15, 30, 45, 60, 75, 90, 98 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -77,10 +92,11 @@ public class Stage12th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()

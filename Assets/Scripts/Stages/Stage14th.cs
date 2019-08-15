@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class Stage14th : Stage {
 
-    [SerializeField] GameObject prefabRoundBlock;
-    [SerializeField] GameObject prefabHardRoundBlock;
-    [SerializeField] GameObject prefabPointBumper;
-    [SerializeField] GameObject prefabSteelBlocksWheelSystem;
-    [SerializeField] GameObject prefabCeilingSystem;
-
     SteelBlocksWheelSystem steelBlocksWheelSystem;
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[5];
+    int[] numbersOfAppearItemCode = { 4, 5, 8, 9, 11, 14, 101 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        if (true)
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+        int[] numbersMin = { 3, 9, 15, 21, 25 };
+        int[] numbersMax = { 6, 12, 18, 24, 27 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -69,10 +76,12 @@ public class Stage14th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        if (resultItemCode == 101) resultItemCode = Random.Range(0, 2) == 0 ? 19 : 20;
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()

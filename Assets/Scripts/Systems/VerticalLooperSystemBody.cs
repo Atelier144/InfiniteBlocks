@@ -17,11 +17,11 @@ public class VerticalLooperSystemBody : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Ball")
+        if (collision.gameObject.tag == "Ball" || collision.gameObject.tag == "PoweredBall") 
         {
             ball.VerticalLoop();
         }
-        if(collision.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet") 
         {
             Destroy(collision);
         }
