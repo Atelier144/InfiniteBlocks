@@ -245,13 +245,15 @@ public class MainManager : MonoBehaviour {
     public void OnValueChangedSliderBGM()
     {
         currentSliderBGMValue = sliderBGM.value;
-        audioMixer.SetFloat("BGM", currentSliderBGMValue);
+        float sliderBGMValue = currentSliderBGMValue < -49.9f ? -80.0f : currentSliderBGMValue;
+        audioMixer.SetFloat("BGM", sliderBGMValue);
     }
 
     public void OnValueChangedSliderSE()
     {
         currentSliderSEValue = sliderSE.value;
-        audioMixer.SetFloat("SE", currentSliderSEValue);
+        float sliderSEValue = currentSliderSEValue < -49.9f ? -80.0f : currentSliderSEValue; 
+        audioMixer.SetFloat("SE", sliderSEValue);
     }
 
     //DisplayScoreボタン(見えない)を押した時に呼び出されるメソッド
