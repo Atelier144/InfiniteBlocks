@@ -46,17 +46,82 @@ public class Stage14th : Stage {
 
     public override void GenerateStage()
     {
+        /*
         for (int i = 0; i < 10; i++)
         {
+            int[][] colorCodes =
+            {
+
+                new int[]{0,0,1,1,2,2,3,3,4,4,5,5,6,6},
+                new int[]{0,0,1,1,2,2,3,3,4,4,5,5,6,6}
+
+            };
+            for (int j = 0; j < 2; j++)
+            {
+                int a = colorCodes[j].Length;
+                while (a > 0)
+                {
+                    int b = a - 1;
+                    int c = Random.Range(0, a);
+                    int tmp = colorCodes[j][b];
+                    colorCodes[j][b] = colorCodes[j][c];
+                    colorCodes[j][c] = tmp;
+                    a--;
+                }
+            }
             float radius = i * 36.0f * Mathf.Deg2Rad;
             float positionX1 = Mathf.Round(Mathf.Cos(radius) * 140.0f) - 250.0f;
             float positionX2 = Mathf.Round(Mathf.Cos(radius) * 140.0f) + 250.0f;
             float positionY = Mathf.Round(Mathf.Sin(radius) * 140.0f) + 140.0f;
-            int colorCode1 = Random.Range(0, 7);
-            int colorCode2 = Random.Range(0, 7);
+            int colorCode1 = colorCodes[0][i];
+            int colorCode2 = colorCodes[1][i];
             prefabCreator.CreateRoundBlock(positionX1, positionY, colorCode1);
             prefabCreator.CreateRoundBlock(positionX2, positionY, colorCode2);
 
+        }
+        */      
+        for (int i = 0; i < 2; i++)
+        {
+            int[] colorCodes = { 0, 1, 2, 3, 4, 5, 6, 0, 1, 2 };
+            int[] colorDice = { 0, 1, 2, 3, 4, 5, 6 };
+            if (true)
+            {
+                int a = colorDice.Length;
+                while (a > 0) 
+                {
+                    int s = a - 1;
+                    int t = Random.Range(0, a);
+                    int tmp = colorDice[s];
+                    colorDice[s] = colorDice[t];
+                    colorDice[t] = tmp;
+                    a--;
+                }
+            }
+            for (int k = 0; k < colorDice.Length; k++) colorCodes[k] = colorDice[k];
+            if (true)
+            {
+                int a = colorDice.Length;
+                while (a > 0)
+                {
+                    int s = a - 1;
+                    int t = Random.Range(0, a);
+                    int tmp = colorDice[s];
+                    colorDice[s] = colorDice[t];
+                    colorDice[t] = tmp;
+                    a--;
+                }
+            }
+            colorCodes[7] = colorDice[0];
+            colorCodes[8] = colorDice[1];
+            colorCodes[9] = colorDice[2];
+            for (int j = 0; j < 10; j++)
+            {
+                float radius = j * 36.0f * Mathf.Deg2Rad;
+                float positionX = Mathf.Round(Mathf.Cos(radius) * 140.0f) + i * 500.0f - 250.0f;
+                float positionY = Mathf.Round(Mathf.Sin(radius) * 140.0f) + 140.0f;
+                int colorCode = colorCodes[j];
+                prefabCreator.CreateRoundBlock(positionX, positionY, colorCode);
+            }
         }
         for (int i = 0; i < 6; i++)
         {
