@@ -119,6 +119,8 @@ public class Racket : MonoBehaviour {
     {
         spritesRacket = spritesRacketPrecipitate;
         Transform();
+        audioSources[3].time = 0.1f;
+        audioSources[3].Play();
     }
 
     public void AttachBulletShooter()

@@ -3410,6 +3410,8 @@ MonoBehaviour:
     type: 3}
   prefabEffectDiminishForMissing: {fileID: 1462519607774242, guid: 7f15d3a41973446a28db96e8c5d55c4e,
     type: 3}
+  prefabEffectPrecipitate: {fileID: 5238851426320674147, guid: d01ec9efffaa4457ebf9590cfdb5bc1a,
+    type: 3}
   spriteNormalBall: {fileID: 21300000, guid: c92b208fa913f445ea3585657f43615f, type: 3}
   spritePoweredBall: {fileID: 21300000, guid: fac4abd1ae0784fd8b3d9fec4a9e5ef0, type: 3}
   spritePrecipitatingNormalBall: {fileID: 21300000, guid: b5825d0abe5f24ce2ab64764e1b1eed7,
@@ -13770,6 +13772,7 @@ GameObject:
   - component: {fileID: 1931036924}
   - component: {fileID: 1931036923}
   - component: {fileID: 1931036922}
+  - component: {fileID: 1931036925}
   m_Layer: 0
   m_Name: TheRacket
   m_TagString: Racket
@@ -14156,6 +14159,103 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 8933d46b6f42d4ecb9a5dd340f3b813b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1931036925
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931036916}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243161543118656294, guid: 7a07b5f183b9c4b919cdd1a34e73d169,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 0f1f4c3146ead4a5ba89a5c72c2d0534, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -14736,7 +14836,7 @@ MonoBehaviour:
   fontForJapanese: {fileID: 12800000, guid: 33acd6bcdb55248e8a50420bb85e6d83, type: 3}
   textRestOfBlocksForDebug: {fileID: 771898177}
   isTestMode: 1
-  testLevel: 27
+  testLevel: 1
 --- !u!82 &1991483124
 AudioSource:
   m_ObjectHideFlags: 0

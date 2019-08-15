@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour {
     [SerializeField] GameObject prefabEffectDiminishForLevelUp;
     [SerializeField] GameObject prefabEffectDiminishForReplay;
     [SerializeField] GameObject prefabEffectDiminishForMissing;
+    [SerializeField] GameObject prefabEffectPrecipitate;
 
     [SerializeField] Sprite spriteNormalBall;
     [SerializeField] Sprite spritePoweredBall;
@@ -224,7 +225,7 @@ public class Ball : MonoBehaviour {
                 isPrecipitating = false;
                 Draw();
                 float rotationAngle = Random.Range(5.0f, 15.0f);
-                if (Random.Range(0, 2) == 0) rotationAngle *= 1.0f;
+                if (Random.Range(0, 2) == 0) rotationAngle *= -1.0f;
                 rigidbody2D.velocity = Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
                 isConstant = true;
             }
@@ -237,7 +238,7 @@ public class Ball : MonoBehaviour {
                 isPrecipitating = false;
                 Draw();
                 float rotationAngle = Random.Range(5.0f, 15.0f);
-                if (Random.Range(0, 2) == 0) rotationAngle *= 1.0f;
+                if (Random.Range(0, 2) == 0) rotationAngle *= -1.0f;
                 rigidbody2D.velocity =  Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
             }
             isConstant = true;
@@ -254,7 +255,7 @@ public class Ball : MonoBehaviour {
             else
             {
                 Accelerate(5.0f);
-                float degree = Random.Range(0.7854f, 2.3562f); //45 to 135 degrees
+                float degree = Random.Range(45.0f * Mathf.Deg2Rad, 135.0f * Mathf.Deg2Rad);
                 Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
                 rigidbody2D.velocity = reflectionVelocity;
             }
@@ -297,6 +298,7 @@ public class Ball : MonoBehaviour {
     {
         if (!isSticked)
         {
+            Instantiate(prefabEffectPrecipitate, transform.position, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
             isConstant = false;
             isPrecipitating = true;
             rigidbody2D.velocity = new Vector2(0.0f, -currentVelocity);
@@ -423,29 +425,14 @@ public class Ball : MonoBehaviour {
     {
         if(gameObject.tag == "Ball")
         {
-            if (isPrecipitating)
-            {
-                spriteRenderer.sprite = spritePrecipitatingNormalBall;
-                for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i].sprite = spritesPrecipitatingNormalBallAfterimage[i];
-            }
-            else
-            {
-                spriteRenderer.sprite = spriteNormalBall;
-                for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i].sprite = spritesNormalBallAfterimage[i];
-            }
+
+            spriteRenderer.sprite = spriteNormalBall;
+            for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i].sprite = spritesNormalBallAfterimage[i];
         }
         if(gameObject.tag == "PoweredBall")
         {
-            if (isPrecipitating)
-            {
-                spriteRenderer.sprite = spritePrecipitatingPoweredBall;
-                for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i].sprite = spritesPrecipitatingPoweredBallAfterimage[i];
-            }
-            else
-            {
-                spriteRenderer.sprite = spritePoweredBall;
-                for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i].sprite = spritesPoweredBallAfterimage[i];
-            }
+            spriteRenderer.sprite = spritePoweredBall;
+            for (int i = 0; i < 10; i++) spriteRenderersAfterimage[i].sprite = spritesPoweredBallAfterimage[i];
         }
     }
 
