@@ -101,10 +101,12 @@ public class Item : MonoBehaviour {
                     racket.Expand();
                     break;
                 case SHRINK_RACKET:
-                    racket.Shrink();
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else racket.Shrink();
                     break;
                 case EXTRA_BALL:
                     mainManager.AddRestOfBall();
+                    prefabSounds.GetExtraBall();
                     break;
                 case POWER_UP:
                     signalManager.StartPoweredBall(1000);
@@ -119,7 +121,8 @@ public class Item : MonoBehaviour {
                     signalManager.StartTrapGuard(1500);
                     break;
                 case GAME_OVER:
-                    mainManager.StartGameOver();
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else mainManager.StartGameOver();
                     break;
                 case PRECIPITATE:
                     signalManager.StartPrecipitate(1500);
@@ -129,16 +132,25 @@ public class Item : MonoBehaviour {
                     break;
                 case HOSTAGE_300:
                     mainManager.AddGameScore(300);
+                    prefabSounds.GetPoint();
                     break;
                 case NEGATIVE_POINT_200:
-                    mainManager.AddGameScore(-200);
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else mainManager.AddGameScore(-200);
                     break;
                 case FLASH:
-                    mainManager.StartFlash();
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else mainManager.StartFlash();
                     break;
                 case COUNTERFEIT:
-                    mainManager.AddGameScore(-10000);
-                    signalManager.StopAllSignals();
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else
+                    {
+                        mainManager.AddGameScore(-1000);
+                        signalManager.StopAllSignals();
+                        racket.SetStepOfLength(1);
+                        prefabSounds.GetCounterfeit();
+                    }
                     break;
                 case MAGNET:
                     signalManager.StartMagnet(1000);
@@ -150,10 +162,12 @@ public class Item : MonoBehaviour {
                     ball.Decelerate();
                     break;
                 case ACCELERATE:
-                    ball.Accelerate();
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else ball.Accelerate();
                     break;
                 case MAX_SPEED:
-                    ball.MaxSpeed();
+                    if (signalManager.IsActiveTrapGuard()) prefabSounds.GetNothing();
+                    else ball.MaxSpeed();
                     break;
             }
             Destroy(this.gameObject);

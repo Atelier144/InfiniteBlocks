@@ -32,6 +32,8 @@ public class SignalManager : MonoBehaviour {
     Ball theBall;
     Racket theRacket;
 
+    AudioSource audioSource;
+
     int activeCountReplayMode = 0;
     int activeCountPowerUp = 0;
     int activeCountProtector = 0;
@@ -49,6 +51,8 @@ public class SignalManager : MonoBehaviour {
 
         theBall = GameObject.Find("TheBall").GetComponent<Ball>();
         theRacket = GameObject.Find("TheRacket").GetComponent<Racket>();
+
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -308,6 +312,8 @@ public class SignalManager : MonoBehaviour {
     {
         activeCountTrapGuard = activeCount;
         background.GetComponent<SpriteRenderer>().sprite = spriteBackgroundTrapGuard;
+        audioSource.time = 0.1f;
+        audioSource.Play();
     }
 
     public void StopTrapGuard()
