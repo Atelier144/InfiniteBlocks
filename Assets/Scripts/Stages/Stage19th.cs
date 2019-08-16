@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class Stage19th : Stage {
 
-    [SerializeField] GameObject prefabCeilingSystem;
-
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[8];
+    int[] numbersOfAppearItemCode = { 3, 3, 5, 8, 9, 11, 11, 101, 102 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+        numbersOfAppearItemCode[5] = 17;
+        numbersOfAppearItemCode[7] = 10;
+
+        int[] numbersMin = { 10, 25, 40, 55, 70, 85, 100, 110 };
+        int[] numbersMax = { 15, 30, 45, 60, 75, 90, 105, 111 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -90,24 +103,22 @@ public class Stage19th : Stage {
             prefabCreator.CreateSmallBlock(positionX1, positionY, colorCode);
             prefabCreator.CreateSmallBlock(positionX2, positionY, colorCode);
         }
-        CreateCeilingSystem();
+        prefabCreator.CreateCeilingSystem();
     }
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        if (resultItemCode == 101) resultItemCode = Random.Range(0, 2) == 0 ? 13 : 14;
+        if (resultItemCode == 102) resultItemCode = Random.Range(0, 2) == 0 ? 19 : 20;
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()
     {
         return GameObject.FindGameObjectsWithTag("Block").Length == 0;
-    }
-
-    void CreateCeilingSystem()
-    {
-        Instantiate(prefabCeilingSystem, new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }
