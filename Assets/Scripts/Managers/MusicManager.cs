@@ -58,6 +58,11 @@ public class MusicManager : MonoBehaviour {
         currentMusicChannel = channel;
         audioSource.clip = audioClips[currentMusicChannel];
         audioSource.volume = volumeBalancers[currentMusicChannel];
-        if (previousMusicChannel != currentMusicChannel) audioSource.Play();
+        if (previousMusicChannel != currentMusicChannel)
+        {
+            audioSource.time = 0.0f;
+            audioSource.Play();
+        }
+
     }
 }

@@ -8,12 +8,17 @@ public class HardBlock : Block {
 
     BoxCollider2D boxCollider2D;
 
+    AudioSource[] audioSources;
+    SpriteRenderer spriteRenderer;
+
     int breakCount = 2;
 
     protected override void Start()
     {
         base.Start();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        audioSources = GetComponents<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected override void FixedUpdate()
@@ -29,8 +34,8 @@ public class HardBlock : Block {
             if(breakCount > 0)
             {
                 breakCount--;
-                this.GetComponent<SpriteRenderer>().sprite = spritesHardBlock[breakCount];
-                this.GetComponent<AudioSource>().Play();
+                spriteRenderer.sprite = spritesHardBlock[breakCount];
+                audioSources[breakCount].Play();
                 base.mainManager.AddGameScore(1);
             }
             else
@@ -55,8 +60,8 @@ public class HardBlock : Block {
             if (breakCount > 0)
             {
                 breakCount--;
-                this.GetComponent<SpriteRenderer>().sprite = spritesHardBlock[breakCount];
-                this.GetComponent<AudioSource>().Play();
+                spriteRenderer.sprite = spritesHardBlock[breakCount];
+                audioSources[breakCount].Play();
                 base.mainManager.AddGameScore(1);
             }
             else

@@ -8,7 +8,7 @@ public class HardRoundBlock : Block {
 
     SpriteRenderer spriteRenderer;
     CircleCollider2D circleCollider2D;
-    AudioSource audioSource;
+    AudioSource[] audioSources;
 
     int breakCount = 2;
 
@@ -18,7 +18,7 @@ public class HardRoundBlock : Block {
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider2D = GetComponent<CircleCollider2D>();
-        audioSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
     }
 
     protected override void FixedUpdate()
@@ -35,7 +35,7 @@ public class HardRoundBlock : Block {
             {
                 breakCount--;
                 spriteRenderer.sprite = sprites[breakCount];
-                audioSource.Play();
+                audioSources[breakCount].Play();
                 mainManager.AddGameScore(1);
             }
             else
@@ -61,7 +61,7 @@ public class HardRoundBlock : Block {
             {
                 breakCount--;
                 spriteRenderer.sprite = sprites[breakCount];
-                audioSource.Play();
+                audioSources[breakCount].Play();
                 mainManager.AddGameScore(1);
             }
             else
