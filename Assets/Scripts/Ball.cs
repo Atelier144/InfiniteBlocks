@@ -9,6 +9,10 @@ public class Ball : MonoBehaviour {
 
     [SerializeField] GameObject[] gameObjectsAfterimage = new GameObject[10];
 
+    [SerializeField] GameObject gameObjectAccelerateEffect;
+    [SerializeField] GameObject gameObjectDecelerateEffect;
+    [SerializeField] GameObject gameObjectMaxSpeedEffect;
+
     [SerializeField] GameObject prefabEffectDiminishForLevelUp;
     [SerializeField] GameObject prefabEffectDiminishForReplay;
     [SerializeField] GameObject prefabEffectDiminishForMissing;
@@ -372,12 +376,17 @@ public class Ball : MonoBehaviour {
 
     public void Decelerate()
     {
+        gameObjectDecelerateEffect.SetActive(false);
+        gameObjectDecelerateEffect.SetActive(true);
         currentVelocity = baseVelocity;
         SetVelocity();
     }
 
     public void Accelerate()
     {
+        gameObjectAccelerateEffect.SetActive(false);
+        gameObjectAccelerateEffect.SetActive(true);
+
         currentVelocity += 100.0f;
         if (currentVelocity > maxVelocity) currentVelocity = maxVelocity;
         SetVelocity();
@@ -390,6 +399,8 @@ public class Ball : MonoBehaviour {
 
     public void MaxSpeed()
     {
+        gameObjectMaxSpeedEffect.SetActive(false);
+        gameObjectMaxSpeedEffect.SetActive(true);
         currentVelocity = maxVelocity;
         SetVelocity();
     }
