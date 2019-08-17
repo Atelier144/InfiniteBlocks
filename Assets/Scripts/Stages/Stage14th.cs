@@ -7,7 +7,7 @@ public class Stage14th : Stage {
     SteelBlocksWheelSystem steelBlocksWheelSystem;
 
     int[] numbersOfAppearItem = new int[5];
-    int[] numbersOfAppearItemCode = { 4, 5, 8, 9, 11, 14, 101 };
+    int[] numbersOfAppearItemCode = { 3, 5, 8, 9, 11, 14, 101 };
 
     int brokenBlocks;
 

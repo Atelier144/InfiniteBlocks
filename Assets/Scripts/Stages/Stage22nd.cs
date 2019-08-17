@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class Stage22nd : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[10];
+    int[] numbersOfAppearItemCode = { 2, 2, 3, 3, 8, 9, 11, 11, 11, 101, 102 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+        numbersOfAppearItemCode[3] = 16;
+        numbersOfAppearItemCode[4] = 6;
+        numbersOfAppearItemCode[5] = 22;
+        numbersOfAppearItemCode[7] = 15;
+        numbersOfAppearItemCode[9] = 10;
+        int[] numbersMin = { 10, 25, 40, 55, 70, 85, 100, 115, 130, 136 };
+        int[] numbersMax = { 15, 30, 45, 60, 75, 90, 105, 120, 135, 138 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -78,10 +95,13 @@ public class Stage22nd : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        if (resultItemCode == 101) resultItemCode = Random.Range(0, 2) == 0 ? 13 : 14;
+        if (resultItemCode == 102) resultItemCode = Random.Range(0, 2) == 0 ? 19 : 20;
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()

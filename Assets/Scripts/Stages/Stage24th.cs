@@ -6,16 +6,16 @@ public class Stage24th : Stage {
 
     SixGatesSystem sixGatesSystem;
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[8];
+    int[] numbersOfAppearItemCode = { 5, 5, 11, 21, 11, 21, 11, 21 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        int[] numbersMin = { 4, 10, 13, 25, 37, 53, 69, 85 };
+        int[] numbersMax = { 6, 12, 24, 36, 52, 68, 84,100 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -83,10 +83,11 @@ public class Stage24th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()

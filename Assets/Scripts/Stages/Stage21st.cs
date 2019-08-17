@@ -4,16 +4,32 @@ using UnityEngine;
 
 public class Stage21st : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[9];
+    int[] numbersOfAppearItemCode = { 2, 3, 5, 8, 9, 11,11, 101, 102 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+        numbersOfAppearItemCode[3] = 22;
+        numbersOfAppearItemCode[5] = 21;
+        numbersOfAppearItemCode[7] = 23;
+        numbersOfAppearItemCode[8] = 10;
+        int[] numbersMin = { 5, 20, 35, 50, 65, 80, 95, 110, 120 };
+        int[] numbersMax = { 10, 25, 40, 55, 70, 85, 100, 115, 122 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -31,7 +47,7 @@ public class Stage21st : Stage {
 
     public override void GenerateStage()
     {
-        int randomColorCode = Random.Range(0, 7);
+        int randomColorCode = 0;
         for (int px = 0; px < 3; px++)
         {
             for (int x = 0; x < 3; x++)
@@ -85,10 +101,13 @@ public class Stage21st : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        if (resultItemCode == 101) resultItemCode = Random.Range(0, 2) == 0 ? 13 : 14;
+        if (resultItemCode == 102) resultItemCode = Random.Range(0, 2) == 0 ? 19 : 20;
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()
