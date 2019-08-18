@@ -251,18 +251,11 @@ public class Ball : MonoBehaviour {
         {
             isPrecipitating = false;
             Draw();
-            if (signalManager.IsActiveTrapGuard())
-            {
-                Vector2 reflectionVelocity = new Vector2(0.0f, currentVelocity);
-                rigidbody2D.velocity = reflectionVelocity;
-            }
-            else
-            {
-                Accelerate(5.0f);
-                float degree = Random.Range(45.0f * Mathf.Deg2Rad, 135.0f * Mathf.Deg2Rad);
-                Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
-                rigidbody2D.velocity = reflectionVelocity;
-            }
+            Accelerate(5.0f);
+            float degree = Random.Range(45.0f * Mathf.Deg2Rad, 135.0f * Mathf.Deg2Rad);
+            Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
+            rigidbody2D.velocity = reflectionVelocity;
+
             isConstant = true;
         }
     }

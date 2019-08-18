@@ -131,6 +131,8 @@ public class MainManager : MonoBehaviour {
 
         isPerformancePlay = gameLevel == 1;
 
+        if (isPerformancePlay) AddJackpotScore(10000);
+
         switch (languageName)
         {
             case "Japanese":
@@ -160,6 +162,7 @@ public class MainManager : MonoBehaviour {
         standardBeginnerSaveCount = playerId == 0 ? 1000 : 1250;
         signalManager.StartReplayMode(standardBeginnerSaveCount);
 
+        if (playerId != 0) AddJackpotScore(20000);
         StartCoroutine(GenerateStage());
 
         DrawUIDisplay();
