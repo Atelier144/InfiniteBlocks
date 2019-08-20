@@ -14,7 +14,7 @@ public class Level27System : MonoBehaviour {
 
     PrefabCreator prefabCreator;
 
-    int levelStage = 13;
+    int levelStage = 11;
     int timerCount;
     bool isLevelUp;
 
@@ -151,6 +151,9 @@ public class Level27System : MonoBehaviour {
             case 10:
                 break;
             case 11:
+                prefabCreator.CreateItemBlock(0.0f, 120.0f, 21);
+                prefabCreator.CreateAccelerateBlock(100.0f, 120.0f);
+                prefabCreator.CreateAccelerateBlock(-100.0f, 120.0f);
                 break;
             case 12:
                 break;
@@ -163,7 +166,16 @@ public class Level27System : MonoBehaviour {
                 }
                 break;
             case 14:
-                prefabCreator.CreateSilverBlock(0.0f, 100.0f);
+                for (int x = 0; x < 20; x++)
+                {
+                    for (int y = 0; y < 4; y++)
+                    {
+                        float positionX = x * 50.0f - 475.0f;
+                        float positionY = y * 20.0f + 122.0f;
+                        if (y % 2 == 0) prefabCreator.CreateSilverBlock(positionX, positionY);
+                        else prefabCreator.CreateGoldBlock(positionX, positionY);
+                    }
+                }
                 break;
         }
     }
