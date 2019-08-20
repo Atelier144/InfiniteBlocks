@@ -156,6 +156,27 @@ public class Level27System : MonoBehaviour {
                 prefabCreator.CreateAccelerateBlock(-100.0f, 120.0f);
                 break;
             case 12:
+                for (int x = 0; x < 7; x++)
+                {
+                    float positionX = x * 140.0f - 420.0f;
+                    float positionY = 140.0f;
+                    int colorCode = x;
+                    prefabCreator.CreateCountRoundBlock(positionX, positionY, colorCode, 10);
+                }
+                for (int x = 0; x < 7; x++)
+                {
+                    float positionX = x * 110.0f - 330.0f;
+                    float positionY = 80.0f;
+                    int colorCode = x;
+                    prefabCreator.CreateCountRoundBlock(positionX, positionY, colorCode, 6);
+                }
+                for (int x = 0; x < 7; x++)
+                {
+                    float positionX = x * 80.0f - 240.0f;
+                    float positionY = 20.0f;
+                    int colorCode = x;
+                    prefabCreator.CreateCountRoundBlock(positionX, positionY, colorCode, 3);
+                }
                 break;
             case 13:
                 for (int x = 0; x < 3; x++)
