@@ -10,6 +10,8 @@ public class EndManager : MonoBehaviour {
     Color colorDisabledBlack = new Color(0.2f, 0.2f, 0.2f, 0.5f);
 
     [SerializeField] Image[] imagesResultScoreNumber = new Image[6];
+    [SerializeField] Image imageScore;
+
     [SerializeField] Button buttonRecord;
     [SerializeField] Button buttonContinue;
     [SerializeField] Button buttonReturn;
@@ -21,6 +23,8 @@ public class EndManager : MonoBehaviour {
     [SerializeField] Sprite[] spritesResultScoreNumber = new Sprite[10];
     [SerializeField] Sprite spriteButtonEnabled;
     [SerializeField] Sprite spriteButtonDisabled;
+
+    [SerializeField] Sprite spriteNewRecord;
 
     [SerializeField] Font fontForEnglish;
     [SerializeField] Font fontForJapanese;
@@ -36,36 +40,40 @@ public class EndManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gameScore = MainManager.gameScoreForEndScene;
-        highScore = MainManager.highScoreForEndScene;
-        playerId = 1;//MainManager.playerIdForEndScene;
-        gameLevel = 2; //MainManager.gameScoreForEndScene;
-        isPerformancePlay = false;//MainManager.isPerformancePlayForEndScene;
+        gameScore = Global.score;
+        highScore = Global.highScore;
+        playerId = Global.playerId;
+        gameLevel = Global.level;
+        isPerformancePlay = Global.isPerformancePlay;
 
-        if(playerId == 0)
-        {
-            buttonRecord.interactable = false;
-            buttonRecord.image.sprite = spriteButtonDisabled;
-        }
-        else if (isPerformancePlay)
+        if(playerId != 0 && isPerformancePlay && gameScore > 0)
         {
             buttonRecord.interactable = true;
             buttonRecord.image.sprite = spriteButtonEnabled;
+            textButtonRecord.color = colorEnabledGreen;
         }
         else
         {
             buttonRecord.interactable = false;
             buttonRecord.image.sprite = spriteButtonDisabled;
+            textButtonRecord.color = colorDisabledBlack;
         }
 
-        if(languageName == "Japanese")
+        if(isPerformancePlay && highScore < gameScore)
         {
-            textButtonRecord.font = fontForJapanese;
-            textButtonRecord.text = "ランキングに登録";
-            textButtonContinue.font = fontForJapanese;
-            textButtonContinue.text = "コンティニュー";
-            textButtonReturn.font = fontForJapanese;
-            textButtonReturn.text = "タイトルに戻る";
+            imageScore.sprite = spriteNewRecord;
+        }
+
+        switch (languageName)
+        {
+            case "Japanese":
+                textButtonRecord.font = fontForJapanese;
+                textButtonRecord.text = "ランキングに登録";
+                textButtonContinue.font = fontForJapanese;
+                textButtonContinue.text = "コンティニュー";
+                textButtonReturn.font = fontForJapanese;
+                textButtonReturn.text = "タイトルに戻る";
+                break;
         }
         DrawResultScore();
 	}
@@ -77,18 +85,23 @@ public class EndManager : MonoBehaviour {
 
     void DrawResultScore()
     {
-        for (int i = 0; i < 6; i++)
-        {
-            imagesResultScoreNumber[i].sprite = spritesResultScoreNumber[gameScore / (int)Mathf.Pow(10, i) % 10];
-        }
+        for (int i = 0; i < 6; i++) imagesResultScoreNumber[i].sprite = spritesResultScoreNumber[gameScore / (int)Mathf.Pow(10, i) % 10];
     }
 
-    public void PushRecordButton()
+    public void OnClickButtonRecord()
     {
-
+        Debug.Log("UserID:" + playerId + " Score:" + gameScore + " Level:" + gameLevel);
     }
 
-    public void PushReturnButton()
+    public void OnClickButtonContinue()
+    {
+        Global.highScore = highScore;
+        Global.playerId = playerId;
+        Global.level = gameLevel;
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public void OnClickButtonReturn()
     {
         SceneManager.LoadScene("TitleScene");
     }

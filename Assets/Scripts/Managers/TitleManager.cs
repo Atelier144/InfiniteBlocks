@@ -42,12 +42,11 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] Sprite spriteSmallButtonDisabled;
 
     public static int highScoreForMainScene = 0;
-    public static int gameLevelForMainScene = 1;
+    public static int gameLevelForMainScene = 0;
     public static int playerIdForMainScene = 0;
 
     int highScore = 0;
     int maxLevel = 1;
-    int selectLevel = 1;
     int playerId = 0;   // 0: Guset Mode
     string languageName = "Japanese";
 
@@ -70,18 +69,20 @@ public class TitleManager : MonoBehaviour {
             textsButtonsStart[i].color = colorEnabledGreen;
         }
 
-        if (languageName == "Japanese")
+        switch (languageName)
         {
-            textsButtonsStart[0].font = fontForJapanese;
-            textsButtonsStart[0].text = "スタート";
-            textButtonLevelSelect.font = fontForJapanese;
-            textButtonLevelSelect.text = "中間レベルから";
-            textButtonHighScoreReset.font = fontForJapanese;
-            textButtonHighScoreReset.text = "ハイスコアリセット";
-            textButtonReturnToTopForLevelSelect.font = fontForJapanese;
-            textButtonReturnToTopForLevelSelect.text = "戻る";
-            textButtonReturnToTopForHighScoreReset.font = fontForJapanese;
-            textButtonReturnToTopForHighScoreReset.text = "戻る";
+            case "Japanese":
+                textsButtonsStart[0].font = fontForJapanese;
+                textsButtonsStart[0].text = "スタート";
+                textButtonLevelSelect.font = fontForJapanese;
+                textButtonLevelSelect.text = "中間レベルから";
+                textButtonHighScoreReset.font = fontForJapanese;
+                textButtonHighScoreReset.text = "ハイスコアリセット";
+                textButtonReturnToTopForLevelSelect.font = fontForJapanese;
+                textButtonReturnToTopForLevelSelect.text = "戻る";
+                textButtonReturnToTopForHighScoreReset.font = fontForJapanese;
+                textButtonReturnToTopForHighScoreReset.text = "戻る";
+                break;
         }
     }
 	
@@ -92,15 +93,14 @@ public class TitleManager : MonoBehaviour {
 
     public void PushStartButton(int startLevel) 
     {
-        highScoreForMainScene = highScore;
-        gameLevelForMainScene = startLevel;
-        playerIdForMainScene = playerId;
+        Global.highScore = highScore;
+        Global.playerId = playerId;
+        Global.level = startLevel;
         SceneManager.LoadScene("MainScene");
     }
 
     public void PushLevelSelectButton()
     {
-        selectLevel = maxLevel;
         gameObjectThePanels.transform.localPosition = new Vector3(0.0f, -1000.0f, 0.0f);
     }
 

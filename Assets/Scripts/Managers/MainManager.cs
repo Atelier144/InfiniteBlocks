@@ -75,17 +75,11 @@ public class MainManager : MonoBehaviour {
 
     AudioSource[] audioSources;
 
-    public static int gameScoreForEndScene;
-    public static int highScoreForEndScene;
-    public static int playerIdForEndScene;
-    public static int gameLevelForEndScene;
-    public static bool isPerformancePlayForEndScene;
-
     static float currentSliderBGMValue;
     static float currentSliderSEValue;
 
     int gameScore = 0;
-    int gameLevel = 1;
+    int gameLevel = 0;
     int restOfBlocks = 0;
     int comboBonus = 0;
     int playerId = 0;
@@ -120,14 +114,14 @@ public class MainManager : MonoBehaviour {
 
         audioSources = GetComponents<AudioSource>();
 
-        highScore = TitleManager.highScoreForMainScene;
-        gameLevel = TitleManager.gameLevelForMainScene;
-        playerId = TitleManager.playerIdForMainScene;
+        highScore = Global.highScore;
+        gameLevel = Global.level;
+        playerId = Global.playerId;
 
         sliderBGM.value = currentSliderBGMValue;
         sliderSE.value = currentSliderSEValue;
 
-        if (isTestMode) gameLevel = testLevel;
+        if (gameLevel == 0) gameLevel = testLevel;
 
         isPerformancePlay = gameLevel == 1;
 
@@ -310,23 +304,9 @@ public class MainManager : MonoBehaviour {
     public void AddGameScore(int s)
     {
         gameScore += s;
-        if (gameScore > MAX_SCORE)
-        {
-            gameScore = MAX_SCORE;
-        }
-        else if (gameScore < 0)
-        {
-            gameScore = 0;
-        }
+        if (gameScore > MAX_SCORE) gameScore = MAX_SCORE;
+        if (gameScore < 0) gameScore = 0;
 
-        if (gameScore > highScore)
-        {
-            highScore = gameScore;
-        }
-        else if (highScore < 0)
-        {
-            highScore = 0;
-        }
     }
 
     public void AddRestOfBall()
@@ -470,11 +450,11 @@ public class MainManager : MonoBehaviour {
 
     public void MoveToEndScene()
     {
-        gameScoreForEndScene = gameScore;
-        highScoreForEndScene = highScore;
-        playerIdForEndScene = playerId;
-        gameLevelForEndScene = gameLevel;
-        isPerformancePlayForEndScene = isPerformancePlay;
+        Global.score = gameScore;
+        Global.highScore = highScore;
+        Global.playerId = playerId;
+        Global.level = gameLevel;
+        Global.isPerformancePlay = isPerformancePlay;
         SceneManager.LoadScene("EndScene");
     }
 
