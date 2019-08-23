@@ -14,6 +14,8 @@ public class Level27System : MonoBehaviour {
 
     PrefabCreator prefabCreator;
 
+    AudioSource audioSource;
+
     int levelStage = 11;
     int timerCount;
     bool isLevelUp;
@@ -23,6 +25,8 @@ public class Level27System : MonoBehaviour {
         prefabCreator = GameObject.Find("PrefabCreator").GetComponent<PrefabCreator>();
 
         for (int i = 0; i < 15; i++) spriteRenderersSignals[i] = gameObjectsSignals[i].GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
 
         CreateLevelStage();
         StartCoroutine(Timer());
@@ -212,6 +216,8 @@ public class Level27System : MonoBehaviour {
         {
             levelStage++;
             CreateLevelStage();
+            audioSource.time = 0.0f;
+            audioSource.Play();
         }
     }
 
