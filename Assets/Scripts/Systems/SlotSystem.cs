@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SlotSystem : MonoBehaviour {
 
+    MainManager mainManager;
+
     [SerializeField] GameObject[] gameObjectsSlotSwitches = new GameObject[4];
     [SerializeField] GameObject[] gameObjectsSlotDrums = new GameObject[3];
     [SerializeField] GameObject gameObjectSlotBoard;
@@ -16,6 +18,8 @@ public class SlotSystem : MonoBehaviour {
 
     GameObject gameObjectLevelUpTelop;
 
+    AudioSource[] audioSources;
+
     int[] feverNumbers = { 0, 0, 0, 0, 0, 1, 1, 1, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 7, 7, 7, 8, 8, 8, 8, 8 };
     bool isIdle = true;
     bool[] vsDrumRotating = { false, false, false };
@@ -26,12 +30,15 @@ public class SlotSystem : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+
         for (int i = 0; i < 4; i++) slotSwitches[i] = gameObjectsSlotSwitches[i].GetComponent<SlotSystemSwitch>();
         for (int i = 0; i < 3; i++) slotDrums[i] = gameObjectsSlotDrums[i].GetComponent<SlotSystemDrum>();
         slotBoard = gameObjectSlotBoard.GetComponent<SlotSystemBoard>();
 
         gameObjectLevelUpTelop = GameObject.Find("Telops").transform.Find("LevelUpTelop").gameObject;   //非アクティブなGameObjectを取得するための手段
-        StartCoroutine(StartAnimators());
+
+        audioSources = GetComponents<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -45,6 +52,9 @@ public class SlotSystem : MonoBehaviour {
         {
             if (switchCode == 3)
             {
+                audioSources[0].time = 0.0f;
+                audioSources[0].Play();
+                mainManager.AddGameScore(5);
                 isIdle = false;
                 slotSwitches[switchCode].SetTrigger("Off");
                 slotBoard.SetTrigger("Rotating");
@@ -87,6 +97,9 @@ public class SlotSystem : MonoBehaviour {
             {
                 if (vsDrumRotating[switchCode])
                 {
+                    audioSources[1].time = 0.0f;
+                    audioSources[1].Play();
+                    mainManager.AddGameScore(1);
                     vsDrumRotating[switchCode] = false;
                     slotSwitches[switchCode].SetTrigger("Off");
                     if (isRiggedReach)
@@ -106,13 +119,22 @@ public class SlotSystem : MonoBehaviour {
                         case 0:
                             if(decidedNumbers[0] == decidedNumbers[1] && decidedNumbers[1] == decidedNumbers[2])
                             {
+                                int index = decidedNumbers[0];
+                                int[] soundIndex = { 5, 6, 5, 5, 5, 5, 5, 6, 5 };
+                                int[] scores = { 100, 0, 100, 100, 100, 100, 100, 0, 100 };
                                 string[] triggers = { "Fever", "Ouch", "Excellent", "Fever", "Fever", "Fever", "Excellent", "Ouch", "Fever" };
                                 GenerateItem();
-                                slotBoard.SetTrigger(triggers[decidedNumbers[0]]);
+                                slotBoard.SetTrigger(triggers[index]);
+                                mainManager.AddGameScore(scores[index]);
+                                audioSources[soundIndex[index]].time = 0.0f;
+                                audioSources[soundIndex[index]].Play();
                             }
                             else if(decidedNumbers[0] == 0 && decidedNumbers[1] == 1 && decidedNumbers[2] == 1)
                             {
                                 slotBoard.SetTrigger("AtelierFever");
+
+                                audioSources[7].time = 0.0f;
+                                audioSources[7].Play();
                             }
                             else
                             {
@@ -124,29 +146,45 @@ public class SlotSystem : MonoBehaviour {
                         case 1:
                             if(decidedNumbers[1] == decidedNumbers[2])
                             {
+                                int index = decidedNumbers[1];
+                                int[] soundIndex = { 2, 4, 2, 2, 2, 2, 2, 3, 2 };
                                 string[] triggers = { "Reach", "AtelierPinch", "Reach", "Reach", "Reach", "Reach", "Reach", "Pinch", "Reach" };
-                                slotBoard.SetTrigger(triggers[decidedNumbers[1]]);
+                                audioSources[soundIndex[index]].time = 0.0f;
+                                audioSources[soundIndex[index]].Play();
+                                slotBoard.SetTrigger(triggers[index]);
                             }
                             break;
                         case 2:
                             if(decidedNumbers[0] == decidedNumbers[2])
                             {
+                                int index = decidedNumbers[0];
+                                int[] soundIndex = { 2, 3, 2, 2, 2, 2, 2, 3, 2 };
                                 string[] triggers = { "Reach", "Pinch", "Reach", "Reach", "Reach", "Reach", "Reach", "Pinch", "Reach" };
-                                slotBoard.SetTrigger(triggers[decidedNumbers[0]]);
+                                audioSources[soundIndex[index]].time = 0.0f;
+                                audioSources[soundIndex[index]].Play();
+                                slotBoard.SetTrigger(triggers[index]);
                             }
                             else if(decidedNumbers[0] == 0 && decidedNumbers[2] == 1)
                             {
+                                audioSources[4].time = 0.0f;
+                                audioSources[4].Play();
                                 slotBoard.SetTrigger("AtelierReach");
                             }
                             break;
                         case 4:
                             if(decidedNumbers[0] == decidedNumbers[1])
                             {
+                                int index = decidedNumbers[0];
+                                int[] soundIndex = { 2, 3, 2, 2, 2, 2, 2, 3, 2 };
                                 string[] triggers = { "Reach", "Pinch", "Reach", "Reach", "Reach", "Reach", "Reach", "Pinch", "Reach" };
-                                slotBoard.SetTrigger(triggers[decidedNumbers[0]]);
+                                audioSources[soundIndex[index]].time = 0.0f;
+                                audioSources[soundIndex[index]].Play();
+                                slotBoard.SetTrigger(triggers[index]);
                             }
                             else if(decidedNumbers[0] == 0 && decidedNumbers[1] == 1)
                             {
+                                audioSources[4].time = 0.0f;
+                                audioSources[4].Play();
                                 slotBoard.SetTrigger("AtelierReach");
                             }
                             break;
@@ -181,12 +219,6 @@ public class SlotSystem : MonoBehaviour {
         };
         int itemCode = itemCodes[decidedNumbers[0]][Random.Range(0, itemCodes[decidedNumbers[0]].Length)];
         Instantiate(prefabItem, new Vector3(190.0f, 137.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Item>().Initialize(itemCode);
-    }
-
-    IEnumerator StartAnimators()
-    {
-        Debug.Log("こルーチン作動");
-        yield return new WaitForSeconds(0.1f);
     }
 }
 
