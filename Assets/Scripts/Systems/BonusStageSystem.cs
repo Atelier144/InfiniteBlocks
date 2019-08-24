@@ -17,6 +17,8 @@ public class BonusStageSystem : MonoBehaviour {
 
     GameObject gameObjectLevelUpTelop;
 
+    AudioSource audioSource;
+
     int currentRestOfBalls;
 
     int countMissedExtraBalls;
@@ -28,6 +30,8 @@ public class BonusStageSystem : MonoBehaviour {
         gameObjectLevelUpTelop = GameObject.Find("Telops").transform.Find("LevelUpTelop").gameObject;   //非アクティブなGameObjectを取得するための手段
         animator = board.GetComponent<Animator>();
         currentRestOfBalls = mainManager.GetRestOfBalls();
+
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +53,9 @@ public class BonusStageSystem : MonoBehaviour {
         mainManager.AddGameScore(50);
         signals[switchId].GetComponent<SpriteRenderer>().sprite = spriteGreenSignal;
         gates[switchId].GetComponent<BonusStageSystemGateBar>().Open();
+
+        audioSource.time = 0.0f;
+        audioSource.Play();
     }
 
     public void OnTriggerFailZoneBall()

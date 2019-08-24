@@ -5,13 +5,13 @@ using UnityEngine;
 public class BonusStageSystemGateBar : MonoBehaviour {
 
     [SerializeField] int directionCode;
-    AudioSource audioSource;
+
     float movingSpeed = 0.0f;
     int movingCount = 0;
     // Use this for initialization
     void Start()
     {
-        audioSource = this.GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -41,6 +41,5 @@ public class BonusStageSystemGateBar : MonoBehaviour {
                 movingSpeed = 15.0f;
                 break;
         }
-        audioSource.Play();
     }
 }
