@@ -16,7 +16,7 @@ public class Level26System : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int levelStage = 0;
+    int levelStage;
     int timerCount;
     bool isLevelUp;
 
@@ -149,6 +149,39 @@ public class Level26System : MonoBehaviour {
                 }
                 break;
             case 5:
+                for (int x = 0; x < 15; x++)
+                {
+                    int[] blockCode = { 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0 };
+                    float positionX = x * 50.0f - 350.0f;
+                    float positionY = 262.0f;
+                    switch (blockCode[x])
+                    {
+                        case 0:
+                            prefabCreator.CreateSilverBlock(positionX, positionY);
+                            break;
+                        case 1:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 8);
+                            break;
+                        case 2:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 9);
+                            break;
+                        case 3:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 11);
+                            break;
+                        case 4:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 13);
+                            break;
+                        case 5:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 14);
+                            break;
+                        case 6:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 19);
+                            break;
+                        case 7:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 20);
+                            break;
+                    }
+                }
                 break;
             case 6:
 
