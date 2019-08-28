@@ -210,7 +210,7 @@ public class Level26System : MonoBehaviour {
                 for (int x = 0; x < 7; x++)
                 {
                     float positionX = x * 140.0f - 420.0f;
-                    float positionY1 = 20.0f;
+                    float positionY1 = 100.0f;
                     float positionY2 = 200.0f;
                     int colorCode = x;
                     int breakCount1 = 5;
