@@ -201,6 +201,7 @@ public class Ball : MonoBehaviour {
         if(theTag == "FailZone")
         {
             StopBall();
+            mainManager.ClearComboBonus();
             StartCoroutine(mainManager.Missing());
         }
         if(theTag == "PrecipitateBlock")
@@ -251,6 +252,7 @@ public class Ball : MonoBehaviour {
         {
             isPrecipitating = false;
             Draw();
+            mainManager.ClearComboBonus();
             Accelerate(5.0f);
             float degree = Random.Range(45.0f * Mathf.Deg2Rad, 135.0f * Mathf.Deg2Rad);
             Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
