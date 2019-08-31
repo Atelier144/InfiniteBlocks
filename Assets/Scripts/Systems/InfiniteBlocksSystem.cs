@@ -26,6 +26,8 @@ public class InfiniteBlocksSystem : MonoBehaviour {
     SpriteRenderer[] spriteRenderersNumbers = new SpriteRenderer[4];
     SpriteRenderer spriteRendererBody;
 
+    AudioSource[] audioSources;
+
     int restOfSteps = 5;
     int systemLevel = 1;
     int timerCount = 0;
@@ -33,6 +35,7 @@ public class InfiniteBlocksSystem : MonoBehaviour {
 
     int[] preparedBlocks = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+    int[] maxTimerCounts = { 40, 30, 28, 26, 24, 22, 20, 19, 18, 17, 16, 15, 15 };
     // Use this for initialization
     void Start () {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
@@ -43,6 +46,8 @@ public class InfiniteBlocksSystem : MonoBehaviour {
         for (int i = 0; i < 20; i++) spriteRenderersSignals[i] = gameObjectsSignals[i].GetComponent<SpriteRenderer>();
         for (int i = 0; i < 4; i++) spriteRenderersNumbers[i] = gameObjectsNumbers[i].GetComponent<SpriteRenderer>();
         spriteRendererBody = gameObjectBody.GetComponent<SpriteRenderer>();
+
+        audioSources = GetComponents<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -58,7 +63,7 @@ public class InfiniteBlocksSystem : MonoBehaviour {
     {
         if (mainManager.GetDialogStatus() == 2)
         {
-            if(timerCount > 30)
+            if(timerCount > maxTimerCounts[systemLevel])
             {
                 timerCount = 0;
                 if(signalIndex == 20)
@@ -69,6 +74,8 @@ public class InfiniteBlocksSystem : MonoBehaviour {
                 else if(signalIndex < 20)
                 {
                     preparedBlocks[signalIndex] = GetSignalType();
+                    audioSources[0].time = 0.03f;
+                    audioSources[0].Play();
                     signalIndex++;
                 }
             }
@@ -103,24 +110,27 @@ public class InfiniteBlocksSystem : MonoBehaviour {
         foreach(GameObject block in blocks)
         {
             block.transform.position += new Vector3(0.0f, -20.0f, 0.0f);
-            if(block.transform.position.y < -180.0f && block.transform.position.x < 1000.0f)
-            {
-                Destroy(block);
-            }
+            if (block.transform.position.y < -180.0f && block.transform.position.x < 1000.0f) Destroy(block);
         }
     }
 
     IEnumerator PrepareLowerBlocks()
     {
+        audioSources[1].time = 0.0f;
+        audioSources[1].Play();
         spriteRendererBody.sprite = spritesBodies[1];
         yield return new WaitForSeconds(0.5f);
         spriteRendererBody.sprite = spritesBodies[0];
         yield return new WaitForSeconds(0.5f);
+        audioSources[1].time = 0.0f;
+        audioSources[1].Play();
         spriteRendererBody.sprite = spritesBodies[1];
         yield return new WaitForSeconds(0.5f);
         spriteRendererBody.sprite = spritesBodies[0];
         yield return new WaitForSeconds(0.5f);
 
+        audioSources[2].time = 0.0f;
+        audioSources[2].Play();
         signalIndex = 0;
         LowerBlocks();
         GenerateBlocks();
@@ -128,6 +138,8 @@ public class InfiniteBlocksSystem : MonoBehaviour {
         if (restOfSteps > 0) restOfSteps--;
         if (restOfSteps == 0 && systemLevel <= 12)
         {
+            audioSources[3].time = 0.0f;
+            audioSources[3].Play();
             systemLevel++;
             restOfSteps = 5;
         }
