@@ -38,8 +38,10 @@ TextureImporter:
     21300066: IBSSignalDecelerate
     21300068: IBSSignalAccelerate
     21300070: IBSSignalBlack
+    21300072: IBSSignalExtraBall
+    21300074: IBSSignalGameOver
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -81,7 +83,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 4
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -153,33 +155,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IBSSignalNone
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f4135977d48347d9b4153fdfb35a158
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: IBSSignalRed
       rect:
         serializedVersion: 2
-        x: 80
-        y: 320
-        width: 80
-        height: 80
+        x: 0
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,7 +169,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06daaae061fac4e3ea39317ef538ceb0
+      spriteID: 59ae051fd425343569b5effae7014e8d
       vertices: []
       indices: 
       edges: []
@@ -196,10 +178,10 @@ TextureImporter:
       name: IBSSignalOrange
       rect:
         serializedVersion: 2
-        x: 160
-        y: 320
-        width: 80
-        height: 80
+        x: 20
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,7 +189,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd61371a93c274cf68489a97c93c3e69
+      spriteID: 5a6b1bc4110ec49ba981f27035740223
       vertices: []
       indices: 
       edges: []
@@ -216,10 +198,10 @@ TextureImporter:
       name: IBSSignalYellow
       rect:
         serializedVersion: 2
-        x: 240
-        y: 320
-        width: 80
-        height: 80
+        x: 40
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,7 +209,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 189baceb3883f4f66b1f949290080b70
+      spriteID: 9370cea2933b34c2fb1a2bd9fb33591f
       vertices: []
       indices: 
       edges: []
@@ -236,10 +218,10 @@ TextureImporter:
       name: IBSSignalGreen
       rect:
         serializedVersion: 2
-        x: 320
-        y: 320
-        width: 80
-        height: 80
+        x: 60
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,7 +229,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d24fff80729c648ee81ed4ede0dbbdad
+      spriteID: e06943adb204a4d23acb88f33087c8f0
       vertices: []
       indices: 
       edges: []
@@ -256,10 +238,10 @@ TextureImporter:
       name: IBSSignalBlue
       rect:
         serializedVersion: 2
-        x: 0
-        y: 240
-        width: 80
-        height: 80
+        x: 80
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,7 +249,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 052c6234d4e1c4822810e908325361cd
+      spriteID: 00ce0f38a16c4417c90fc95eeca7c301
       vertices: []
       indices: 
       edges: []
@@ -276,10 +258,10 @@ TextureImporter:
       name: IBSSignalIndigo
       rect:
         serializedVersion: 2
-        x: 80
-        y: 240
-        width: 80
-        height: 80
+        x: 100
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,7 +269,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 167dfba388ec5480d8f69e5a8b438e26
+      spriteID: d0eefdb4dffe54bcda29ceab661c9ec2
       vertices: []
       indices: 
       edges: []
@@ -296,10 +278,10 @@ TextureImporter:
       name: IBSSignalViolet
       rect:
         serializedVersion: 2
-        x: 160
-        y: 240
-        width: 80
-        height: 80
+        x: 120
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,47 +289,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b801a2a97cf845708fe4bd3caae9015
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IBSSignalSilver
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67ee3892431d14e9a8b3bf42b5785215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IBSSignalGold
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ffddd832db854a40ac3655263c1cdc2
+      spriteID: 4cbbb41e6d8c342d59a975517868f277
       vertices: []
       indices: 
       edges: []
@@ -357,9 +299,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
-        width: 80
-        height: 80
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,7 +309,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 753288e06feb247758b323c6811f77b8
+      spriteID: ffcf6ceb0757f44c58a664e8e58195c4
       vertices: []
       indices: 
       edges: []
@@ -376,10 +318,10 @@ TextureImporter:
       name: IBSSignalProtector
       rect:
         serializedVersion: 2
-        x: 80
-        y: 160
-        width: 80
-        height: 80
+        x: 20
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -387,7 +329,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35b07c07e25d948638e3a2e7d4db797a
+      spriteID: a651d9f8d52844fd69fcfc254b8c9101
       vertices: []
       indices: 
       edges: []
@@ -396,10 +338,10 @@ TextureImporter:
       name: IBSSignalTrapGuard
       rect:
         serializedVersion: 2
-        x: 160
-        y: 160
-        width: 80
-        height: 80
+        x: 40
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,7 +349,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c45a04ce89e5246658a9878fdcfdb095
+      spriteID: 7722c73b6f7104d0ba77a03348b54030
       vertices: []
       indices: 
       edges: []
@@ -416,10 +358,10 @@ TextureImporter:
       name: IBSSignalPrecipitate
       rect:
         serializedVersion: 2
-        x: 240
-        y: 160
-        width: 80
-        height: 80
+        x: 60
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -427,7 +369,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c96eaef58124f4ce1847c2bd08698339
+      spriteID: 62347bcdfa9da4b1aa21ea653c5e0815
       vertices: []
       indices: 
       edges: []
@@ -436,10 +378,10 @@ TextureImporter:
       name: IBSSignalShooting
       rect:
         serializedVersion: 2
-        x: 320
-        y: 160
-        width: 80
-        height: 80
+        x: 80
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -447,7 +389,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eadf13ecdc931477b9ecd71e7d74b8c9
+      spriteID: 90cadd7e3296841fcbfbeaebc146c144
       vertices: []
       indices: 
       edges: []
@@ -456,10 +398,10 @@ TextureImporter:
       name: IBSSignalMagnet
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
-        width: 80
-        height: 80
+        x: 100
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -467,7 +409,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 748eeff77d5a342759de29232f67a4c6
+      spriteID: 17a3bd286568f4f639e791f88a77578f
       vertices: []
       indices: 
       edges: []
@@ -476,10 +418,10 @@ TextureImporter:
       name: IBSSignalSticky
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
-        width: 80
-        height: 80
+        x: 120
+        y: 20
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -487,19 +429,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ab63f00f0e9e4466adce5ab464dd1b2
+      spriteID: a4fc6228b609a480cb2666027f56dfad
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IBSSignalExtraBall1
+      name: IBSSignalSilver
       rect:
         serializedVersion: 2
-        x: 160
-        y: 80
-        width: 80
-        height: 80
+        x: 0
+        y: 0
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,19 +449,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba741ef8fc1dd4aad94c3440ff2d4d9d
+      spriteID: 3791c823785094c2e93edf1b6b4c6ef1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IBSSignalExtraBall2
+      name: IBSSignalGold
       rect:
         serializedVersion: 2
-        x: 240
-        y: 80
-        width: 80
-        height: 80
+        x: 20
+        y: 0
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -527,19 +469,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0efffe90e99404caf82a2d94ec77f5d9
+      spriteID: 0fe76a802e7014e1a8c586aa98824742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IBSSignalExtraBall3
+      name: IBSSignalExtraBall
       rect:
         serializedVersion: 2
-        x: 320
-        y: 80
-        width: 80
-        height: 80
+        x: 40
+        y: 0
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -547,7 +489,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20b2cbae44475487b905dfc3a7bf2955
+      spriteID: 5cdaea9d0ebd942adaa61251765d2048
       vertices: []
       indices: 
       edges: []
@@ -556,10 +498,10 @@ TextureImporter:
       name: IBSSignalPoint
       rect:
         serializedVersion: 2
-        x: 0
+        x: 60
         y: 0
-        width: 80
-        height: 80
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -567,27 +509,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab75cf3ab8e524c4e83f33172f545df1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IBSSignalHard
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 590cb18ba8b684a1a960a552c81cdd8d
+      spriteID: e97d100c47d074126aa43cab917554e6
       vertices: []
       indices: 
       edges: []
@@ -596,10 +518,10 @@ TextureImporter:
       name: IBSSignalDecelerate
       rect:
         serializedVersion: 2
-        x: 160
+        x: 80
         y: 0
-        width: 80
-        height: 80
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -607,7 +529,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34bdc80288f2e4d11b4d5f47bca116cb
+      spriteID: 612051073b72b4b15b329306c0defe02
       vertices: []
       indices: 
       edges: []
@@ -616,10 +538,10 @@ TextureImporter:
       name: IBSSignalAccelerate
       rect:
         serializedVersion: 2
-        x: 240
+        x: 100
         y: 0
-        width: 80
-        height: 80
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -627,19 +549,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05571bcf1b30046b2a6de9c00cab74a1
+      spriteID: 624253ce0741c47c6b922f87703f9c67
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IBSSignalBlack
+      name: IBSSignalGameOver
       rect:
         serializedVersion: 2
-        x: 320
+        x: 120
         y: 0
-        width: 80
-        height: 80
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -647,7 +569,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f638a9c7a8574c7da0efe60e822598c
+      spriteID: 93bf654029d6b4de2b77b4f6c4706530
       vertices: []
       indices: 
       edges: []

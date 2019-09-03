@@ -14,7 +14,7 @@ public class InfiniteBlocksSystem : MonoBehaviour {
     PrefabCreator prefabCreator;
     Ball theBall;
 
-    [SerializeField] GameObject[] gameObjectsSignals = new GameObject[20];
+    [SerializeField] GameObject[] gameObjectsSignals = new GameObject[19];
     [SerializeField] GameObject[] gameObjectsNumbers = new GameObject[4];
     [SerializeField] GameObject gameObjectBody;
 
@@ -92,14 +92,60 @@ public class InfiniteBlocksSystem : MonoBehaviour {
 
     void GenerateBlocks()
     {
-        for(int i=0; i<preparedBlocks.Length; i++)
+        for (int i = 0; i < preparedBlocks.Length; i++) 
         {
             float positionX = i * 50.0f - 475.0f;
             float positionY = 202.0f;
-            if(preparedBlocks[i] > 0 && preparedBlocks[i] < 8)
+            switch (preparedBlocks[i])
             {
-                int colorCode = preparedBlocks[i] - 1;
-                prefabCreator.CreateNormalBlock(positionX, positionY, colorCode);
+                case 1:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 0);
+                    break;
+                case 2:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 1);
+                    break;
+                case 3:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 2);
+                    break;
+                case 4:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 3);
+                    break;
+                case 5:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 4);
+                    break;
+                case 6:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 5);
+                    break;
+                case 7:
+                    prefabCreator.CreateNormalBlock(positionX, positionY, 6);
+                    break;
+                case 8:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 8);
+                    break;
+                case 9:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 9);
+                    break;
+                case 10:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 11);
+                    break;
+                case 11:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 13);
+                    break;
+                case 12:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 14);
+                    break;
+                case 13:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 19);
+                    break;
+                case 14:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 20);
+                    break;
+                case 15:
+                    prefabCreator.CreateSilverBlock(positionX, positionY);
+                    break;
+                case 16:
+                    prefabCreator.CreateGoldBlock(positionX, positionY);
+                    break;
             }
         }
     }
@@ -116,38 +162,78 @@ public class InfiniteBlocksSystem : MonoBehaviour {
 
     IEnumerator PrepareLowerBlocks()
     {
-        audioSources[1].time = 0.0f;
-        audioSources[1].Play();
-        spriteRendererBody.sprite = spritesBodies[1];
-        yield return new WaitForSeconds(0.5f);
-        spriteRendererBody.sprite = spritesBodies[0];
-        yield return new WaitForSeconds(0.5f);
-        audioSources[1].time = 0.0f;
-        audioSources[1].Play();
-        spriteRendererBody.sprite = spritesBodies[1];
-        yield return new WaitForSeconds(0.5f);
-        spriteRendererBody.sprite = spritesBodies[0];
-        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i < 2; i++)
+        {
+            audioSources[1].time = 0.0f;
+            audioSources[1].Play();
+            spriteRendererBody.sprite = spritesBodies[1];
+            yield return new WaitForSeconds(0.5f);
+            spriteRendererBody.sprite = spritesBodies[0];
+            yield return new WaitForSeconds(0.5f);
+        }
 
         audioSources[2].time = 0.0f;
         audioSources[2].Play();
         signalIndex = 0;
         LowerBlocks();
         GenerateBlocks();
+
         for (int i = 0; i < preparedBlocks.Length; i++) preparedBlocks[i] = 0;
         if (restOfSteps > 0) restOfSteps--;
-        if (restOfSteps == 0 && systemLevel <= 12)
+        if (restOfSteps == 0 && systemLevel < 12)
         {
+            int[] maxNumbersOfRestOfSteps = { 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
             audioSources[3].time = 0.0f;
             audioSources[3].Play();
             systemLevel++;
-            restOfSteps = 5;
+            restOfSteps = maxNumbersOfRestOfSteps[systemLevel];
         }
     }
 
     int GetSignalType()
     {
-        return Random.Range(1, 8);
+        int[][] pattern =
+        {
+            new int[]{0},
+            new int[]{0},   // Lv1
+            new int[]{0,0,0,0,0,0,1,2}, // Lv2
+            new int[]{0},   // Lv3
+            new int[]{0},   // Lv4
+            new int[]{0},   // Lv5
+            new int[]{0},   // Lv6
+            new int[]{0},   // Lv7
+            new int[]{0},   // Lv8
+            new int[]{0,8},   // Lv9
+            new int[]{8},   // Lv10
+            new int[]{8,9},   // Lv11
+            new int[]{9},   // Lv12
+        };
+        int index = Random.Range(0, pattern[systemLevel].Length);
+        switch (pattern[systemLevel][index])
+        {
+            case 0: // Normal Block
+                return Random.Range(1, 8);
+            case 1: // PowerUp Block
+                return 8;
+            case 2: // Protector Block
+                return 9;
+            case 3: // TrapGuard Block
+                return 10;
+            case 4: // Precipitate Block
+                return 11;
+            case 5: // Shooting Block
+                return 12;
+            case 6: // Magnet Block
+                return 13;
+            case 7: // Sticky Block
+                return 14;
+            case 8: // Silver Block
+                return 15;
+            case 9: // Gold Block
+                return 16;
+            default:
+                return 0;
+        }
     }
 }
 
