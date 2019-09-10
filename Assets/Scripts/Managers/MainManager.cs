@@ -160,6 +160,7 @@ public class MainManager : MonoBehaviour {
         StartCoroutine(GenerateStage());
 
         DrawUIDisplay();
+        StartCoroutine(GarbageCollection());
     }
 	
 	// Update is called once per frame
@@ -180,6 +181,16 @@ public class MainManager : MonoBehaviour {
     private void FixedUpdate()
     {
         if (dialogStatus == 2 && currentStage.IsLevelUp()) LevelUp();
+    }
+
+    IEnumerator GarbageCollection()
+    {
+        while (true)
+        {
+            System.GC.Collect();
+            Resources.UnloadUnusedAssets();
+            yield return new WaitForSeconds(10.0f);
+        }
     }
 
     public int GetLevel()
@@ -446,6 +457,9 @@ public class MainManager : MonoBehaviour {
 
         levelUpTelop.SetActive(true);
         if (bonusScore > 0) levelUpBonusTelop.SetActive(true);
+
+        missTelop.SetActive(false);
+        replayTelop.SetActive(false);
     }
 
     public void MoveToEndScene()

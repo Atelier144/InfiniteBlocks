@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 988964f6dcc6d4cf4a3d59f9caf61a64
+guid: cdf6a5d3be2eb4eb69074a5c3bbd7a9f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SKL144SystemPrecipitateEnabled
-    21300002: SKL144SystemPrecipitateDisabled
+    21300000: PrecipitateBlockEnabled
+    21300002: PrecipitateBlockDisabled
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -65,7 +65,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -76,7 +76,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -87,18 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,7 +98,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,13 +108,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SKL144SystemPrecipitateEnabled
+      name: PrecipitateBlockEnabled
       rect:
         serializedVersion: 2
         x: 0
-        y: 50
-        width: 400
-        height: 50
+        y: 40
+        width: 50
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,19 +122,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2d4ab2a41451424db4e8a1233417618
+      spriteID: 022ef06a4baa94a1ebbd27136ad5fda9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SKL144SystemPrecipitateDisabled
+      name: PrecipitateBlockDisabled
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 400
-        height: 50
+        width: 50
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,7 +142,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebe6aa9d124ff44899eb33a7da53f20d
+      spriteID: 5c42e6fa5ee534cd88e61b941a2ef1c9
       vertices: []
       indices: 
       edges: []
@@ -161,7 +150,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b7e5e560363a2463cb2fc685883a89a6
+    spriteID: 8281e82c9a78f4c96967c5a0567ee9d8
     vertices: []
     indices: 
     edges: []

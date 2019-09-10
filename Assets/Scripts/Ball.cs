@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour {
 
     MainManager mainManager;
     SignalManager signalManager;
-
+    ScreenNavigationManager screenNavigationManager;
     [SerializeField] GameObject[] gameObjectsAfterimage = new GameObject[10];
 
     [SerializeField] GameObject gameObjectAccelerateEffect;
@@ -72,6 +72,7 @@ public class Ball : MonoBehaviour {
     {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
         signalManager = GameObject.Find("SignalManager").GetComponent<SignalManager>();
+        screenNavigationManager = GameObject.Find("ScreenNavigationManager").GetComponent<ScreenNavigationManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -165,102 +166,108 @@ public class Ball : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        string theTag = collision.gameObject.tag;
-        if(theTag == "Racket")
+        switch (collision.gameObject.tag)
         {
-            isPrecipitating = false;
-            Draw();
-            mainManager.ClearComboBonus();
-            Accelerate(2.0f);
-            rigidbody2D.velocity = Vector2.zero;
-
-            float theLengthOfRacket = collision.gameObject.GetComponent<Racket>().GetLength();
-
-            int indexVelocity = mainManager.GetLevel();
-
-            float ballPointX = collision.contacts[0].point.x;
-            float racketPointX = collision.gameObject.transform.position.x;
-            float pointX = ballPointX - racketPointX;
-            float degree = (1.0f - pointX / theLengthOfRacket) * Mathf.PI / 2;
-            Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
-
-            if (signalManager.IsActiveSticky())
-            {
-                stickedPointX = pointX;
-                stickedVelocity = reflectionVelocity;
-                isSticked = true;
-                isConstant = false;
+            case "Racket":
+                isPrecipitating = false;
+                Draw();
+                mainManager.ClearComboBonus();
+                Accelerate(2.0f);
                 rigidbody2D.velocity = Vector2.zero;
-            }
-            else
-            {
-                isConstant = true;
-                rigidbody2D.velocity = reflectionVelocity;
-            }
-        }
-        if(theTag == "FailZone")
-        {
-            StopBall();
-            mainManager.ClearComboBonus();
-            StartCoroutine(mainManager.Missing());
-        }
-        if(theTag == "PrecipitateBlock")
-        {
-            float collisionPointY = collision.contacts[0].point.y - collision.transform.position.y;
-            if (collisionPointY <= -20.0f)
-            {
-                collision.gameObject.GetComponent<PrecipitateBlock>().StartEffect();
-                PrecipitateExtremely();
-            }
-        }
-        if(theTag == "RigidbodyPrecipitate")
-        {
-            float collisionPointX = collision.contacts[0].point.x - collision.transform.position.x;
-            float collisionPointY = collision.contacts[0].point.y - collision.transform.position.y;
-            Debug.Log("(" + collisionPointX + "," + collisionPointY + ")");
-            if (collisionPointY <= -25.0f)
-            {
-                if (collisionPointX <= -10.0f) collision.gameObject.GetComponent<SKL144SystemPrecipitate>().StartEffectLeft();
-                if (collisionPointX >= 10.0f) collision.gameObject.GetComponent<SKL144SystemPrecipitate>().StartEffectRight();
 
-                PrecipitateExtremely();
-            }
-            else if (isPrecipitating)
-            {
+                float theLengthOfRacket = collision.gameObject.GetComponent<Racket>().GetLength();
+
+                int indexVelocity = mainManager.GetLevel();
+
+                float ballPointX = collision.contacts[0].point.x;
+                float racketPointX = collision.gameObject.transform.position.x;
+                float pointX = ballPointX - racketPointX;
+                float degree = (1.0f - pointX / theLengthOfRacket) * Mathf.PI / 2;
+                Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
+
+                if (signalManager.IsActiveSticky())
+                {
+                    stickedPointX = pointX;
+                    stickedVelocity = reflectionVelocity;
+                    isSticked = true;
+                    isConstant = false;
+                    rigidbody2D.velocity = Vector2.zero;
+                    screenNavigationManager.SetSticky(true);
+                }
+                else
+                {
+                    isConstant = true;
+                    rigidbody2D.velocity = reflectionVelocity;
+                }
+                break;
+
+            case "FailZone":
+                StopBall();
+                mainManager.ClearComboBonus();
+                StartCoroutine(mainManager.Missing());
+                break;
+
+            case "PrecipitateBlock":
+                if (isPrecipitating) ChangeMovingAngle();
+
+                if (!signalManager.IsActiveTrapGuard())
+                {
+                    float collisionPointY = collision.contacts[0].point.y - collision.transform.position.y;
+                    if (collisionPointY <= -20.0f)
+                    {
+                        collision.gameObject.GetComponent<PrecipitateBlock>().StartEffect();
+                        PrecipitateExtremely();
+                    }
+                }
+                break;
+
+            case "RigidbodyPrecipitate":
+
+                if (isPrecipitating) ChangeMovingAngle();
+
+                if (!signalManager.IsActiveTrapGuard())
+                {
+                    float collisionPointX = collision.contacts[0].point.x - collision.transform.position.x;
+                    float collisionPointY = collision.contacts[0].point.y - collision.transform.position.y;
+                    if (collisionPointY <= -22.0f)
+                    {
+                        if (collisionPointX <= -10.0f) collision.gameObject.GetComponent<SKL144SystemPrecipitate>().StartEffectLeft();
+                        if (collisionPointX >= 10.0f) collision.gameObject.GetComponent<SKL144SystemPrecipitate>().StartEffectRight();
+
+                        PrecipitateExtremely();
+                    }
+                }
+                break;
+
+            case "Rigidbody":
+            case "BlockSupport":
+                if (isPrecipitating) ChangeMovingAngle();
+                break;
+
+            case "Protector":
                 isPrecipitating = false;
                 Draw();
-                float rotationAngle = Random.Range(5.0f, 15.0f);
-                if (Random.Range(0, 2) == 0) rotationAngle *= -1.0f;
-                rigidbody2D.velocity = Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
+                mainManager.ClearComboBonus();
+                Accelerate(5.0f);
+                float degreeProtector = Random.Range(45.0f * Mathf.Deg2Rad, 135.0f * Mathf.Deg2Rad);
+                Vector2 reflectionVelocityProtector = new Vector2(currentVelocity * Mathf.Cos(degreeProtector), currentVelocity * Mathf.Sin(degreeProtector));
+                rigidbody2D.velocity = reflectionVelocityProtector;
+
                 isConstant = true;
-            }
-        }
+                break;
 
-        if (theTag == "Rigidbody" || theTag == "BlockSupport")
-        {
-            if (isPrecipitating)
-            {
-                isPrecipitating = false;
-                Draw();
-                float rotationAngle = Random.Range(5.0f, 15.0f);
-                if (Random.Range(0, 2) == 0) rotationAngle *= -1.0f;
-                rigidbody2D.velocity =  Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
-            }
-            isConstant = true;
-        }
-        if(theTag == "Protector")
-        {
-            isPrecipitating = false;
-            Draw();
-            mainManager.ClearComboBonus();
-            Accelerate(5.0f);
-            float degree = Random.Range(45.0f * Mathf.Deg2Rad, 135.0f * Mathf.Deg2Rad);
-            Vector2 reflectionVelocity = new Vector2(currentVelocity * Mathf.Cos(degree), currentVelocity * Mathf.Sin(degree));
-            rigidbody2D.velocity = reflectionVelocity;
-
-            isConstant = true;
         }
     }
+
+    void ChangeMovingAngle()
+    {
+        isPrecipitating = false;
+        isConstant = true;
+        float rotationAngle = Random.Range(5.0f, 15.0f);
+        if (Random.Range(0, 2) == 0) rotationAngle *= -1.0f;
+        rigidbody2D.velocity = Quaternion.Euler(0.0f, 0.0f, rotationAngle) * rigidbody2D.velocity;
+    }
+
     public void StopBall()
     {
         isConstant = false;
@@ -315,11 +322,14 @@ public class Ball : MonoBehaviour {
 
     public void Detach()
     {
-        if (isSticked && this.transform.position.x < 492.0f && this.transform.position.x > -492.0f)
+        if (isSticked)
         {
+            if (transform.position.x < -492.5f) transform.position = new Vector3(-492.5f, transform.position.y, transform.position.z);
+            if (transform.position.x > 492.5f) transform.position = new Vector3(492.5f, transform.position.y, transform.position.z);
             isSticked = false;
             isConstant = true;
             rigidbody2D.velocity = stickedVelocity;
+            screenNavigationManager.SetSticky(false);
         }
     }
     public void VerticalLoop()

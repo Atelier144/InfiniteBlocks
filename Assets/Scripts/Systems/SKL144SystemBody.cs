@@ -8,12 +8,14 @@ public class SKL144SystemBody : MonoBehaviour {
     PrefabCreator prefabCreator;
 
     Rigidbody2D rbody2D;
+    AudioSource audioSource;
 
     void Start()
     {
         prefabCreator = GameObject.Find("PrefabCreator").GetComponent<PrefabCreator>();
 
         rbody2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,8 @@ public class SKL144SystemBody : MonoBehaviour {
         float positionY = transform.position.y + 130.0f;
         prefabCreator.CreateNormalBlock(positionX1, positionY, Random.Range(0, 7));
         prefabCreator.CreateNormalBlock(positionX2, positionY, Random.Range(0, 7));
+        audioSource.time = 0.0f;
+        audioSource.Play();
     }
 
     public void CreateHardBlocks()
@@ -53,5 +57,7 @@ public class SKL144SystemBody : MonoBehaviour {
         float positionY = transform.position.y + 130.0f;
         prefabCreator.CreateHardBlock(positionX1, positionY);
         prefabCreator.CreateHardBlock(positionX2, positionY);
+        audioSource.time = 0.0f;
+        audioSource.Play();
     }
 }

@@ -18,7 +18,7 @@ public class InfiniteBlocksSystem : MonoBehaviour {
     [SerializeField] GameObject[] gameObjectsNumbers = new GameObject[4];
     [SerializeField] GameObject gameObjectBody;
 
-    [SerializeField] Sprite[] spritesSignals = new Sprite[25];
+    [SerializeField] Sprite[] spritesSignals = new Sprite[21];
     [SerializeField] Sprite[] spritesNumbers = new Sprite[10];
     [SerializeField] Sprite[] spritesBodies = new Sprite[2];
 
@@ -146,6 +146,18 @@ public class InfiniteBlocksSystem : MonoBehaviour {
                 case 16:
                     prefabCreator.CreateGoldBlock(positionX, positionY);
                     break;
+                case 17:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 20);
+                    break;
+                case 18:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 20);
+                    break;
+                case 19:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 20);
+                    break;
+                case 20:
+                    prefabCreator.CreateItemBlock(positionX, positionY, 12);
+                    break;
             }
         }
     }
@@ -196,7 +208,7 @@ public class InfiniteBlocksSystem : MonoBehaviour {
         {
             new int[]{0},
             new int[]{0},   // Lv1
-            new int[]{0,0,0,0,0,0,1,2}, // Lv2
+            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,1,2}, // Lv2
             new int[]{0},   // Lv3
             new int[]{0},   // Lv4
             new int[]{0},   // Lv5
@@ -206,7 +218,7 @@ public class InfiniteBlocksSystem : MonoBehaviour {
             new int[]{0,8},   // Lv9
             new int[]{8},   // Lv10
             new int[]{8,9},   // Lv11
-            new int[]{9},   // Lv12
+            new int[]{9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,13},   // Lv12
         };
         int index = Random.Range(0, pattern[systemLevel].Length);
         switch (pattern[systemLevel][index])
@@ -231,6 +243,14 @@ public class InfiniteBlocksSystem : MonoBehaviour {
                 return 15;
             case 9: // Gold Block
                 return 16;
+            case 10: // ExtraBall Block
+                return 17;
+            case 11: // DecelerateItem Block
+                return 18;
+            case 12: // AccelerateItem Block
+                return 19;
+            case 13: // GameOver Block
+                return 20;
             default:
                 return 0;
         }

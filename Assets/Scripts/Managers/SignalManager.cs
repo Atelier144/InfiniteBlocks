@@ -25,8 +25,8 @@ public class SignalManager : MonoBehaviour {
     [SerializeField] bool signalTestMode;
 
     MainManager mainManager;
-    AudioManager audioManager;
     SystemManager systemManager;
+    ScreenNavigationManager screenNavigationManager;
     Aurora aurora;
 
     Ball theBall;
@@ -47,6 +47,8 @@ public class SignalManager : MonoBehaviour {
     void Start () {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
         systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+        screenNavigationManager = GameObject.Find("ScreenNavigationManager").GetComponent<ScreenNavigationManager>();
+
         aurora = GameObject.Find("Aurora").GetComponent<Aurora>();
 
         theBall = GameObject.Find("TheBall").GetComponent<Ball>();
@@ -326,24 +328,28 @@ public class SignalManager : MonoBehaviour {
     {
         activeCountPrecipitate = activeCount;
         theRacket.ChangeToPrecipitate();
+        screenNavigationManager.SetPrecipitate(true);
     }
 
     public void StopPrecipitate()
     {
         activeCountPrecipitate = 0;
         theRacket.ChangeToNormal();
+        screenNavigationManager.SetPrecipitate(false);
     }
 
     public void StartShooting(int activeCount)
     {
         activeCountShooting = activeCount;
         theRacket.AttachBulletShooter();
+        screenNavigationManager.SetShooting(true);
     }
 
     public void StopShooting()
     {
         theRacket.DetachBulletShooter();
         activeCountShooting = 0;
+        screenNavigationManager.SetShooting(false);
     }
 
     public void StartMagnet(int activeCount)
@@ -368,6 +374,7 @@ public class SignalManager : MonoBehaviour {
     {
         activeCountSticky = 0;
         theRacket.StopStickyEffect();
+        theBall.Detach();
     }
 
     //ReplayMode以外の特殊効果を無効にするメソッド

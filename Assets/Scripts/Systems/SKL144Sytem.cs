@@ -19,6 +19,8 @@ public class SKL144Sytem : MonoBehaviour {
     [SerializeField] GameObject gameObjectWeakPoint1;
     [SerializeField] GameObject gameObjectWeakPoint2;
     [SerializeField] GameObject gameObjectWeakPoint3;
+    [SerializeField] GameObject gameObjectPrecipitateEffectLeft;
+    [SerializeField] GameObject gameObjectPrecipitateEffectRight;
 
     [SerializeField] GameObject prefabExplosionEffect;
 
@@ -30,6 +32,7 @@ public class SKL144Sytem : MonoBehaviour {
     [SerializeField] string[] motionTrigger2;
     [SerializeField] string[] motionTrigger3;
 
+    AudioSource[] audioSources;
     string[][] motionTriggers = { new string[] { }, new string[] { }, new string[] { }, new string[] { } };
     int[] durations = new int[4];
     SKL144SystemBody body;
@@ -54,6 +57,8 @@ public class SKL144Sytem : MonoBehaviour {
         musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
         prefabCreator = GameObject.Find("PrefabCreator").GetComponent<PrefabCreator>();
         ball = GameObject.Find("TheBall").GetComponent<Ball>();
+
+        audioSources = GetComponents<AudioSource>();
 
         body = gameObjectBody.GetComponent<SKL144SystemBody>();
         face = gameObjectFace.GetComponent<SKL144SystemFace>();
@@ -129,12 +134,20 @@ public class SKL144Sytem : MonoBehaviour {
                         StartCoroutine("ReturnToExplosion");
                         break;
                 }
-
+                audioSources[1].time = 0.2f;
+                audioSources[1].Play();
+                mainManager.AddGameScore(300);
             }
+
+
             else
             {
+                audioSources[0].time = 0.07f;
+                audioSources[0].Play();
                 countInvincible = 60;
                 face.DamageFace();
+
+                mainManager.AddGameScore(30);
             }
         }
     }
@@ -625,6 +638,9 @@ public class SKL144Sytem : MonoBehaviour {
     public IEnumerator Precipitate1()
     {
         gameObjectPrecipitate.SetActive(true);
+        gameObjectPrecipitateEffectLeft.SetActive(false);
+        gameObjectPrecipitateEffectRight.SetActive(false);
+
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < 9; i++)
         {
@@ -646,6 +662,9 @@ public class SKL144Sytem : MonoBehaviour {
     public IEnumerator Precipitate2()
     {
         gameObjectPrecipitate.SetActive(true);
+        gameObjectPrecipitateEffectLeft.SetActive(false);
+        gameObjectPrecipitateEffectRight.SetActive(false);
+
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < 8; i++)
         {
@@ -673,7 +692,7 @@ public class SKL144Sytem : MonoBehaviour {
         face.ChangeFace(11);
         yield return new WaitForSeconds(1.0f);
         face.ChangeFace(0);
-        mainManager.StartFlash();
+        if (!signalManager.IsActiveTrapGuard()) mainManager.StartFlash();
         yield return new WaitForSeconds(1.0f);
         face.ChangeFace(1);
         yield return new WaitForSeconds(3.0f);

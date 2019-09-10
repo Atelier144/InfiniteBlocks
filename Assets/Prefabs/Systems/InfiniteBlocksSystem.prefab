@@ -775,14 +775,10 @@ MonoBehaviour:
   - {fileID: 21300054, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
   - {fileID: 21300038, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
   - {fileID: 21300040, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300072, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
+  - {fileID: 21300066, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
+  - {fileID: 21300068, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
+  - {fileID: 21300074, guid: 933a8fde5d7e7421ea33be65a53a036e, type: 3}
   spritesNumbers:
   - {fileID: 21300000, guid: 368bf3ea30cfd4963a40a63ae696b474, type: 3}
   - {fileID: 21300002, guid: 368bf3ea30cfd4963a40a63ae696b474, type: 3}
