@@ -16,7 +16,7 @@ public class Level27System : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int levelStage = 7;
+    int levelStage = 5;
     int timerCount;
     bool isLevelUp;
 
@@ -128,8 +128,62 @@ public class Level27System : MonoBehaviour {
                 }
                 break;
             case 4:
+                int baseColorCodeForPhase4a = Random.Range(0, 7);
+                int baseColorCodeForPhase4b = Random.Range(0, 7);
+                for (int x = 0; x < 16; x++)
+                {
+                    float positionX = x * 60.0f - 455.0f;
+                    float positionY = 154.0f;
+                    int colorCode = (baseColorCodeForPhase4a + x + 1) % 7;
+                    prefabCreator.CreateRoundBlock(positionX, positionY, colorCode);
+                }
+                for (int x = 0; x < 15; x++)
+                {
+                    float positionX = x * 60.0f - 425.0f;
+                    float positionY = 102.0f;
+                    int colorCode = (baseColorCodeForPhase4a + x + 1) % 7;
+                    prefabCreator.CreateRoundBlock(positionX, positionY, colorCode);
+                }
+                for (int x = 0; x < 16; x++)
+                {
+                    float positionX = x * 60.0f - 455.0f;
+                    float positionY = 50.0f;
+                    int colorCode = (baseColorCodeForPhase4a + x) % 7;
+                    prefabCreator.CreateRoundBlock(positionX, positionY, colorCode);
+                }
+                for (int x = 0; x < 50; x++)
+                {
+                    float positionX = x * 20.0f - 490.0f;
+                    float positionY = 0.0f;
+                    int colorCode = (baseColorCodeForPhase4b + x) % 7;
+                    prefabCreator.CreateSmallBlock(positionX, positionY, colorCode);
+                }
                 break;
             case 5:
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int x = 0; x < 3; x++)
+                    {
+                        for (int y = 0; y < 3; y++)
+                        {
+                            int[,] pattern = { { 1, 0, 1 }, { 0, 2, 0 }, { 1, 0, 1 } };
+                            float positionX = i * 200.0f + x * 50.0f - 350.0f;
+                            float positionY = y * 20.0f + 120.0f;
+                            switch (pattern[x, y])
+                            {
+                                case 0:
+                                    prefabCreator.CreateNormalBlock(positionX, positionY, 1);
+                                    break;
+                                case 1:
+                                    prefabCreator.CreateNormalBlock(positionX, positionY, 0);
+                                    break;
+                                case 2:
+                                    prefabCreator.CreateItemBlock(positionX, positionY, 21);
+                                    break;
+                            }
+                        }
+                    }
+                }
                 break;
             case 6:
                 for (int x = 0; x < 6; x++)
@@ -147,17 +201,6 @@ public class Level27System : MonoBehaviour {
                 }
                 break;
             case 7:
-                for (int x = 0; x < 18; x++)
-                {
-                    for (int y = 0; y < 7; y++)
-                    {
-                        int[] itemCodes = { 8, 9, 11, 13, 14, 19, 20 };
-                        float positionX = x * 50.0f - 425.0f;
-                        float positionY = y * 20.0f + 40.0f;
-                        int itemCode = itemCodes[y];
-                        prefabCreator.CreateItemBlock(positionX, positionY, itemCode);
-                    }
-                }
                 break;
             case 8:
                 break;

@@ -2976,7 +2976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493807295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120, y: 0, z: 0}
+  m_LocalPosition: {x: 135, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2144946288}
@@ -5434,9 +5434,9 @@ MonoBehaviour:
   - 0.3
   - 0.4
   - 0.55
-  - 0.9
-  - 0.9
-  - 1
+  - 0.6
+  - 0.6
+  - 0.8
   loopStart:
   - 0
   - 0
@@ -6264,6 +6264,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gameObjectJackpotBoard: {fileID: 0}
+  gameObjectSwitchSignalsJackpot: {fileID: 0}
   spritesNumbers:
   - {fileID: 0}
   - {fileID: 0}
@@ -9807,7 +9808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260924301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 0, z: 0}
+  m_LocalPosition: {x: -135, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1108637698}
@@ -16350,7 +16351,7 @@ MonoBehaviour:
   fontForJapanese: {fileID: 12800000, guid: 33acd6bcdb55248e8a50420bb85e6d83, type: 3}
   textRestOfBlocksForDebug: {fileID: 771898177}
   isTestMode: 1
-  testLevel: 1
+  testLevel: 27
 --- !u!82 &1991483124
 AudioSource:
   m_ObjectHideFlags: 0

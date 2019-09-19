@@ -53,7 +53,7 @@ public class TitleManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         highScore = 0;
-        maxLevel = 25;
+        maxLevel = 30;
         playerId = 1;
 
         textHighScore.text = "HIGH SCORE : " + highScore.ToString("D6");

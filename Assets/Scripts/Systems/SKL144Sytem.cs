@@ -715,7 +715,7 @@ public class SKL144Sytem : MonoBehaviour {
 
         body.SetVelocity(velocityX, velocityY);
         for (int i = 0; i < 100; i++) yield return new WaitForFixedUpdate();
-        motionCode--;
+        if (signalManager.IsActiveReplayMode()) motionCode--;
         SetIdle();
     }
 

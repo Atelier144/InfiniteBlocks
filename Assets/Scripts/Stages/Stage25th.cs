@@ -23,18 +23,6 @@ public class Stage25th : Stage {
 
     public override void GenerateStage()
     {
-
-        for (int x = 0; x < 14; x++)
-        {
-            for (int y = 0; y < 3; y++)
-            {
-                float positionX = x * 50.0f - 325.0f;
-                float positionY = y * 20.0f + 40.0f;
-                int colorCode = 6 - x / 2;
-                prefabCreator.CreateNormalBlock(positionX, positionY, colorCode);
-            }
-        }
-
         jackpotChallengeSystem = prefabCreator.CreateJackpotChallengeSystem();
         prefabCreator.CreateCeilingSystem();
     }

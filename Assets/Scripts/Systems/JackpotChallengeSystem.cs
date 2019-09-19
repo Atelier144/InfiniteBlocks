@@ -14,6 +14,7 @@ public class JackpotChallengeSystem : MonoBehaviour {
     [SerializeField] GameObject gameObjectDisplayItemR;
     [SerializeField] GameObject[] gameObjectsJackpotSwitches = new GameObject[8];
     [SerializeField] GameObject gameObjectJackpotBoard;
+    [SerializeField] GameObject gameObjectSwitchSignalsJackpot;
 
     [SerializeField] Sprite[] spritesNumbers = new Sprite[10];
     [SerializeField] Sprite[] spritesItems = new Sprite[24];
@@ -36,6 +37,8 @@ public class JackpotChallengeSystem : MonoBehaviour {
 
     JackpotChallengeSystemSwitch[] jackpotSwitches = new JackpotChallengeSystemSwitch[8];
     JackpotChallengeSystemBoard jackpotBoard;
+
+    AudioSource[] audioSources;
 
     int switchCount;
 
@@ -94,8 +97,8 @@ public class JackpotChallengeSystem : MonoBehaviour {
     };
 
     //                   0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  JP
-    int[] itemCodesL = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  1,  2,  3,  3,  4,  4,  9, 21,  5,  7,  7,  0 };
-    int[] itemCodesR = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  2,  0,  4, 14,  9, 21,  5,  7,  0 };
+    int[] itemCodesL = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  1,  2,  3,  3,  4,  4,  9, 21,  5, 20,  7,  0 };
+    int[] itemCodesR = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  2,  0,  4, 14,  9, 21,  5,  0,  0 };
 
     int itemCodeL;
     int itemCodeR;
@@ -115,6 +118,8 @@ public class JackpotChallengeSystem : MonoBehaviour {
         jackpotBoard = gameObjectJackpotBoard.GetComponent<JackpotChallengeSystemBoard>();
 
         gameObjectLevelUpTelop = GameObject.Find("Telops").transform.Find("LevelUpTelop").gameObject;   //非アクティブなGameObjectを取得するための手段
+
+        audioSources = GetComponents<AudioSource>();
 
         jackpotScore = mainManager.GetJackpotScore();
         StartCoroutine(Initialize());
@@ -200,51 +205,87 @@ public class JackpotChallengeSystem : MonoBehaviour {
 
     public void OnJackpotSwitchOn(int switchCode)
     {
+        float[] audioTimes = { 0.05f, 0.02f, 0.02f };
         int targetCode = currentSwitchSignals[switchCode];
         switch (targetCode)
         {
             case 1:
                 jackpotStep += 1;
+                audioSources[0].time = audioTimes[0];
+                audioSources[0].Play();
                 break;
             case 2:
                 jackpotStep += 2;
+                audioSources[0].time = audioTimes[0];
+                audioSources[0].Play();
                 break;
             case 3:
                 jackpotStep += 3;
+                audioSources[0].time = audioTimes[0];
+                audioSources[0].Play();
                 break;
             case 4:
                 jackpotStep += 4;
+                audioSources[0].time = audioTimes[0];
+                audioSources[0].Play();
                 break;
             case 5:
                 jackpotStep -= 1;
+                audioSources[2].time = audioTimes[2];
+                audioSources[2].Play();
                 break;
             case 6:
                 jackpotStep -= 2;
+                audioSources[2].time = audioTimes[2];
+                audioSources[2].Play();
                 break;
             case 7:
                 jackpotStep -= 3;
+                audioSources[2].time = audioTimes[2];
+                audioSources[2].Play();
                 break;
             case 8:
                 jackpotStep -= 4;
+                audioSources[2].time = audioTimes[2];
+                audioSources[2].Play();
                 break;
             case 9:
                 jackpotStep -= 5;
+                audioSources[2].time = audioTimes[2];
+                audioSources[2].Play();
                 break;
             case 10:
                 jackpotStep = 0;
-                GenerateItems();
+                if (GenerateItems())
+                {
+                    audioSources[4].time = 0.1f;
+                    audioSources[4].Play();
+                }
+                else
+                {
+                    audioSources[3].time = 0.1f;
+                    audioSources[3].Play();
+                }
                 break;
             case 11:
                 jackpotScore += 100;
+                audioSources[1].time = audioTimes[1];
+                audioSources[1].Play();
                 break;
             case 12:
                 jackpotScore += 200;
+                audioSources[1].time = audioTimes[1];
+                audioSources[1].Play();
                 break;
             case 13:
                 jackpotScore += 500;
+                audioSources[1].time = audioTimes[1];
+                audioSources[1].Play();
                 break;
             case 14:
                 jackpotScore += 1000;
+                audioSources[1].time = audioTimes[1];
+                audioSources[1].Play();
                 break;
         }
         if (jackpotStep < 0) jackpotStep = 0;
@@ -254,6 +295,10 @@ public class JackpotChallengeSystem : MonoBehaviour {
             mainManager.AddGameScore(jackpotScore);
             hasGottenJackpot = true;
             jackpotBoard.SetTrigger("Congratulations");
+            gameObjectSwitchSignalsJackpot.SetActive(true);
+            for (int i = 0; i < jackpotSwitches.Length; i++) jackpotSwitches[i].ChangeColor("Rainbow");
+            audioSources[5].time = 0.2f;
+            audioSources[5].Play();
         }
 
         ProcessSwitches();
@@ -264,12 +309,13 @@ public class JackpotChallengeSystem : MonoBehaviour {
         return hasGottenJackpot;
     }
 
-    public void GenerateItems()
+    public bool GenerateItems()
     {
         Vector3 appearPositionLeft = new Vector3(-450.0f, 107.0f, 0.0f);
         Vector3 appearPositionRight = new Vector3(450.0f, 107.0f, 0.0f);
         Instantiate(prefabItem, appearPositionLeft, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Item>().Initialize(-itemCodeL);
         Instantiate(prefabItem, appearPositionRight, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f)).GetComponent<Item>().Initialize(-itemCodeR);
+        return itemCodeL != 0 || itemCodeR != 0;
     }
 
     IEnumerator TestStepSignals()
