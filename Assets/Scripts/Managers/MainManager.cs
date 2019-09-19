@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 
-public class MainManager : MonoBehaviour {
+public class MainManager : GameManager {
 
     const int DUMMY_NUMBER = 10;
     const int MAX_SCORE = 999999;
@@ -78,15 +77,14 @@ public class MainManager : MonoBehaviour {
     static float currentSliderBGMValue;
     static float currentSliderSEValue;
 
-    int gameScore = 0;
-    int gameLevel = 0;
+    int score;
+    int level;
     int restOfBlocks = 0;
     int comboBonus = 0;
     int playerId = 0;
     int highScore = 0;
     int restOfBall = 3;
-    int displayGameScore = 0;
-    int displayHighScore = 0;
+
     int dialogStatus = 1;   //0:Uncontrollable 1:Standby 2:BallMoving 3:ReturnDialog 4:RetireDialog
 
     string languageName = "Japanese";
@@ -102,7 +100,8 @@ public class MainManager : MonoBehaviour {
     Stage currentStage;
 
     // Use this for initialization
-    void Start () {
+    protected override void Start () {
+        base.Start();
 
         theBall = GameObject.Find("TheBall").GetComponent<Ball>();
         theRacket = GameObject.Find("TheRacket").GetComponent<Racket>();
@@ -114,16 +113,16 @@ public class MainManager : MonoBehaviour {
 
         audioSources = GetComponents<AudioSource>();
 
-        highScore = Global.highScore;
-        gameLevel = Global.level;
-        playerId = Global.playerId;
+        highScore = base.GetHighScore();
+        level = base.GetLevel();
+        playerId = base.GetPlayerId();
 
         sliderBGM.value = currentSliderBGMValue;
         sliderSE.value = currentSliderSEValue;
 
-        if (gameLevel == 0) gameLevel = testLevel;
+        if (level == 0) level = testLevel;
 
-        isPerformancePlay = gameLevel == 1;
+        isPerformancePlay = level == 1;
 
         if (isPerformancePlay) AddJackpotScore(10000);
 
@@ -149,8 +148,6 @@ public class MainManager : MonoBehaviour {
                 break;
         }
 
-        displayGameScore = gameScore;
-        displayHighScore = highScore;
 
 
         standardBeginnerSaveCount = playerId == 0 ? 1000 : 1250;
@@ -162,21 +159,13 @@ public class MainManager : MonoBehaviour {
         DrawUIDisplay();
         StartCoroutine(GarbageCollection());
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        if (gameScore > displayGameScore) displayGameScore++;
-        else if (gameScore < displayGameScore) displayGameScore--;
-
-        if (displayGameScore >= displayHighScore) displayHighScore = displayGameScore;
-
-
-        displayGameScore = gameScore;
-        displayHighScore = highScore;
-
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
         DrawUIDisplay();
-	}
+    }
 
     private void FixedUpdate()
     {
@@ -193,9 +182,9 @@ public class MainManager : MonoBehaviour {
         }
     }
 
-    public int GetLevel()
+    public new int GetLevel()
     {
-        return gameLevel;
+        return level;
     }
 
     public int GetRestOfBalls()
@@ -267,8 +256,6 @@ public class MainManager : MonoBehaviour {
     //DisplayScoreボタン(見えない)を押した時に呼び出されるメソッド
     public void PushDisplayScoreButton()
     {
-        displayGameScore = gameScore;
-        displayHighScore = highScore;
         DrawUIDisplay();
     }
 
@@ -293,7 +280,7 @@ public class MainManager : MonoBehaviour {
     //ReturnダイアログのOKボタンを押した時に呼び出されるメソッド
     public void PushDialogButtonReturn()
     {
-        SceneManager.LoadScene("TitleScene");
+        base.ChangeSceneToTitleScene();
     }
 
     //RetireダイアログのOKボタンを押した時に呼び出されるメソッド
@@ -314,10 +301,9 @@ public class MainManager : MonoBehaviour {
     //Scoreを加算するメソッド
     public void AddGameScore(int s)
     {
-        gameScore += s;
-        if (gameScore > MAX_SCORE) gameScore = MAX_SCORE;
-        if (gameScore < 0) gameScore = 0;
-
+        score += s;
+        if (score > MAX_SCORE) score = MAX_SCORE;
+        if (score < 0) score = 0;
     }
 
     public void AddRestOfBall()
@@ -330,13 +316,26 @@ public class MainManager : MonoBehaviour {
         float[] positionsXforMainViewPanel = { 2048.0f, 1024.0f, 0.0f, -1024.0f, -2048.0f };
 
         //High-Score表示部（本番プレイ以外ではハイフン表示となる）
-        if (isPerformancePlay) for (int i = 0; i < 6; i++) imagesHighScoreNumber[i].sprite = spritesYellowNumber[displayHighScore / (int)Mathf.Pow(10, i) % 10];
-        else for (int i = 0; i < 6; i++) imagesHighScoreNumber[i].sprite = spritesYellowNumber[10];
+        if (isPerformancePlay)
+        {
+            int[] highScoreNumbersIndexes = new int[6];
+            highScoreNumbersIndexes[0] = highScore % 10;
+            highScoreNumbersIndexes[1] = highScore / 10 % 10;
+            highScoreNumbersIndexes[2] = highScore / 100 % 10;
+            highScoreNumbersIndexes[3] = highScore / 1000 % 10;
+            highScoreNumbersIndexes[4] = highScore / 10000 % 10;
+            highScoreNumbersIndexes[5] = highScore / 100000 % 10;
+            for (int i = 0; i < 6; i++) imagesHighScoreNumber[i].sprite = spritesYellowNumber[highScoreNumbersIndexes[i]];
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++) imagesHighScoreNumber[i].sprite = spritesYellowNumber[10];
+        }
 
-        for (int i = 0; i < 6; i++) imagesGameScoreNumber[i].sprite = spritesYellowNumber[displayGameScore / (int)Mathf.Pow(10, i) % 10];
+        for (int i = 0; i < 6; i++) imagesGameScoreNumber[i].sprite = spritesYellowNumber[score / (int)Mathf.Pow(10, i) % 10];
 
-        imagesGameLevelNumber[0].sprite = spritesYellowNumber[gameLevel % 10];
-        imagesGameLevelNumber[1].sprite = spritesYellowNumber[gameLevel / 10 % 10];
+        imagesGameLevelNumber[0].sprite = spritesYellowNumber[level % 10];
+        imagesGameLevelNumber[1].sprite = spritesYellowNumber[level / 10 % 10];
 
         imageRestOfBallNumber.sprite = spritesYellowNumber[restOfBall % 10];
 
@@ -394,7 +393,7 @@ public class MainManager : MonoBehaviour {
         foreach (GameObject gameObjectStage in gameObjectsStage) Destroy(gameObjectStage);
         yield return null;
 
-        Instantiate(prefabsStage[gameLevel], new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
+        Instantiate(prefabsStage[level], new Vector3(0.0f, 0.0f, 0.0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
         currentStage = GameObject.FindWithTag("Stage").GetComponent<Stage>();
         DestroyAllBlocks();
         DestroyAllSystems();
@@ -464,12 +463,7 @@ public class MainManager : MonoBehaviour {
 
     public void MoveToEndScene()
     {
-        Global.score = gameScore;
-        Global.highScore = highScore;
-        Global.playerId = playerId;
-        Global.level = gameLevel;
-        Global.isPerformancePlay = isPerformancePlay;
-        SceneManager.LoadScene("EndScene");
+        base.ChangeSceneToEndScene(score, highScore, level, isPerformancePlay);
     }
 
     public void OnAnimationEndFromLevelUpTelop()
@@ -478,7 +472,7 @@ public class MainManager : MonoBehaviour {
         levelUpBonusTelop.SetActive(false);
 
         theRacket.SetStepOfLength(3);
-        gameLevel++;
+        level++;
         StartCoroutine(GenerateStage());
     }
 

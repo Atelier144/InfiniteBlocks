@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class EndManager : MonoBehaviour {
+public class EndManager : GameManager {
 
     Color colorEnabledGreen = new Color(0.0f, 0.5f, 0.125f, 1.0f);
     Color colorDisabledBlack = new Color(0.2f, 0.2f, 0.2f, 0.5f);
@@ -29,24 +28,26 @@ public class EndManager : MonoBehaviour {
     [SerializeField] Font fontForEnglish;
     [SerializeField] Font fontForJapanese;
 
-    int gameScore;
+    int score;
     int highScore;
     int playerId;
-    int gameLevel;
+    int level;
 
     string languageName = "Japanese";
 
     bool isPerformancePlay;
 
 	// Use this for initialization
-	void Start () {
-        gameScore = Global.score;
-        highScore = Global.highScore;
-        playerId = Global.playerId;
-        gameLevel = Global.level;
-        isPerformancePlay = Global.isPerformancePlay;
+	protected override void Start () {
+        base.Start();
 
-        if(playerId != 0 && isPerformancePlay && gameScore > 0)
+        score = base.GetScore();
+        highScore = base.GetHighScore();
+        playerId = base.GetPlayerId();
+        level = base.GetLevel();
+        isPerformancePlay = base.IsPerformancePlay();
+
+        if(playerId != 0 && isPerformancePlay && score > 0)
         {
             buttonRecord.interactable = true;
             buttonRecord.image.sprite = spriteButtonEnabled;
@@ -59,7 +60,7 @@ public class EndManager : MonoBehaviour {
             textButtonRecord.color = colorDisabledBlack;
         }
 
-        if(isPerformancePlay && highScore < gameScore)
+        if(isPerformancePlay && highScore < score)
         {
             imageScore.sprite = spriteNewRecord;
         }
@@ -77,32 +78,30 @@ public class EndManager : MonoBehaviour {
         }
         DrawResultScore();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+    }
 
     void DrawResultScore()
     {
-        for (int i = 0; i < 6; i++) imagesResultScoreNumber[i].sprite = spritesResultScoreNumber[gameScore / (int)Mathf.Pow(10, i) % 10];
+        for (int i = 0; i < 6; i++) imagesResultScoreNumber[i].sprite = spritesResultScoreNumber[score / (int)Mathf.Pow(10, i) % 10];
     }
 
     public void OnClickButtonRecord()
     {
-        Debug.Log("UserID:" + playerId + " Score:" + gameScore + " Level:" + gameLevel);
+        Debug.Log("UserID:" + playerId + " Score:" + score + " Level:" + level);
     }
 
     public void OnClickButtonContinue()
     {
-        Global.highScore = highScore;
-        Global.playerId = playerId;
-        Global.level = gameLevel;
-        SceneManager.LoadScene("MainScene");
+        base.ChangeSceneToMainScene(level, highScore);
     }
 
     public void OnClickButtonReturn()
     {
-        SceneManager.LoadScene("TitleScene");
+        base.ChangeSceneToTitleScene();
     }
 }

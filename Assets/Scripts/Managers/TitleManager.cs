@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 //using System.Runtime.InteropServices;
 
-public class TitleManager : MonoBehaviour {
+public class TitleManager : GameManager {
 
     Color colorEnabledGreen = new Color(0.0f, 0.5f, 0.125f, 1.0f);
     Color colorDisabledBlack = new Color(0.2f, 0.2f, 0.2f, 0.5f);
@@ -41,9 +41,6 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] Sprite spriteSmallButtonEnabled;
     [SerializeField] Sprite spriteSmallButtonDisabled;
 
-    public static int highScoreForMainScene = 0;
-    public static int gameLevelForMainScene = 0;
-    public static int playerIdForMainScene = 0;
 
     int highScore = 0;
     int maxLevel = 1;
@@ -51,7 +48,9 @@ public class TitleManager : MonoBehaviour {
     string languageName = "Japanese";
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+        base.Start();
+
         highScore = 0;
         maxLevel = 30;
         playerId = 1;
@@ -85,18 +84,16 @@ public class TitleManager : MonoBehaviour {
                 break;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+    }
 
     public void PushStartButton(int startLevel) 
     {
-        Global.highScore = highScore;
-        Global.playerId = playerId;
-        Global.level = startLevel;
-        SceneManager.LoadScene("MainScene");
+        base.ChangeSceneToMainScene(startLevel, highScore);
     }
 
     public void PushLevelSelectButton()
