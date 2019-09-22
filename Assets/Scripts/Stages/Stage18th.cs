@@ -42,19 +42,6 @@ public class Stage18th : Stage {
                 }
             }
         }
-        for(int x = 0; x < 7; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                float positionX1 = x * 50.0f - 450.0f;
-                float positionX2 = x * 50.0f + 150.0f;
-                float positionY = y * 20.0f - 160.0f;
-                int colorCode1 = 6 - x;
-                int colorCode2 = x;
-                prefabCreator.CreateNormalBlock(positionX1, positionY, colorCode1);
-                prefabCreator.CreateNormalBlock(positionX2, positionY, colorCode2);
-            }
-        }
         for(int x = 0; x < 3; x++)
         {
             float positionX1 = x * 90.0f - 450.0f;
