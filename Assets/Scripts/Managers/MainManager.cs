@@ -486,7 +486,7 @@ public class MainManager : GameManager {
             theBall.StopBall();
             theBall.SetBall();
             signalManager.StartReplayMode(standardBeginnerSaveCount);
-            theRacket.Rebound();
+            theRacket.ReboundExpand();
         }
         else
         {
@@ -500,7 +500,7 @@ public class MainManager : GameManager {
         SetDialogStatus(1);
         theBall.StopBall();
         theBall.SetBall();
-        theRacket.Rebound();
+        theRacket.ReboundShrink();
     }
 
     public void OnAnimationEndFromExplosion()

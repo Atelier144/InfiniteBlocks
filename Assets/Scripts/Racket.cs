@@ -89,7 +89,18 @@ public class Racket : MonoBehaviour {
         }
     }
 
-    public void Rebound()
+    //リプレイ時、ラケットが長い状態から元に戻すメソッド
+    public void ReboundShrink()
+    {
+        if (stepOfLengthOfRacket > 3)
+        {
+            stepOfLengthOfRacket--;
+            Transform();
+        }
+    }
+
+    //ミス時、ラケットが短い状態から元に戻すメソッド
+    public void ReboundExpand()
     {
         if (stepOfLengthOfRacket < 3)
         {
