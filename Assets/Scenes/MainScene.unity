@@ -323,7 +323,7 @@ MonoBehaviour:
   imageSignalSticky: {fileID: 272644116}
   background: {fileID: 1691360165}
   protector: {fileID: 996562327}
-  signalTestMode: 1
+  signalTestMode: 0
 --- !u!82 &24449576
 AudioSource:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 23112c0ab8320416b8f0c8cd1375b2c0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6642,7 +6642,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243161543118656294, guid: 7a07b5f183b9c4b919cdd1a34e73d169,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d568d652193b64d7b9534f2ed1862690, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -12003,7 +12003,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243161543118656294, guid: 7a07b5f183b9c4b919cdd1a34e73d169,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 67f1fae6140644a34b2e3830c4507280, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -14087,8 +14087,9 @@ AudioSource:
   m_GameObject: {fileID: 1785687423}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243161543118656294, guid: 7a07b5f183b9c4b919cdd1a34e73d169,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 48b7c993c4fc74c6aab5e38076f0634b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -16351,7 +16352,7 @@ MonoBehaviour:
   fontForJapanese: {fileID: 12800000, guid: 33acd6bcdb55248e8a50420bb85e6d83, type: 3}
   textRestOfBlocksForDebug: {fileID: 771898177}
   isTestMode: 1
-  testLevel: 27
+  testLevel: 1
 --- !u!82 &1991483124
 AudioSource:
   m_ObjectHideFlags: 0

@@ -96,11 +96,6 @@ public class Racket : MonoBehaviour {
             stepOfLengthOfRacket = 3;
             Transform();
         }
-        else if (stepOfLengthOfRacket > 3)
-        {
-            stepOfLengthOfRacket--;
-            Transform();
-        }
     }
 
     public void SetStepOfLength(int step)
