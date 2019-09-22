@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 5826096336829644332}
   - component: {fileID: 5826096336829644333}
   - component: {fileID: 5826096336829644323}
+  - component: {fileID: 3963146162385837421}
   m_Layer: 0
   m_Name: WeakPoint3
   m_TagString: Rigidbody
@@ -836,6 +837,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectSKL144System: {fileID: 5826096337133230003}
+--- !u!95 &3963146162385837421
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826096336829644328}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3363f48a75f5a4542a9e440818c21052, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5826096337133230003
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,9 +914,9 @@ MonoBehaviour:
   gameObjectPrecipitateEffectRight: {fileID: 96764242}
   prefabExplosionEffect: {fileID: 1486323793133598, guid: 1a868211a208d4216b609dccbf2e2740,
     type: 3}
-  duration1: 1
-  duration2: 5
-  duration3: 5
+  duration1: 6
+  duration2: 6
+  duration3: 6
   motionTrigger1:
   - Motion1
   - Guard1
@@ -1724,6 +1744,7 @@ GameObject:
   - component: {fileID: 5826096337937181567}
   - component: {fileID: 5826096337937181560}
   - component: {fileID: 5826096337937181566}
+  - component: {fileID: 2107846932320344097}
   m_Layer: 0
   m_Name: WeakPoint2
   m_TagString: Rigidbody
@@ -1853,6 +1874,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectSKL144System: {fileID: 5826096337133230003}
+--- !u!95 &2107846932320344097
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826096337937181563}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3363f48a75f5a4542a9e440818c21052, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5826096338070652576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,6 +2148,7 @@ GameObject:
   - component: {fileID: 5826096338244015682}
   - component: {fileID: 5826096338244015683}
   - component: {fileID: 5826096338244015681}
+  - component: {fileID: 3187557565710750263}
   m_Layer: 0
   m_Name: WeakPoint1
   m_TagString: Rigidbody
@@ -2237,3 +2278,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectSKL144System: {fileID: 5826096337133230003}
+--- !u!95 &3187557565710750263
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826096338244015694}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3363f48a75f5a4542a9e440818c21052, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

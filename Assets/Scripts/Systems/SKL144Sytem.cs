@@ -744,6 +744,8 @@ public class SKL144Sytem : MonoBehaviour {
         gameObjectBigBar.SetActive(true);
         gameObjectBlockGenerator.SetActive(true);
         gameObjectPrecipitate.SetActive(true);
+        gameObjectPrecipitateEffectLeft.SetActive(false);
+        gameObjectPrecipitateEffectRight.SetActive(false);
         yield return new WaitForSeconds(2.0f);
         gameObjectBigBar.SetActive(false);
         gameObjectBlockGenerator.SetActive(false);
@@ -787,6 +789,8 @@ public class SKL144Sytem : MonoBehaviour {
             gameObjectBigBar.SetActive(true);
             gameObjectBlockGenerator.SetActive(true);
             gameObjectPrecipitate.SetActive(true);
+            gameObjectPrecipitateEffectLeft.SetActive(false);
+            gameObjectPrecipitateEffectRight.SetActive(false);
             yield return new WaitForSeconds(0.3f);
         }
         yield return new WaitForSeconds(3.0f);
