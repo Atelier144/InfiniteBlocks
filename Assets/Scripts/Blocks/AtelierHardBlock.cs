@@ -121,7 +121,7 @@ public class AtelierHardBlock : Block {
 
         atelierDamage = gameObjectAtelierDamage.GetComponent<AtelierDamage>();
 
-        duration = Random.Range(9, 15);
+        duration = Random.Range(6, 10);
 
         spriteRenderer.sprite = spritesAtelierHardBlock[characterCode];
         polygonCollider2D.points = colliderPoints[characterCode];

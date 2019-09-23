@@ -71,7 +71,7 @@ public class AtelierHardestBlock : Block {
 
         atelierDamage = gameObjectAtelierDamage.GetComponent<AtelierDamage>();
 
-        duration = Random.Range(29, 40);
+        duration = Random.Range(19, 30);
 
         spriteRenderer.sprite = spritesAtelierHardestBlock[characterCode];
         polygonCollider2D.points = colliderPoints[characterCode];

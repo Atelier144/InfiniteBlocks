@@ -16,7 +16,7 @@ public class Level27System : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int levelStage = 11;
+    int levelStage = 7;
     int timerCount;
     bool isLevelUp;
 
@@ -201,17 +201,96 @@ public class Level27System : MonoBehaviour {
                 }
                 break;
             case 7:
+                int[] colorCodesForPhase7 = { 0, 1, 2, 3, 4, 5, 6 };
+                {
+                    int a = colorCodesForPhase7.Length;
+                    while (a > 0)
+                    {
+                        int i = a - 1;
+                        int j = Random.Range(0, a);
+                        int tmp = colorCodesForPhase7[i];
+                        colorCodesForPhase7[i] = colorCodesForPhase7[j];
+                        colorCodesForPhase7[j] = tmp;
+                        a--;
+                    }
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 7; j++)
+                    {
+                        float[] positionXs = { 0.0f, 60.0f, 30.0f, -30.0f, -60.0f, -30.0f, 30.0f };
+                        float[] positionYs = { 0.0f, 0.0f, 52.0f, 52.0f, 0.0f, -52.0f, -52.0f };
+                        float positionX = positionXs[j] + i * 200.0f - 400.0f;
+                        float positionY = positionYs[j] + 100.0f;
+                        if (j == 0) prefabCreator.CreateHardRoundBlock(positionX, positionY);
+                        else prefabCreator.CreateRoundBlock(positionX, positionY, colorCodesForPhase7[i]);
+                    }
+                }
                 break;
             case 8:
                 break;
             case 9:
+                for (int x = 0; x < 19; x++)
+                {
+                    for (int y = 0; y < 4; y++)
+                    {
+                        int[,] pattern =
+                        {
+
+                            {1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1},
+                            {1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1},
+                            {1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1},
+                            {1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1}
+
+                        };
+                        float positionX = x * 50.0f - 450.0f;
+                        float positionY = y * 20.0f + 90.0f;
+                        if (pattern[y, x] == 1) prefabCreator.CreateTransparentBlock(positionX, positionY);
+                    }
+                }
                 break;
             case 10:
+                for (int i = 0; i < 3; i++) 
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        for (int y = 0; y < 5; y++)
+                        {
+                            int[,] pattern = { { 0, 0, 0, 0, 0 }, { 0, 1, 1, 1, 0 }, { 0, 1, 2, 1, 0 }, { 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 } };
+                            float positionX = x * 50.0f + i * 300.0f - 400.0f;
+                            float positionY = y * 20.0f + 75.0f;
+                            switch (pattern[x, y])
+                            {
+                                case 0:
+                                    prefabCreator.CreateHardBlock(positionX, positionY);
+                                    break;
+                                case 1:
+                                    prefabCreator.CreateTransparentBlock(positionX, positionY);
+                                    break;
+                                case 2:
+                                    prefabCreator.CreateItemBlock(positionX, positionY, 8);
+                                    break;
+                            }
+                        }
+                    }
+                }
                 break;
             case 11:
-                prefabCreator.CreateItemBlock(0.0f, 120.0f, 21);
-                prefabCreator.CreateAccelerateBlock(100.0f, 120.0f);
-                prefabCreator.CreateAccelerateBlock(-100.0f, 120.0f);
+                for (int x = 0; x < 9; x++)
+                {
+                    int[] pattern = { 0, 1, 0, 1, 0, 1, 0, 1, 0 };
+                    float positionX = x * 100.0f - 400.0f;
+                    float positionY = 120.0f;
+                    switch (pattern[x])
+                    {
+                        case 0:
+                            prefabCreator.CreateAccelerateBlock(positionX, positionY);
+                            break;
+                        case 1:
+                            prefabCreator.CreateItemBlock(positionX, positionY, 21);
+                            break;
+                    }
+                }
                 break;
             case 12:
                 for (int x = 0; x < 7; x++)
