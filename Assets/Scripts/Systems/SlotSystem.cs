@@ -136,6 +136,7 @@ public class SlotSystem : MonoBehaviour {
                                 audioSources[7].time = 0.0f;
                                 audioSources[7].Play();
                                 mainManager.AddJackpotScore(14400);
+                                mainManager.SetHasSlot144(true);
                             }
                             else
                             {

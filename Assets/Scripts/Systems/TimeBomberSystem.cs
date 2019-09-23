@@ -5,6 +5,8 @@ using UnityEngine;
 public class TimeBomberSystem : MonoBehaviour {
 
     MainManager mainManager;
+    SignalManager signalManager;
+
     Ball ball;
 
     [SerializeField] GameObject[] gameObjectsNumbers = new GameObject[4];
@@ -12,10 +14,13 @@ public class TimeBomberSystem : MonoBehaviour {
     [SerializeField] GameObject gameObjectSignal;
 
     [SerializeField] Sprite[] spritesNumbers = new Sprite[10];
+    [SerializeField] Sprite spriteSignalRed;
+    [SerializeField] Sprite spriteSignalGreen;
+    [SerializeField] Sprite spriteSignalCyaan;
     [SerializeField] Sprite spriteColonOn;
     [SerializeField] Sprite spriteColonOff;
 
-    [SerializeField] int bombingCount;
+    int bombingCount;
 
     SpriteRenderer[] spriteRenderersNumbers = new SpriteRenderer[4];
     SpriteRenderer spriteRendererColon;
@@ -30,6 +35,8 @@ public class TimeBomberSystem : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        signalManager = GameObject.Find("SignalManager").GetComponent<SignalManager>();
+
         ball = GameObject.Find("TheBall").GetComponent<Ball>();
 
         for (int i = 0; i < 4; i++) spriteRenderersNumbers[i] = gameObjectsNumbers[i].GetComponent<SpriteRenderer>();
@@ -37,6 +44,8 @@ public class TimeBomberSystem : MonoBehaviour {
         spriteRendererSignal = gameObjectSignal.GetComponent<SpriteRenderer>();
 
         audioSource = GetComponent<AudioSource>();
+
+        bombingCount = mainManager.GetTimeBomberCount();
     }
 	
 	// Update is called once per frame
@@ -46,13 +55,27 @@ public class TimeBomberSystem : MonoBehaviour {
         spriteRenderersNumbers[2].sprite = spritesNumbers[bombingCount / 60 % 10];
         spriteRenderersNumbers[3].sprite = spritesNumbers[bombingCount / 600 % 10];
         spriteRendererColon.sprite = countingCount < 25 ? spriteColonOff : spriteColonOn;
-        spriteRendererSignal.color = mainManager.GetDialogStatus() == 2 ? colorRed : colorGreen;
+        if (mainManager.GetDialogStatus() == 2)
+        {
+            if (signalManager.IsActiveTrapGuard())
+            {
+                spriteRendererSignal.sprite = spriteSignalCyaan;
+            }
+            else
+            {
+                spriteRendererSignal.sprite = spriteSignalRed;
+            }
+        }
+        else
+        {
+            spriteRendererSignal.sprite = spriteSignalGreen;
+        }
     }
 
     private void FixedUpdate()
     {
 
-        if (mainManager.GetDialogStatus() == 2)
+        if (mainManager.GetDialogStatus() == 2 && !signalManager.IsActiveTrapGuard())
         {
             if (countingCount > 0) countingCount--;
             else
@@ -73,14 +96,8 @@ public class TimeBomberSystem : MonoBehaviour {
 }
 
 /*時限爆弾の初期時間
- * 途中レベルからスタート：8分追加、正統派プレイ：10分追加
- * メンバーモード：2分追加
- * 全てのブロックを壊してレベルアップ：1分追加
- * エクストラボールを取り逃がす：5分追加
- * 有効なアイテムをキャンセル：10秒追加
- * プロテクターに触れる：10秒削減
- * リプレイタイム以内のボール落下：30秒削減
- * 
- * 最小時間：5分
- * 最大時間：30分
+途中レベルからのプレイ：10分
+正規プレイ（ゲストモード）：12分
+正規プレイ（メンバーモード）：15分
+Lv18で「144」を揃える：20分
 */

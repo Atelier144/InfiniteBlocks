@@ -97,6 +97,8 @@ public class MainManager : GameManager {
 
     int jackpotScore = 100000;
 
+    bool hasSlot144;
+
     Stage currentStage;
 
     // Use this for initialization
@@ -221,6 +223,33 @@ public class MainManager : GameManager {
     public void AddJackpotScore(int s)
     {
         jackpotScore += s;
+    }
+
+    public bool HasSlot144()
+    {
+        return hasSlot144;
+    }
+
+    public void SetHasSlot144(bool s)
+    {
+        hasSlot144 = s;
+    }
+
+    public int GetTimeBomberCount()
+    {
+        if (hasSlot144)
+        {
+            return 1200;
+        }
+        if(isPerformancePlay)
+        {
+            if(playerId == 0)
+            {
+                return 720;
+            }
+            return 900;
+        }
+        return 600;
     }
 
     //Returnボタン(左矢印)を押した時の呼び出されるメソッド
