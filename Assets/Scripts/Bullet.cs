@@ -46,10 +46,15 @@ public class Bullet : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        string theTag = collision.gameObject.tag;
-        if(theTag == "Block" || theTag == "BlockSupport" || theTag == "Rigidbody" || theTag == "PrecipitateBlock")
+        switch (collision.gameObject.tag)
         {
-            Destroy(this.gameObject);
+            case "Block":
+            case "BlockSupport":
+            case "Rigidbody":
+            case "PrecipitateBlock":
+            case "RigidbodyPrecipitate":
+                Destroy(gameObject);
+                break;
         }
     }
 }
