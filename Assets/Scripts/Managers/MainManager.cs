@@ -91,8 +91,6 @@ public class MainManager : GameManager {
 
     int standardBeginnerSaveCount;
 
-    bool isMusicOn = true;
-    bool isSoundOn = true;
     bool isPerformancePlay = false;
 
     int jackpotScore = 100000;
@@ -239,7 +237,7 @@ public class MainManager : GameManager {
     {
         if (hasSlot144)
         {
-            return 1200;
+            return 1800;
         }
         if(isPerformancePlay)
         {

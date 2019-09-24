@@ -23,6 +23,7 @@ public class Racket : MonoBehaviour {
     [SerializeField] GameObject magnetEffect;
     [SerializeField] GameObject stickyEffect;
 
+    [SerializeField] bool isActiveSuperDemo;
     AudioSource[] audioSources;
 
     int stepOfLengthOfRacket = 3;
@@ -42,10 +43,20 @@ public class Racket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float mouseX = Mathf.Round(Input.mousePosition.x - 512.0f);
-        if (mouseX > 500.0f) mouseX = 500.0f;
-        if (mouseX < -500.0f) mouseX = -500.0f;
-        this.transform.position = new Vector3(mouseX, -195.5f, 0.0f);
+        if (isActiveSuperDemo)
+        {
+            float positionX = ball.transform.position.x + Random.Range(-50.0f, 50.0f);
+            transform.position = new Vector3(positionX, -195.5f, 0.0f);
+
+        }
+        else
+        {
+            float mouseX = Mathf.Round(Input.mousePosition.x - 512.0f);
+            if (mouseX > 500.0f) mouseX = 500.0f;
+            if (mouseX < -500.0f) mouseX = -500.0f;
+            transform.position = new Vector3(mouseX, -195.5f, 0.0f);
+        }
+
     }
 
     private void FixedUpdate()

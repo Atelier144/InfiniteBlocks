@@ -16,7 +16,7 @@ public class Level27System : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int levelStage = 7;
+    int levelStage;
     int timerCount;
     bool isLevelUp;
 
@@ -228,6 +228,53 @@ public class Level27System : MonoBehaviour {
                 }
                 break;
             case 8:
+                int colorCodeForPhase8a = Random.Range(0, 7);
+                int colorCodeForPhase8b = Random.Range(0, 7);
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        for (int y = 0; y < 2; y++)
+                        {
+                            int[,] pattern = { { 1, 2, 3, 4, 5 }, { 0, 7, 8, 7, 6 } };
+                            float positionX = x * 50.0f + i * 300.0f - 400.0f;
+                            float positionY = y * 20.0f + 162.0f;
+                            switch (pattern[y, x])
+                            {
+
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    prefabCreator.CreateCountBlock(positionX, positionY, pattern[y, x], 4);
+                                    break;
+                                case 7:
+                                    prefabCreator.CreateSilverBlock(positionX, positionY);
+                                    break;
+                                case 8:
+                                    prefabCreator.CreateGoldBlock(positionX, positionY);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                for (int x = 0; x < 20; x++)
+                {
+                    float positionX = x * 50.0f - 475.0f;
+                    float positionY = 82.0f;
+                    int colorCode = (colorCodeForPhase8a + x) % 7;
+                    prefabCreator.CreateNormalBlock(positionX, positionY, colorCode);
+                }
+                for (int x = 0; x < 50; x++)
+                {
+                    float positionX = x * 20.0f - 490.0f;
+                    float positionY = 122.0f;
+                    int colorCode = (colorCodeForPhase8b + x) % 7;
+                    prefabCreator.CreateSmallBlock(positionX, positionY, colorCode);
+                }
                 break;
             case 9:
                 for (int x = 0; x < 19; x++)
