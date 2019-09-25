@@ -16,7 +16,7 @@ public class Level27System : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int levelStage;
+    int levelStage = 2;
     int timerCount;
     bool isLevelUp;
 
@@ -108,6 +108,11 @@ public class Level27System : MonoBehaviour {
                         prefabCreator.CreateSmallBlock(positionX, positionY, colorCode);
                     }
                 }
+
+                prefabCreator.CreateItemBlock(-200.0f, 80.0f, 8);
+                prefabCreator.CreateItemBlock(0.0f, 80.0f, 9);
+                prefabCreator.CreateItemBlock(200.0f, 80.0f, 8);
+
                 break;
             case 3:
                 for (int x = 0; x < 7; x++)
