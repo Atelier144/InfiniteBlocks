@@ -168,6 +168,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountReplayMode = 0;
             StopReplayMode();
+            mainManager.AddJackpotScore(5000);
         }
         else if (signalTestMode)
         {
@@ -181,6 +182,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountPowerUp = 0;
             StopPoweredBall();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {
@@ -194,6 +196,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountProtector = 0;
             StopProtector();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {
@@ -207,6 +210,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountTrapGuard = 0;
             StopTrapGuard();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {
@@ -220,6 +224,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountPrecipitate = 0;
             StopPrecipitate();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {
@@ -233,6 +238,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountShooting = 0;
             StopShooting();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {
@@ -246,6 +252,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountMagnet = 0;
             StopMagnet();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {
@@ -259,6 +266,7 @@ public class SignalManager : MonoBehaviour {
         {
             activeCountSticky = 0;
             StopSticky();
+            mainManager.AddJackpotScore(1000);
         }
         else if (signalTestMode)
         {

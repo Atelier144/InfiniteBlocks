@@ -153,11 +153,16 @@ public class MainManager : GameManager {
         standardBeginnerSaveCount = playerId == 0 ? 1000 : 1250;
         signalManager.StartReplayMode(standardBeginnerSaveCount);
 
-        if (playerId != 0) AddJackpotScore(20000);
+        if (playerId == 0) AddJackpotScore(20000);
+        else AddJackpotScore(50000);
+
         StartCoroutine(GenerateStage());
 
         DrawUIDisplay();
         StartCoroutine(GarbageCollection());
+
+        AddJackpotScore(Random.Range(0, 10));
+
     }
 
     // Update is called once per frame
@@ -169,7 +174,13 @@ public class MainManager : GameManager {
 
     private void FixedUpdate()
     {
-        if (dialogStatus == 2 && currentStage.IsLevelUp()) LevelUp();
+        if (dialogStatus == 2 && currentStage.IsLevelUp())
+        {
+            AddJackpotScore(1000);
+            LevelUp();
+        }
+
+
     }
 
     IEnumerator GarbageCollection()

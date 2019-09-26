@@ -115,6 +115,7 @@ public class Item : MonoBehaviour {
                     signalManager.StartProtector(750);
                     break;
                 case LEVEL_UP:
+                    mainManager.AddJackpotScore(100);
                     mainManager.LevelUp();
                     break;
                 case TRAP_GUARD:
