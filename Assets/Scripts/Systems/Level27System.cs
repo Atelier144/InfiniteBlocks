@@ -16,7 +16,7 @@ public class Level27System : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int levelStage = 2;
+    int levelStage;
     int timerCount;
     bool isLevelUp;
 
