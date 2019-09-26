@@ -914,9 +914,9 @@ MonoBehaviour:
   gameObjectPrecipitateEffectRight: {fileID: 96764242}
   prefabExplosionEffect: {fileID: 1486323793133598, guid: 1a868211a208d4216b609dccbf2e2740,
     type: 3}
-  duration1: 8
-  duration2: 8
-  duration3: 8
+  duration1: 6
+  duration2: 6
+  duration3: 6
   motionTrigger1:
   - Motion1
   - Guard1

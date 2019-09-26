@@ -412,6 +412,7 @@ public class MainManager : GameManager {
         {
             replayTelop.SetActive(true);
             theBall.DiminishForReplay();
+            AddJackpotScore(10);
         }
         else if (currentStage.IsLevelUpFailZone())
         {
@@ -419,6 +420,7 @@ public class MainManager : GameManager {
         }
         else
         {
+            AddJackpotScore(50);
             missTelop.SetActive(true);
             theBall.DiminishForMissing();
         }
