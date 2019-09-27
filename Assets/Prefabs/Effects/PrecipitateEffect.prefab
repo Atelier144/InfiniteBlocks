@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505be5d2fa5794cc29a38eae7d726b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundStart: 0
+  soundStart: 0.25
 --- !u!82 &5238851426320674156
 AudioSource:
   m_ObjectHideFlags: 0
