@@ -4,8 +4,11 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: TBSColonOn
     21300002: TBSColonOff
+    21300004: TBSColonRed
+    21300006: TBSColonGreen
+    21300008: TBSColonCyaan
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -119,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TBSColonOn
+      name: TBSColonRed
       rect:
         serializedVersion: 2
         x: 0
@@ -133,13 +136,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a46fe5c1bfbfc4782825007a03c893c1
+      spriteID: ff032938ca487454590a58a84045ad7b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSColonOff
+      name: TBSColonGreen
       rect:
         serializedVersion: 2
         x: 20
@@ -153,7 +156,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e42731e462c9408c9e21dec29c49f1c
+      spriteID: 07c30271f44a14ed491cb5083f7c8c08
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSColonCyaan
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 20
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbbc5a67853664204be75321bcb781ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSColonOff
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 20
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e23fcaf7782546abb0e01bdefeb98f6
       vertices: []
       indices: 
       edges: []

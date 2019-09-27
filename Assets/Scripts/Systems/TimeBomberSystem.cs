@@ -11,23 +11,20 @@ public class TimeBomberSystem : MonoBehaviour {
 
     [SerializeField] GameObject[] gameObjectsNumbers = new GameObject[4];
     [SerializeField] GameObject gameObjectColon;
-    [SerializeField] GameObject gameObjectSignal;
 
-    [SerializeField] Sprite[] spritesNumbers = new Sprite[10];
-    [SerializeField] Sprite spriteSignalRed;
-    [SerializeField] Sprite spriteSignalGreen;
-    [SerializeField] Sprite spriteSignalCyaan;
-    [SerializeField] Sprite spriteColonOn;
+    [SerializeField] Sprite[] spritesNumbersRed = new Sprite[10];
+    [SerializeField] Sprite[] spritesNumbersGreen = new Sprite[10];
+    [SerializeField] Sprite[] spritesNumbersCyaan = new Sprite[10];
+
+    [SerializeField] Sprite spriteColonRed;
+    [SerializeField] Sprite spriteColonGreen;
+    [SerializeField] Sprite spriteColonCyaan;
     [SerializeField] Sprite spriteColonOff;
 
     int bombingCount;
 
     SpriteRenderer[] spriteRenderersNumbers = new SpriteRenderer[4];
     SpriteRenderer spriteRendererColon;
-    SpriteRenderer spriteRendererSignal;
-
-    Color colorRed = new Color(1.0f, 0.2f, 0.2f);
-    Color colorGreen = new Color(0.2f, 1.0f, 0.2f);
 
     AudioSource audioSource;
 
@@ -41,7 +38,6 @@ public class TimeBomberSystem : MonoBehaviour {
 
         for (int i = 0; i < 4; i++) spriteRenderersNumbers[i] = gameObjectsNumbers[i].GetComponent<SpriteRenderer>();
         spriteRendererColon = gameObjectColon.GetComponent<SpriteRenderer>();
-        spriteRendererSignal = gameObjectSignal.GetComponent<SpriteRenderer>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -50,25 +46,34 @@ public class TimeBomberSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        spriteRenderersNumbers[0].sprite = spritesNumbers[bombingCount % 10];
-        spriteRenderersNumbers[1].sprite = spritesNumbers[bombingCount / 10 % 6];
-        spriteRenderersNumbers[2].sprite = spritesNumbers[bombingCount / 60 % 10];
-        spriteRenderersNumbers[3].sprite = spritesNumbers[bombingCount / 600 % 10];
-        spriteRendererColon.sprite = countingCount < 25 ? spriteColonOff : spriteColonOn;
+
+
         if (mainManager.GetDialogStatus() == 2)
         {
             if (signalManager.IsActiveTrapGuard())
             {
-                spriteRendererSignal.sprite = spriteSignalCyaan;
+                spriteRenderersNumbers[0].sprite = spritesNumbersCyaan[bombingCount % 10];
+                spriteRenderersNumbers[1].sprite = spritesNumbersCyaan[bombingCount / 10 % 6];
+                spriteRenderersNumbers[2].sprite = spritesNumbersCyaan[bombingCount / 60 % 10];
+                spriteRenderersNumbers[3].sprite = spritesNumbersCyaan[bombingCount / 600 % 10];
+                spriteRendererColon.sprite = spriteColonCyaan;
             }
             else
             {
-                spriteRendererSignal.sprite = spriteSignalRed;
+                spriteRenderersNumbers[0].sprite = spritesNumbersRed[bombingCount % 10];
+                spriteRenderersNumbers[1].sprite = spritesNumbersRed[bombingCount / 10 % 6];
+                spriteRenderersNumbers[2].sprite = spritesNumbersRed[bombingCount / 60 % 10];
+                spriteRenderersNumbers[3].sprite = spritesNumbersRed[bombingCount / 600 % 10];
+                spriteRendererColon.sprite = countingCount < 25 ? spriteColonOff : spriteColonRed;
             }
         }
         else
         {
-            spriteRendererSignal.sprite = spriteSignalGreen;
+            spriteRenderersNumbers[0].sprite = spritesNumbersGreen[bombingCount % 10];
+            spriteRenderersNumbers[1].sprite = spritesNumbersGreen[bombingCount / 10 % 6];
+            spriteRenderersNumbers[2].sprite = spritesNumbersGreen[bombingCount / 60 % 10];
+            spriteRenderersNumbers[3].sprite = spritesNumbersGreen[bombingCount / 600 % 10];
+            spriteRendererColon.sprite = spriteColonGreen;
         }
     }
 

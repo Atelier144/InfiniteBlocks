@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class Stage29th : Stage {
 
-    int[] numbersOfAppearItem = { };
-    int[] numbersOfAppearItemCode = { };
+    int[] numbersOfAppearItem = new int[7];
+    int[] numbersOfAppearItemCode = { 4, 5, 8, 9, 11, 19, 20 };
 
     int brokenBlocks;
 
     protected override void Start()
     {
         base.Start();
-        int[] numbersMin = { };
-        int[] numbersMax = { };
+        {
+            int a = numbersOfAppearItemCode.Length;
+            while (a > 0)
+            {
+                int i = a - 1;
+                int j = Random.Range(0, a);
+                int tmp = numbersOfAppearItemCode[i];
+                numbersOfAppearItemCode[i] = numbersOfAppearItemCode[j];
+                numbersOfAppearItemCode[j] = tmp;
+                a--;
+            }
+        }
+        numbersOfAppearItemCode[5] = 21;
+
+        int[] numbersMin = { 9, 27, 45, 63, 81, 99, 117 };
+        int[] numbersMax = { 18, 36, 54, 72, 90, 108, 120 };
         for (int i = 0; i < numbersOfAppearItem.Length; i++) numbersOfAppearItem[i] = Random.Range(numbersMin[i], numbersMax[i]);
 
         brokenBlocks = 0;
@@ -71,7 +85,7 @@ public class Stage29th : Stage {
         {
             for (int y = 0; y < 3; y++)
             {
-                int[,] pattern = { { 1, 0, 1 }, { 0, 2, 0 }, { 1, 0, 1 } };
+                int[,] pattern = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
                 float positionX1 = x * 50.0f - 450.0f;
                 float positionX2 = x * 50.0f + 350.0f;
                 float positionY = y * 20.0f + 280.0f;
@@ -83,12 +97,17 @@ public class Stage29th : Stage {
                         prefabCreator.CreateSilverBlock(positionX2, positionY);
                         break;
                     case 1:
-                        prefabCreator.CreateGoldBlock(positionX1, positionY);
-                        prefabCreator.CreateGoldBlock(positionX2, positionY);
-                        break;
-                    case 2:
-                        prefabCreator.CreateItemBlock(positionX1, positionY, 19);
-                        prefabCreator.CreateItemBlock(positionX2, positionY, 19);
+                        switch (Random.Range(0, 2))
+                        {
+                            case 0:
+                                prefabCreator.CreateItemBlock(positionX1, positionY, 19);
+                                prefabCreator.CreateItemBlock(positionX2, positionY, 8);
+                                break;
+                            case 1:
+                                prefabCreator.CreateItemBlock(positionX1, positionY, 8);
+                                prefabCreator.CreateItemBlock(positionX2, positionY, 19);
+                                break;
+                        }
                         break;
                 }
             }
@@ -100,10 +119,11 @@ public class Stage29th : Stage {
 
     public override int GenerateItemCode(int itemCode)
     {
+        int resultItemCode = 0;
         brokenBlocks++;
         if (itemCode != 0) return itemCode;
-        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) return numbersOfAppearItemCode[i];
-        return 0;
+        for (int i = 0; i < numbersOfAppearItem.Length; i++) if (numbersOfAppearItem[i] == brokenBlocks) resultItemCode = numbersOfAppearItemCode[i];
+        return resultItemCode;
     }
 
     public override bool IsLevelUp()

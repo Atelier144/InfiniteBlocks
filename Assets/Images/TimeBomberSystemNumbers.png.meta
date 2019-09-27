@@ -12,8 +12,38 @@ TextureImporter:
     21300014: TBSNumber7
     21300016: TBSNumber8
     21300018: TBSNumber9
+    21300020: TBSNumberRed0
+    21300022: TBSNumberRed1
+    21300024: TBSNumberRed2
+    21300026: TBSNumberRed3
+    21300028: TBSNumberRed4
+    21300030: TBSNumberRed5
+    21300032: TBSNumberRed6
+    21300034: TBSNumberRed7
+    21300036: TBSNumberRed8
+    21300038: TBSNumberRed9
+    21300040: TBSNumberGreen0
+    21300042: TBSNumberGreen1
+    21300044: TBSNumberGreen2
+    21300046: TBSNumberGreen3
+    21300048: TBSNumberGreen4
+    21300050: TBSNumberGreen5
+    21300052: TBSNumberGreen6
+    21300054: TBSNumberGreen7
+    21300056: TBSNumberGreen8
+    21300058: TBSNumberGreen9
+    21300060: TBSNumberCyann0
+    21300062: TBSNumberCyann1
+    21300064: TBSNumberCyann2
+    21300066: TBSNumberCyann3
+    21300068: TBSNumberCyann4
+    21300070: TBSNumberCyann5
+    21300072: TBSNumberCyann6
+    21300074: TBSNumberCyann7
+    21300076: TBSNumberCyann8
+    21300078: TBSNumberCyann9
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -127,7 +157,407 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TBSNumber0
+      name: TBSNumberRed0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3da32af0b9d18423eaf9c17a9245ecc3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed8457a1c64f84de486dce96b5563e6d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49e98881032fd4c76bcf97dc14552dd8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed3
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f846653427b204773aa16bc941f15aef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67d86da1683d9408db0278ff4a966624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0190178a8ef354477a60892c0503f339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c3c03b031a142ff982b9c3699b805c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b1afa880cd6f4ef2baa017baa1f0adc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 430251c6a2c1b4dcfa84101eb808c6d2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberRed9
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 120
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa604908cae7477585e91a6e8b8c879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc36e958b201c4b13bb15d18aab7c5fa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca10d0e1f6bc543918824899260a5185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 483d982adf2b54bb38725a20b743c999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen3
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0cd736d10e934983b23bc074e855fcb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12f0cb49ee2514fcda17f1bdc9b43a51
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7b3629ecf8494d0ba7abe2c93904c70
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1906ef55cf035475bb2e02d5d493ddd2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 533a457ddb89041d1886a2565023b4ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cb28c46be4074e8c9bcc52fec2a3ed0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberGreen9
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 60
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67128d439e1e7452c8619e8ede9d795a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TBSNumberCyann0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,13 +571,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c64b1b52cc504286bb87d54461f3a73
+      spriteID: 27ebf04285a7c4b2ba43b75c1db94cdf
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber1
+      name: TBSNumberCyann1
       rect:
         serializedVersion: 2
         x: 40
@@ -161,13 +591,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da460eee48eca43ab84f2a6d80f84e86
+      spriteID: 80e74bfd4d1054c86bc7915fc926a954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber2
+      name: TBSNumberCyann2
       rect:
         serializedVersion: 2
         x: 80
@@ -181,13 +611,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2fd712c8ac634ecb95d555c1e1deb08
+      spriteID: ff8a236659ec84382add3fbe2732d716
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber3
+      name: TBSNumberCyann3
       rect:
         serializedVersion: 2
         x: 120
@@ -201,13 +631,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea973b447cf67443b995ba6e42beda26
+      spriteID: f1f0a97a2320240fca3ce6dbbeb966e2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber4
+      name: TBSNumberCyann4
       rect:
         serializedVersion: 2
         x: 160
@@ -221,13 +651,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 916628a351ec54a7d8dea6bd5faf6dc3
+      spriteID: 486d99ed4449f462daa49cada891c8a1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber5
+      name: TBSNumberCyann5
       rect:
         serializedVersion: 2
         x: 200
@@ -241,13 +671,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a553a0b5a08d42d59835754a603ea2e
+      spriteID: 637a8207e2f7b4be7b165729e015aeaa
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber6
+      name: TBSNumberCyann6
       rect:
         serializedVersion: 2
         x: 240
@@ -261,13 +691,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d5431ea28f614c58ba3cd89d1de47a2
+      spriteID: 8d3554eb119fe424a89a9d3ef06e8ec7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber7
+      name: TBSNumberCyann7
       rect:
         serializedVersion: 2
         x: 280
@@ -281,13 +711,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef40020f948d84e058ef5d5377b3f973
+      spriteID: b8babefb1e94f4d1d81179d0fa9e2675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber8
+      name: TBSNumberCyann8
       rect:
         serializedVersion: 2
         x: 320
@@ -301,13 +731,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d8bf004ec3f44ad19e8cff63c22dc3c
+      spriteID: c342c89af54dc4d7ab31db7dc5179c49
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TBSNumber9
+      name: TBSNumberCyann9
       rect:
         serializedVersion: 2
         x: 360
@@ -321,7 +751,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e695a9203a5f94b2fa8bb8e8d800aced
+      spriteID: 2f34b1171d5a24d87bc3a94aac1112f0
       vertices: []
       indices: 
       edges: []
