@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Racket : MonoBehaviour {
 
-    GameObject mainManager;
+    MainManager mainManager;
+    SignalManager signalManager;
+
     Ball ball;
     EdgeCollider2D edgeCollider2D;
 
@@ -32,7 +34,8 @@ public class Racket : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        mainManager = GameObject.Find("MainManager");
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        signalManager = GameObject.Find("SignalManager").GetComponent<SignalManager>();
         ball = GameObject.Find("TheBall").GetComponent<Ball>();
 
         edgeCollider2D = GetComponent<EdgeCollider2D>();
@@ -73,8 +76,11 @@ public class Racket : MonoBehaviour {
             Vector2 collisionPoint = collision.contacts[0].point;
             float effectPointX = ballPointX - racketPointX;
 
-            audioSources[0].time = 0.2f;
-            audioSources[0].Play();
+            if (!signalManager.IsActiveSticky())
+            {
+                audioSources[0].time = 0.2f;
+                audioSources[0].Play();
+            }
         }
     }
 
