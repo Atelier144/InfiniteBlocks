@@ -10,11 +10,6 @@ public class TitleManager : GameManager {
     Color colorEnabledGreen = new Color(0.0f, 0.5f, 0.125f, 1.0f);
     Color colorDisabledBlack = new Color(0.2f, 0.2f, 0.2f, 0.5f);
 
-    //[DllImport("__Internal")]
-    //private static extern int GetNumberFromUnity();
-
-    //[DllImport("__Internal")]
-    //private static extern void SetNumberFromUnity(int s);
     [SerializeField] GameObject gameObjectThePanels;
 
     [SerializeField] Button buttonLevelSelect;
@@ -25,13 +20,16 @@ public class TitleManager : GameManager {
 
     [SerializeField] Text textButtonLevelSelect;
     [SerializeField] Text textButtonHighScoreReset;
+    [SerializeField] Text textButtonAcceptHighScoreReset;
     [SerializeField] Text textButtonReturnToTopForLevelSelect;
     [SerializeField] Text textButtonReturnToTopForHighScoreReset;
     [SerializeField] Text[] textsButtonsStart = new Text[31];
 
+    [SerializeField] Text textSelectLevel;
+    [SerializeField] Text textHighScoreResetNotice;
+
     [SerializeField] Text textHighScore;
     [SerializeField] Text textGuestMode;
-    [SerializeField] Text textMaxLevel;
 
     [SerializeField] Font fontForEnglish;
     [SerializeField] Font fontForJapanese;
@@ -42,21 +40,21 @@ public class TitleManager : GameManager {
     [SerializeField] Sprite spriteSmallButtonDisabled;
 
 
-    int highScore = 0;
-    int maxLevel = 1;
-    int playerId = 0;   // 0: Guset Mode
-    string languageName = "Japanese";
+    int highScore;
+    int maxLevel;
+    int playerId;   // 0: Guset Mode
+    string languageName;
 
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
 
-        highScore = 0;
-        maxLevel = 30;
-        playerId = 1;
+        highScore = base.GetHighScore();
+        maxLevel = base.GetMaxLevel();
+        playerId = base.GetPlayerId();
+        languageName = base.GetLanguageName();
 
         textHighScore.text = "HIGH SCORE : " + highScore.ToString("D6");
-        textMaxLevel.text = "MAX LEVEL : " + maxLevel.ToString("D2");
 
         if (playerId == 0) textGuestMode.text = "GUEST MODE";
         else textGuestMode.text = "";
@@ -77,10 +75,17 @@ public class TitleManager : GameManager {
                 textButtonLevelSelect.text = "中間レベルから";
                 textButtonHighScoreReset.font = fontForJapanese;
                 textButtonHighScoreReset.text = "ハイスコアリセット";
+                textButtonAcceptHighScoreReset.font = fontForJapanese;
+                textButtonAcceptHighScoreReset.text = "リセット";
                 textButtonReturnToTopForLevelSelect.font = fontForJapanese;
                 textButtonReturnToTopForLevelSelect.text = "戻る";
                 textButtonReturnToTopForHighScoreReset.font = fontForJapanese;
                 textButtonReturnToTopForHighScoreReset.text = "戻る";
+                textSelectLevel.font = fontForJapanese;
+                textSelectLevel.text = "開始レベルを選択してください";
+                textHighScoreResetNotice.font = fontForJapanese;
+                textHighScoreResetNotice.lineSpacing = 1.35f;
+                textHighScoreResetNotice.text = "本当にハイスコアをリセットしますか？\n(リセットした記録は元に戻せません)";
                 break;
         }
     }
@@ -108,7 +113,8 @@ public class TitleManager : GameManager {
 
     public void PushAcceptResetHighScoreButton()
     {
-
+        DestroyInfiniteBlocksHighScoreFromJS();
+        gameObjectThePanels.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     public void PushReturnToTopButton()

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class SignalManager : MonoBehaviour {
 
-    const int MAX_COUNT = 1000000000;
-
     [SerializeField] Sprite spriteBackgroundNormal;
     [SerializeField] Sprite spriteBackgroundTrapGuard;
 
@@ -34,14 +32,14 @@ public class SignalManager : MonoBehaviour {
 
     AudioSource audioSource;
 
-    int activeCountReplayMode = 0;
-    int activeCountPowerUp = 0;
-    int activeCountProtector = 0;
-    int activeCountTrapGuard = 0;
-    int activeCountPrecipitate = 0;
-    int activeCountShooting = 0;
-    int activeCountMagnet = 0;
-    int activeCountSticky = 0;
+    int activeCountReplayMode;
+    int activeCountPowerUp;
+    int activeCountProtector;
+    int activeCountTrapGuard;
+    int activeCountPrecipitate;
+    int activeCountShooting;
+    int activeCountMagnet;
+    int activeCountSticky;
 
     // Use this for initialization
     void Start () {
@@ -172,7 +170,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartReplayMode(MAX_COUNT);
+            StartReplayMode(int.MaxValue);
         }
     }
 
@@ -186,7 +184,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartPoweredBall(MAX_COUNT);
+            StartPoweredBall(int.MaxValue);
         }
     }
 
@@ -200,7 +198,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartProtector(MAX_COUNT);
+            StartProtector(int.MaxValue);
         }
     }
 
@@ -214,7 +212,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartTrapGuard(MAX_COUNT);
+            StartTrapGuard(int.MaxValue);
         }
     }
 
@@ -228,7 +226,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartPrecipitate(MAX_COUNT);
+            StartPrecipitate(int.MaxValue);
         }
     }
 
@@ -242,7 +240,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartShooting(MAX_COUNT);
+            StartShooting(int.MaxValue);
         }
     }
 
@@ -256,7 +254,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartMagnet(MAX_COUNT);
+            StartMagnet(int.MaxValue);
         }
     }
 
@@ -270,7 +268,7 @@ public class SignalManager : MonoBehaviour {
         }
         else if (signalTestMode)
         {
-            StartSticky(MAX_COUNT);
+            StartSticky(int.MaxValue);
         }
     }
     //

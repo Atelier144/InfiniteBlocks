@@ -32,9 +32,9 @@ public class EndManager : GameManager {
     int highScore;
     int playerId;
     int level;
+    int maxLevel;
 
-    string languageName = "Japanese";
-
+    string languageName;
     bool isPerformancePlay;
 
 	// Use this for initialization
@@ -45,6 +45,8 @@ public class EndManager : GameManager {
         highScore = base.GetHighScore();
         playerId = base.GetPlayerId();
         level = base.GetLevel();
+        maxLevel = base.GetMaxLevel();
+        languageName = base.GetLanguageName();
         isPerformancePlay = base.IsPerformancePlay();
 
         if(playerId != 0 && isPerformancePlay && score > 0)
@@ -60,9 +62,15 @@ public class EndManager : GameManager {
             textButtonRecord.color = colorDisabledBlack;
         }
 
-        if(isPerformancePlay && highScore < score)
+        if(isPerformancePlay && score > highScore)
         {
+            SetInfiniteBlocksHighScoreFromJS(score);
             imageScore.sprite = spriteNewRecord;
+        }
+
+        if (level > maxLevel)
+        {
+            SetInfiniteBlocksMaxLevelFromJS(level);
         }
 
         switch (languageName)
@@ -92,7 +100,7 @@ public class EndManager : GameManager {
 
     public void OnClickButtonRecord()
     {
-        Debug.Log("UserID:" + playerId + " Score:" + score + " Level:" + level);
+        SendInfiniteBlocksRecordFromJS(playerId, score, level);
     }
 
     public void OnClickButtonContinue()

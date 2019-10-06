@@ -76,7 +76,12 @@ public class Racket : MonoBehaviour {
             Vector2 collisionPoint = collision.contacts[0].point;
             float effectPointX = ballPointX - racketPointX;
 
-            if (!signalManager.IsActiveSticky())
+            if (signalManager.IsActiveSticky())
+            {
+                audioSources[4].time = 0.85f;
+                audioSources[4].Play();
+            }
+            else
             {
                 audioSources[0].time = 0.2f;
                 audioSources[0].Play();

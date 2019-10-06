@@ -2,12 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
+
+    [DllImport("__Internal")] public static extern int GetUserIdFromJS();
+    [DllImport("__Internal")] public static extern string GetLanguageFromJS();
+    [DllImport("__Internal")] public static extern void SendInfiniteBlocksRecordFromJS(int userId, int score, int level);
+    [DllImport("__Internal")] public static extern int GetInfiniteBlocksHighScoreFromJS();
+    [DllImport("__Internal")] public static extern void SetInfiniteBlocksHighScoreFromJS(int highScore);
+    [DllImport("__Internal")] public static extern void DestroyInfiniteBlocksHighScoreFromJS();
+    [DllImport("__Internal")] public static extern int GetInfiniteBlocksMaxLevelFromJS();
+    [DllImport("__Internal")] public static extern void SetInfiniteBlocksMaxLevelFromJS(int maxLevel);
+    [DllImport("__Internal")] public static extern void DestroyInfiniteBlocksMaxLevelFromJS();
+
     static int score;
     static int highScore;
     static int level;
+    static int maxLevel;
     static int playerId;
     static bool isPerformancePlay;
     static string languageName;
@@ -15,8 +28,10 @@ public class GameManager : MonoBehaviour
 
     virtual protected void Start()
     {
-        playerId = 1;
-        languageName = "Japanese";
+        playerId = GetUserIdFromJS();
+        languageName = GetLanguageFromJS();
+        maxLevel = GetMaxLevel();
+        highScore = GetHighScore();
     }
 
     virtual protected void Update()
@@ -37,6 +52,11 @@ public class GameManager : MonoBehaviour
     protected int GetLevel()
     {
         return level;
+    }
+
+    protected int GetMaxLevel()
+    {
+        return maxLevel;
     }
 
     protected int GetPlayerId()

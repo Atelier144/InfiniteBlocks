@@ -14,7 +14,6 @@ public class MainManager : GameManager {
 
     [SerializeField] AudioMixer audioMixer;
 
-    StageManager stageManager;
     MusicManager musicManager;
     ItemManager itemManager;
     SystemManager systemManager;
@@ -81,17 +80,17 @@ public class MainManager : GameManager {
     int level;
     int restOfBlocks = 0;
     int comboBonus = 0;
-    int playerId = 0;
-    int highScore = 0;
     int restOfBall = 3;
+
+    int playerId;
+    int highScore;
+    string languageName;
 
     int dialogStatus = 1;   //0:Uncontrollable 1:Standby 2:BallMoving 3:ReturnDialog 4:RetireDialog
 
-    string languageName = "Japanese";
-
     int standardBeginnerSaveCount;
 
-    bool isPerformancePlay = false;
+    bool isPerformancePlay;
 
     int jackpotScore = 100000;
 
@@ -105,7 +104,6 @@ public class MainManager : GameManager {
 
         theBall = GameObject.Find("TheBall").GetComponent<Ball>();
         theRacket = GameObject.Find("TheRacket").GetComponent<Racket>();
-        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
@@ -116,6 +114,7 @@ public class MainManager : GameManager {
         highScore = base.GetHighScore();
         level = base.GetLevel();
         playerId = base.GetPlayerId();
+        languageName = base.GetLanguageName();
 
         sliderBGM.value = currentSliderBGMValue;
         sliderSE.value = currentSliderSEValue;
@@ -356,13 +355,14 @@ public class MainManager : GameManager {
         //High-Score表示部（本番プレイ以外ではハイフン表示となる）
         if (isPerformancePlay)
         {
+            int displayScore = score > highScore ? score : highScore;
             int[] highScoreNumbersIndexes = new int[6];
-            highScoreNumbersIndexes[0] = highScore % 10;
-            highScoreNumbersIndexes[1] = highScore / 10 % 10;
-            highScoreNumbersIndexes[2] = highScore / 100 % 10;
-            highScoreNumbersIndexes[3] = highScore / 1000 % 10;
-            highScoreNumbersIndexes[4] = highScore / 10000 % 10;
-            highScoreNumbersIndexes[5] = highScore / 100000 % 10;
+            highScoreNumbersIndexes[0] = displayScore % 10;
+            highScoreNumbersIndexes[1] = displayScore / 10 % 10;
+            highScoreNumbersIndexes[2] = displayScore / 100 % 10;
+            highScoreNumbersIndexes[3] = displayScore / 1000 % 10;
+            highScoreNumbersIndexes[4] = displayScore / 10000 % 10;
+            highScoreNumbersIndexes[5] = displayScore / 100000 % 10;
             for (int i = 0; i < 6; i++) imagesHighScoreNumber[i].sprite = spritesYellowNumber[highScoreNumbersIndexes[i]];
         }
         else
@@ -569,12 +569,16 @@ public class MainManager : GameManager {
     //閃光を起こすメソッド（トラップガードで防ぐ）
     public void StartFlash()
     {
-        theFlash.SetActive(false);
-        theFlash.SetActive(true);
+        if (!signalManager.IsActiveTrapGuard())
+        {
+            theFlash.SetActive(false);
+            theFlash.SetActive(true);
+        }
     }
 
     public void StartGameOver()
     {
+        signalManager.StopAllSignals();
         SetDialogStatus(0);
         musicManager.HaltMusic();
         theBall.Diminish();
@@ -583,26 +587,10 @@ public class MainManager : GameManager {
 
     public void StartExplosion()
     {
+        signalManager.StopAllSignals();
         SetDialogStatus(0);
         musicManager.HaltMusic();
         theBall.Diminish();
         theExplosion.SetActive(true);
-    }
-
-    public int[] GetRandomPatterns(int length)
-    {
-        int[] retval = new int[length];
-        for (int i = 0; i < retval.Length; i++) retval[i] = i;
-        int a = retval.Length;
-        while(a > 0)
-        {
-            int i = a - 1;
-            int j = Random.Range(0, a);
-            int tmp = retval[i];
-            retval[i] = retval[j];
-            retval[j] = tmp;
-            a--; 
-        }
-        return retval;
     }
 }
